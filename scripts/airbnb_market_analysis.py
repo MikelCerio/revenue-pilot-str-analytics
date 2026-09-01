@@ -19,7 +19,7 @@ Outputs:
     outputs/reports/10_airbnb_market_report.md
 """
 
-import sys, warnings, json
+import os, sys, warnings, json
 sys.stdout.reconfigure(encoding='utf-8')
 warnings.filterwarnings('ignore')
 
@@ -32,7 +32,37 @@ PUB    = ROOT / 'data' / 'public'
 OUT_R  = ROOT / 'outputs' / 'reports'
 PUB.mkdir(parents=True, exist_ok=True)
 
-DOWNLOADS = Path(r'C:\Users\PCUser\Downloads')
+# Ubicacion de los ficheros de Inside Airbnb. Orden de resolucion:
+#   1. variable de entorno INSIDE_AIRBNB_DIR
+#   2. data/external/ dentro del repo (recomendado para reproducibilidad)
+#   3. carpeta de descargas del usuario (comodidad en local)
+REQUIRED = ['listings.csv', 'reviews.csv', 'neighbourhoods.geojson']
+
+
+def resolve_data_dir() -> Path:
+    candidates = []
+    if os.environ.get('INSIDE_AIRBNB_DIR'):
+        candidates.append(Path(os.environ['INSIDE_AIRBNB_DIR']))
+    candidates.append(ROOT / 'data' / 'external')
+    candidates.append(Path.home() / 'Downloads')
+
+    for c in candidates:
+        if all((c / f).exists() for f in REQUIRED):
+            print(f"  Datos Inside Airbnb: {c}")
+            return c
+
+    tried = "\n".join(f"    - {c}" for c in candidates)
+    raise SystemExit(
+        "\nERROR: no se encontraron los ficheros de Inside Airbnb.\n\n"
+        f"  Se necesitan: {', '.join(REQUIRED)}\n"
+        f"  Buscados en:\n{tried}\n\n"
+        "  Descargalos gratis en http://insideairbnb.com/get-the-data\n"
+        "  (region: Euskadi / Basque Country) y colocalos en data/external/,\n"
+        "  o define INSIDE_AIRBNB_DIR apuntando a su carpeta.\n"
+    )
+
+
+DOWNLOADS = resolve_data_dir()
 
 print("=" * 60)
 print("FASE 10 — Inside Airbnb Market Analysis para Bilbao")

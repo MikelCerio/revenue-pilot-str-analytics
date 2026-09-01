@@ -227,9 +227,22 @@ function priceColor(price) {
 
 // =================== MAP ===================
 const map = L.map('map', { center: [43.263, -2.935], zoom: 13 });
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
-  subdomains: 'abcd', maxZoom: 19
+// Basemap: Esri Dark Gray Canvas. Keyless — CARTO's dark_all now returns
+// tiles watermarked "API KEY REQUIRED" for unauthenticated requests.
+// Base and labels are separate services, so labels stay on top of the data.
+L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+  attribution: '&copy; <a href="https://www.esri.com/">Esri</a> &middot; listings: <a href="http://insideairbnb.com/">Inside Airbnb</a>',
+  maxZoom: 16
+}).addTo(map);
+
+// Pane propio para las etiquetas: por encima del choropleth (overlayPane, 400)
+// y por debajo de los marcadores (markerPane, 600).
+map.createPane('labels');
+map.getPane('labels').style.zIndex = 450;
+map.getPane('labels').style.pointerEvents = 'none';
+
+L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+  maxZoom: 16, pane: 'labels', opacity: 0.9
 }).addTo(map);
 
 const choroplethLayer = L.layerGroup().addTo(map);
