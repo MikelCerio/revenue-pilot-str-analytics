@@ -1,0 +1,261 @@
+building,year,week_iso,period_start,pred_occ_pct,is_event,demand_signal,adr_recommended,adr_range_min,adr_range_max,adjustments
+Edificio A — Urban District,2025,1,2024-12-30,67.0,False,Demanda media,84.07,75.67,92.48,Sin ajustes especiales
+Edificio A — Urban District,2025,2,2025-01-06,67.0,False,Demanda media,83.28,74.95,91.61,Sin ajustes especiales
+Edificio A — Urban District,2025,3,2025-01-13,69.1,False,Demanda media,79.94,71.95,87.94,Sin ajustes especiales
+Edificio A — Urban District,2025,4,2025-01-20,69.7,False,Demanda media,78.15,70.34,85.97,Sin ajustes especiales
+Edificio A — Urban District,2025,5,2025-01-27,69.7,False,Demanda media,78.61,70.74,86.47,Sin ajustes especiales
+Edificio A — Urban District,2025,6,2025-02-03,70.0,False,Demanda media,78.61,70.74,86.47,Sin ajustes especiales
+Edificio A — Urban District,2025,7,2025-02-10,71.1,False,Demanda media,78.98,71.08,86.88,Sin ajustes especiales
+Edificio A — Urban District,2025,8,2025-02-17,71.1,False,Demanda media,78.42,70.57,86.26,Sin ajustes especiales
+Edificio A — Urban District,2025,9,2025-02-24,68.9,False,Demanda media,77.49,69.74,85.24,Sin ajustes especiales
+Edificio A — Urban District,2025,10,2025-03-03,68.5,False,Demanda media,82.25,74.02,90.47,Sin ajustes especiales
+Edificio A — Urban District,2025,11,2025-03-10,70.2,False,Demanda media,80.59,72.53,88.65,Sin ajustes especiales
+Edificio A — Urban District,2025,12,2025-03-17,72.8,False,Demanda media,78.54,70.69,86.39,Sin ajustes especiales
+Edificio A — Urban District,2025,13,2025-03-24,75.2,False,Demanda media,82.03,73.83,90.24,Sin ajustes especiales
+Edificio A — Urban District,2025,14,2025-03-31,75.2,False,Demanda media,89.02,80.12,97.93,Sin ajustes especiales
+Edificio A — Urban District,2025,15,2025-04-07,75.2,False,Demanda media,87.52,78.76,96.27,Sin ajustes especiales
+Edificio A — Urban District,2025,16,2025-04-14,75.2,False,Demanda media,86.95,78.26,95.65,Sin ajustes especiales
+Edificio A — Urban District,2025,17,2025-04-21,76.0,False,Demanda media,86.15,77.53,94.76,Sin ajustes especiales
+Edificio A — Urban District,2025,18,2025-04-28,76.0,False,Demanda media,86.15,77.53,94.76,Sin ajustes especiales
+Edificio A — Urban District,2025,19,2025-05-05,78.3,False,Demanda media,85.23,76.71,93.76,Sin ajustes especiales
+Edificio A — Urban District,2025,20,2025-05-12,78.3,False,Demanda media,85.23,76.71,93.76,Sin ajustes especiales
+Edificio A — Urban District,2025,21,2025-05-19,78.3,False,Demanda media,87.04,78.33,95.74,Sin ajustes especiales
+Edificio A — Urban District,2025,22,2025-05-26,78.3,False,Demanda media,87.04,78.33,95.74,Sin ajustes especiales
+Edificio A — Urban District,2025,23,2025-06-02,78.9,False,Demanda media,88.24,79.41,97.06,Sin ajustes especiales
+Edificio A — Urban District,2025,24,2025-06-09,78.9,False,Demanda media,89.07,80.16,97.98,Sin ajustes especiales
+Edificio A — Urban District,2025,25,2025-06-16,79.9,False,Demanda media,98.51,88.66,108.36,Sin ajustes especiales
+Edificio A — Urban District,2025,26,2025-06-23,80.1,False,Alta demanda — considerar subida de precio,98.11,88.3,107.92,+20% por ocupación esperada alta (80%)
+Edificio A — Urban District,2025,27,2025-06-30,79.3,False,Demanda media,100.36,90.32,110.39,Sin ajustes especiales
+Edificio A — Urban District,2025,28,2025-07-07,79.0,False,Demanda media,101.73,91.56,111.9,Sin ajustes especiales
+Edificio A — Urban District,2025,29,2025-07-14,84.3,False,Alta demanda — considerar subida de precio,112.8,101.52,124.08,+20% por ocupación esperada alta (84%)
+Edificio A — Urban District,2025,30,2025-07-21,84.8,False,Alta demanda — considerar subida de precio,112.8,101.52,124.08,+20% por ocupación esperada alta (85%)
+Edificio A — Urban District,2025,31,2025-07-28,84.5,False,Alta demanda — considerar subida de precio,113.27,101.95,124.6,+20% por ocupación esperada alta (84%)
+Edificio A — Urban District,2025,32,2025-08-04,85.4,False,Alta demanda — considerar subida de precio,113.27,101.95,124.6,+20% por ocupación esperada alta (85%)
+Edificio A — Urban District,2025,33,2025-08-11,84.8,False,Alta demanda — considerar subida de precio,105.59,95.03,116.15,+20% por ocupación esperada alta (85%)
+Edificio A — Urban District,2025,34,2025-08-18,84.8,False,Alta demanda — considerar subida de precio,105.59,95.03,116.15,+20% por ocupación esperada alta (85%)
+Edificio A — Urban District,2025,35,2025-08-25,83.9,False,Alta demanda — considerar subida de precio,100.3,90.27,110.33,+20% por ocupación esperada alta (84%)
+Edificio A — Urban District,2025,36,2025-09-01,82.8,False,Alta demanda — considerar subida de precio,99.69,89.72,109.65,+20% por ocupación esperada alta (83%)
+Edificio A — Urban District,2025,37,2025-09-08,83.1,False,Alta demanda — considerar subida de precio,99.01,89.1,108.91,+20% por ocupación esperada alta (83%)
+Edificio A — Urban District,2025,38,2025-09-15,83.1,False,Alta demanda — considerar subida de precio,98.06,88.25,107.86,+20% por ocupación esperada alta (83%)
+Edificio A — Urban District,2025,39,2025-09-22,83.1,False,Alta demanda — considerar subida de precio,100.38,90.34,110.42,+20% por ocupación esperada alta (83%)
+Edificio A — Urban District,2025,40,2025-09-29,83.1,False,Alta demanda — considerar subida de precio,102.31,92.08,112.54,+20% por ocupación esperada alta (83%)
+Edificio A — Urban District,2025,41,2025-10-06,80.0,False,Alta demanda — considerar subida de precio,97.28,87.56,107.01,+20% por ocupación esperada alta (80%)
+Edificio A — Urban District,2025,42,2025-10-13,76.7,False,Demanda media,95.27,85.75,104.8,Sin ajustes especiales
+Edificio A — Urban District,2025,43,2025-10-20,76.7,False,Demanda media,92.31,83.08,101.54,Sin ajustes especiales
+Edificio A — Urban District,2025,44,2025-10-27,75.5,False,Demanda media,91.13,82.01,100.24,Sin ajustes especiales
+Edificio A — Urban District,2025,45,2025-11-03,71.5,False,Demanda media,90.9,81.81,99.99,Sin ajustes especiales
+Edificio A — Urban District,2025,46,2025-11-10,71.3,False,Demanda media,90.9,81.81,99.99,Sin ajustes especiales
+Edificio A — Urban District,2025,47,2025-11-17,70.1,False,Demanda media,94.6,85.14,104.06,Sin ajustes especiales
+Edificio A — Urban District,2025,48,2025-11-24,70.1,False,Demanda media,94.6,85.14,104.06,Sin ajustes especiales
+Edificio A — Urban District,2025,49,2025-12-01,69.6,False,Demanda media,89.86,80.88,98.85,Sin ajustes especiales
+Edificio A — Urban District,2025,50,2025-12-08,67.9,False,Demanda media,81.73,73.55,89.9,Sin ajustes especiales
+Edificio A — Urban District,2025,51,2025-12-15,67.9,False,Demanda media,82.03,73.83,90.23,Sin ajustes especiales
+Edificio A — Urban District,2025,52,2025-12-22,67.8,False,Demanda media,85.97,77.37,94.57,Sin ajustes especiales
+Edificio B — City Center,2025,1,2024-12-30,54.0,False,Demanda media,101.02,90.91,111.12,Sin ajustes especiales
+Edificio B — City Center,2025,2,2025-01-06,54.0,False,Demanda media,100.22,90.2,110.24,Sin ajustes especiales
+Edificio B — City Center,2025,3,2025-01-13,55.3,False,Demanda media,111.01,99.91,122.11,Sin ajustes especiales
+Edificio B — City Center,2025,4,2025-01-20,55.9,False,Demanda media,108.06,97.26,118.87,Sin ajustes especiales
+Edificio B — City Center,2025,5,2025-01-27,55.9,False,Demanda media,108.52,97.66,119.37,Sin ajustes especiales
+Edificio B — City Center,2025,6,2025-02-03,55.9,False,Demanda media,108.52,97.66,119.37,Sin ajustes especiales
+Edificio B — City Center,2025,7,2025-02-10,56.1,False,Demanda media,108.52,97.66,119.37,Sin ajustes especiales
+Edificio B — City Center,2025,8,2025-02-17,58.0,False,Demanda media,105.78,95.2,116.36,Sin ajustes especiales
+Edificio B — City Center,2025,9,2025-02-24,56.4,False,Demanda media,102.26,92.03,112.48,Sin ajustes especiales
+Edificio B — City Center,2025,10,2025-03-03,60.2,False,Demanda media,107.21,96.49,117.93,Sin ajustes especiales
+Edificio B — City Center,2025,11,2025-03-10,61.0,False,Demanda media,110.53,99.48,121.59,Sin ajustes especiales
+Edificio B — City Center,2025,12,2025-03-17,62.6,False,Demanda media,110.9,99.81,121.99,Sin ajustes especiales
+Edificio B — City Center,2025,13,2025-03-24,64.4,False,Demanda media,115.67,104.1,127.24,Sin ajustes especiales
+Edificio B — City Center,2025,14,2025-03-31,64.4,False,Demanda media,124.3,111.87,136.73,Sin ajustes especiales
+Edificio B — City Center,2025,15,2025-04-07,64.4,False,Demanda media,127.78,115.0,140.56,Sin ajustes especiales
+Edificio B — City Center,2025,16,2025-04-14,64.4,False,Demanda media,121.4,109.26,133.54,Sin ajustes especiales
+Edificio B — City Center,2025,17,2025-04-21,65.2,False,Demanda media,116.17,104.55,127.78,Sin ajustes especiales
+Edificio B — City Center,2025,18,2025-04-28,65.9,False,Demanda media,116.17,104.55,127.78,Sin ajustes especiales
+Edificio B — City Center,2025,19,2025-05-05,65.9,False,Demanda media,116.17,104.55,127.78,Sin ajustes especiales
+Edificio B — City Center,2025,20,2025-05-12,65.9,False,Demanda media,116.17,104.55,127.78,Sin ajustes especiales
+Edificio B — City Center,2025,21,2025-05-19,65.9,False,Demanda media,116.62,104.95,128.28,Sin ajustes especiales
+Edificio B — City Center,2025,22,2025-05-26,65.9,False,Demanda media,116.62,104.95,128.28,Sin ajustes especiales
+Edificio B — City Center,2025,23,2025-06-02,66.4,False,Demanda media,121.04,108.93,133.14,Sin ajustes especiales
+Edificio B — City Center,2025,24,2025-06-09,66.4,False,Demanda media,121.87,109.68,134.06,Sin ajustes especiales
+Edificio B — City Center,2025,25,2025-06-16,67.3,False,Demanda media,129.48,116.53,142.42,Sin ajustes especiales
+Edificio B — City Center,2025,26,2025-06-23,68.2,False,Demanda media,130.15,117.13,143.16,Sin ajustes especiales
+Edificio B — City Center,2025,27,2025-06-30,68.2,False,Demanda media,131.99,118.8,145.19,Sin ajustes especiales
+Edificio B — City Center,2025,28,2025-07-07,68.2,False,Demanda media,133.03,119.73,146.33,Sin ajustes especiales
+Edificio B — City Center,2025,29,2025-07-14,68.4,False,Demanda media,148.22,133.4,163.05,Sin ajustes especiales
+Edificio B — City Center,2025,30,2025-07-21,68.4,False,Demanda media,148.22,133.4,163.05,Sin ajustes especiales
+Edificio B — City Center,2025,31,2025-07-28,69.8,False,Demanda media,151.84,136.65,167.02,Sin ajustes especiales
+Edificio B — City Center,2025,32,2025-08-04,70.7,False,Demanda media,149.89,134.9,164.88,Sin ajustes especiales
+Edificio B — City Center,2025,33,2025-08-11,70.1,False,Demanda media,146.15,131.54,160.77,Sin ajustes especiales
+Edificio B — City Center,2025,34,2025-08-18,70.1,False,Demanda media,146.15,131.54,160.77,Sin ajustes especiales
+Edificio B — City Center,2025,35,2025-08-25,66.2,False,Demanda media,127.76,114.98,140.53,Sin ajustes especiales
+Edificio B — City Center,2025,36,2025-09-01,65.1,False,Demanda media,124.52,112.07,136.98,Sin ajustes especiales
+Edificio B — City Center,2025,37,2025-09-08,66.5,False,Demanda media,132.71,119.44,145.98,Sin ajustes especiales
+Edificio B — City Center,2025,38,2025-09-15,66.5,False,Demanda media,133.73,120.35,147.1,Sin ajustes especiales
+Edificio B — City Center,2025,39,2025-09-22,66.5,False,Demanda media,136.05,122.44,149.65,Sin ajustes especiales
+Edificio B — City Center,2025,40,2025-09-29,66.5,False,Demanda media,139.23,125.31,153.15,Sin ajustes especiales
+Edificio B — City Center,2025,41,2025-10-06,65.6,False,Demanda media,123.33,111.0,135.67,Sin ajustes especiales
+Edificio B — City Center,2025,42,2025-10-13,64.1,False,Demanda media,121.06,108.96,133.17,Sin ajustes especiales
+Edificio B — City Center,2025,43,2025-10-20,64.1,False,Demanda media,119.42,107.48,131.37,Sin ajustes especiales
+Edificio B — City Center,2025,44,2025-10-27,59.6,False,Demanda media,119.78,107.8,131.76,Sin ajustes especiales
+Edificio B — City Center,2025,45,2025-11-03,57.4,False,Demanda media,114.35,102.91,125.78,Sin ajustes especiales
+Edificio B — City Center,2025,46,2025-11-10,57.2,False,Demanda media,114.35,102.91,125.78,Sin ajustes especiales
+Edificio B — City Center,2025,47,2025-11-17,57.2,False,Demanda media,114.35,102.91,125.78,Sin ajustes especiales
+Edificio B — City Center,2025,48,2025-11-24,57.2,False,Demanda media,114.35,102.91,125.78,Sin ajustes especiales
+Edificio B — City Center,2025,49,2025-12-01,57.2,False,Demanda media,119.73,107.76,131.71,Sin ajustes especiales
+Edificio B — City Center,2025,50,2025-12-08,56.4,False,Demanda media,106.04,95.44,116.65,Sin ajustes especiales
+Edificio B — City Center,2025,51,2025-12-15,56.4,False,Demanda media,106.35,95.71,116.98,Sin ajustes especiales
+Edificio B — City Center,2025,52,2025-12-22,55.5,False,Demanda media,114.12,102.71,125.53,Sin ajustes especiales
+Edificio C — Riverside,2025,1,2024-12-30,52.2,False,Demanda media,91.89,82.7,101.08,Sin ajustes especiales
+Edificio C — Riverside,2025,2,2025-01-06,52.2,False,Demanda media,91.1,81.99,100.21,Sin ajustes especiales
+Edificio C — Riverside,2025,3,2025-01-13,53.5,False,Demanda media,90.44,81.4,99.48,Sin ajustes especiales
+Edificio C — Riverside,2025,4,2025-01-20,54.1,False,Demanda media,84.03,75.63,92.44,Sin ajustes especiales
+Edificio C — Riverside,2025,5,2025-01-27,54.1,False,Demanda media,84.49,76.04,92.94,Sin ajustes especiales
+Edificio C — Riverside,2025,6,2025-02-03,54.1,False,Demanda media,84.49,76.04,92.94,Sin ajustes especiales
+Edificio C — Riverside,2025,7,2025-02-10,54.3,False,Demanda media,84.49,76.04,92.94,Sin ajustes especiales
+Edificio C — Riverside,2025,8,2025-02-17,56.1,False,Demanda media,101.4,91.26,111.54,Sin ajustes especiales
+Edificio C — Riverside,2025,9,2025-02-24,54.5,False,Demanda media,84.43,75.99,92.87,Sin ajustes especiales
+Edificio C — Riverside,2025,10,2025-03-03,56.6,False,Demanda media,97.2,87.48,106.92,Sin ajustes especiales
+Edificio C — Riverside,2025,11,2025-03-10,57.4,False,Demanda media,97.15,87.44,106.87,Sin ajustes especiales
+Edificio C — Riverside,2025,12,2025-03-17,59.0,False,Demanda media,103.63,93.27,113.99,Sin ajustes especiales
+Edificio C — Riverside,2025,13,2025-03-24,60.8,False,Demanda media,114.75,103.27,126.22,Sin ajustes especiales
+Edificio C — Riverside,2025,14,2025-03-31,60.8,False,Demanda media,122.04,109.83,134.24,Sin ajustes especiales
+Edificio C — Riverside,2025,15,2025-04-07,60.8,False,Demanda media,125.51,112.96,138.06,Sin ajustes especiales
+Edificio C — Riverside,2025,16,2025-04-14,60.8,False,Demanda media,119.13,107.22,131.05,Sin ajustes especiales
+Edificio C — Riverside,2025,17,2025-04-21,61.7,False,Demanda media,113.9,102.51,125.29,Sin ajustes especiales
+Edificio C — Riverside,2025,18,2025-04-28,62.3,False,Demanda media,113.9,102.51,125.29,Sin ajustes especiales
+Edificio C — Riverside,2025,19,2025-05-05,62.3,False,Demanda media,113.9,102.51,125.29,Sin ajustes especiales
+Edificio C — Riverside,2025,20,2025-05-12,62.3,False,Demanda media,113.9,102.51,125.29,Sin ajustes especiales
+Edificio C — Riverside,2025,21,2025-05-19,62.3,False,Demanda media,114.35,102.92,125.79,Sin ajustes especiales
+Edificio C — Riverside,2025,22,2025-05-26,62.3,False,Demanda media,114.35,102.92,125.79,Sin ajustes especiales
+Edificio C — Riverside,2025,23,2025-06-02,63.0,False,Demanda media,113.04,101.74,124.35,Sin ajustes especiales
+Edificio C — Riverside,2025,24,2025-06-09,63.0,False,Demanda media,113.88,102.49,125.26,Sin ajustes especiales
+Edificio C — Riverside,2025,25,2025-06-16,64.0,False,Demanda media,115.15,103.64,126.67,Sin ajustes especiales
+Edificio C — Riverside,2025,26,2025-06-23,64.5,False,Demanda media,115.15,103.64,126.67,Sin ajustes especiales
+Edificio C — Riverside,2025,27,2025-06-30,64.5,False,Demanda media,115.57,104.01,127.12,Sin ajustes especiales
+Edificio C — Riverside,2025,28,2025-07-07,64.5,False,Demanda media,117.13,105.42,128.85,Sin ajustes especiales
+Edificio C — Riverside,2025,29,2025-07-14,65.1,False,Demanda media,133.03,119.72,146.33,Sin ajustes especiales
+Edificio C — Riverside,2025,30,2025-07-21,65.1,False,Demanda media,133.03,119.72,146.33,Sin ajustes especiales
+Edificio C — Riverside,2025,31,2025-07-28,66.5,False,Demanda media,142.41,128.17,156.65,Sin ajustes especiales
+Edificio C — Riverside,2025,32,2025-08-04,67.4,False,Demanda media,143.75,129.37,158.12,Sin ajustes especiales
+Edificio C — Riverside,2025,33,2025-08-11,66.8,False,Demanda media,134.54,121.09,148.0,Sin ajustes especiales
+Edificio C — Riverside,2025,34,2025-08-18,66.8,False,Demanda media,134.54,121.09,148.0,Sin ajustes especiales
+Edificio C — Riverside,2025,35,2025-08-25,62.9,False,Demanda media,118.57,106.71,130.43,Sin ajustes especiales
+Edificio C — Riverside,2025,36,2025-09-01,61.8,False,Demanda media,120.43,108.38,132.47,Sin ajustes especiales
+Edificio C — Riverside,2025,37,2025-09-08,63.2,False,Demanda media,118.53,106.68,130.39,Sin ajustes especiales
+Edificio C — Riverside,2025,38,2025-09-15,63.2,False,Demanda media,119.55,107.59,131.5,Sin ajustes especiales
+Edificio C — Riverside,2025,39,2025-09-22,63.2,False,Demanda media,121.87,109.68,134.05,Sin ajustes especiales
+Edificio C — Riverside,2025,40,2025-09-29,63.2,False,Demanda media,123.91,111.52,136.3,Sin ajustes especiales
+Edificio C — Riverside,2025,41,2025-10-06,61.9,False,Demanda media,118.41,106.57,130.26,Sin ajustes especiales
+Edificio C — Riverside,2025,42,2025-10-13,60.5,False,Demanda media,116.14,104.53,127.76,Sin ajustes especiales
+Edificio C — Riverside,2025,43,2025-10-20,60.5,False,Demanda media,114.27,102.84,125.69,Sin ajustes especiales
+Edificio C — Riverside,2025,44,2025-10-27,57.4,False,Demanda media,107.65,96.89,118.42,Sin ajustes especiales
+Edificio C — Riverside,2025,45,2025-11-03,55.2,False,Demanda media,111.83,100.65,123.02,Sin ajustes especiales
+Edificio C — Riverside,2025,46,2025-11-10,55.1,False,Demanda media,111.83,100.65,123.02,Sin ajustes especiales
+Edificio C — Riverside,2025,47,2025-11-17,55.1,False,Demanda media,111.83,100.65,123.02,Sin ajustes especiales
+Edificio C — Riverside,2025,48,2025-11-24,55.1,False,Demanda media,111.83,100.65,123.02,Sin ajustes especiales
+Edificio C — Riverside,2025,49,2025-12-01,55.1,False,Demanda media,116.96,105.26,128.65,Sin ajustes especiales
+Edificio C — Riverside,2025,50,2025-12-08,54.2,False,Demanda media,89.54,80.58,98.49,Sin ajustes especiales
+Edificio C — Riverside,2025,51,2025-12-15,54.2,False,Demanda media,89.84,80.86,98.83,Sin ajustes especiales
+Edificio C — Riverside,2025,52,2025-12-22,53.3,False,Demanda media,93.54,84.19,102.9,Sin ajustes especiales
+Edificio D — Old Quarter,2025,1,2024-12-30,56.4,False,Demanda media,101.79,91.61,111.97,Sin ajustes especiales
+Edificio D — Old Quarter,2025,2,2025-01-06,56.4,False,Demanda media,101.0,90.9,111.1,Sin ajustes especiales
+Edificio D — Old Quarter,2025,3,2025-01-13,57.8,False,Demanda media,100.45,90.4,110.49,Sin ajustes especiales
+Edificio D — Old Quarter,2025,4,2025-01-20,58.4,False,Demanda media,98.72,88.85,108.59,Sin ajustes especiales
+Edificio D — Old Quarter,2025,5,2025-01-27,58.4,False,Demanda media,99.18,89.26,109.09,Sin ajustes especiales
+Edificio D — Old Quarter,2025,6,2025-02-03,58.4,False,Demanda media,99.18,89.26,109.09,Sin ajustes especiales
+Edificio D — Old Quarter,2025,7,2025-02-10,58.5,False,Demanda media,99.18,89.26,109.09,Sin ajustes especiales
+Edificio D — Old Quarter,2025,8,2025-02-17,60.4,False,Demanda media,99.18,89.26,109.09,Sin ajustes especiales
+Edificio D — Old Quarter,2025,9,2025-02-24,58.8,False,Demanda media,98.63,88.77,108.49,Sin ajustes especiales
+Edificio D — Old Quarter,2025,10,2025-03-03,63.5,False,Demanda media,98.76,88.89,108.64,Sin ajustes especiales
+Edificio D — Old Quarter,2025,11,2025-03-10,65.1,False,Demanda media,102.08,91.88,112.29,Sin ajustes especiales
+Edificio D — Old Quarter,2025,12,2025-03-17,67.7,False,Demanda media,105.47,94.92,116.01,Sin ajustes especiales
+Edificio D — Old Quarter,2025,13,2025-03-24,69.5,False,Demanda media,111.45,100.31,122.6,Sin ajustes especiales
+Edificio D — Old Quarter,2025,14,2025-03-31,69.5,False,Demanda media,120.08,108.07,132.09,Sin ajustes especiales
+Edificio D — Old Quarter,2025,15,2025-04-07,69.5,False,Demanda media,122.05,109.84,134.25,Sin ajustes especiales
+Edificio D — Old Quarter,2025,16,2025-04-14,69.5,False,Demanda media,119.04,107.14,130.94,Sin ajustes especiales
+Edificio D — Old Quarter,2025,17,2025-04-21,70.3,False,Demanda media,114.22,102.8,125.64,Sin ajustes especiales
+Edificio D — Old Quarter,2025,18,2025-04-28,70.3,False,Demanda media,114.22,102.8,125.64,Sin ajustes especiales
+Edificio D — Old Quarter,2025,19,2025-05-05,70.8,False,Demanda media,112.27,101.04,123.5,Sin ajustes especiales
+Edificio D — Old Quarter,2025,20,2025-05-12,70.8,False,Demanda media,112.27,101.04,123.5,Sin ajustes especiales
+Edificio D — Old Quarter,2025,21,2025-05-19,70.8,False,Demanda media,112.72,101.45,123.99,Sin ajustes especiales
+Edificio D — Old Quarter,2025,22,2025-05-26,70.8,False,Demanda media,112.72,101.45,123.99,Sin ajustes especiales
+Edificio D — Old Quarter,2025,23,2025-06-02,71.4,False,Demanda media,113.7,102.33,125.08,Sin ajustes especiales
+Edificio D — Old Quarter,2025,24,2025-06-09,71.4,False,Demanda media,114.54,103.08,125.99,Sin ajustes especiales
+Edificio D — Old Quarter,2025,25,2025-06-16,72.4,False,Demanda media,120.66,108.59,132.72,Sin ajustes especiales
+Edificio D — Old Quarter,2025,26,2025-06-23,72.6,False,Demanda media,120.66,108.59,132.72,Sin ajustes especiales
+Edificio D — Old Quarter,2025,27,2025-06-30,72.6,False,Demanda media,124.87,112.38,137.36,Sin ajustes especiales
+Edificio D — Old Quarter,2025,28,2025-07-07,72.2,False,Demanda media,125.42,112.88,137.97,Sin ajustes especiales
+Edificio D — Old Quarter,2025,29,2025-07-14,73.0,False,Demanda media,142.16,127.95,156.38,Sin ajustes especiales
+Edificio D — Old Quarter,2025,30,2025-07-21,73.0,False,Demanda media,141.6,127.44,155.76,Sin ajustes especiales
+Edificio D — Old Quarter,2025,31,2025-07-28,74.2,False,Demanda media,138.72,124.85,152.59,Sin ajustes especiales
+Edificio D — Old Quarter,2025,32,2025-08-04,75.1,False,Demanda media,139.17,125.26,153.09,Sin ajustes especiales
+Edificio D — Old Quarter,2025,33,2025-08-11,74.4,False,Demanda media,132.57,119.31,145.83,Sin ajustes especiales
+Edificio D — Old Quarter,2025,34,2025-08-18,74.4,False,Demanda media,132.57,119.31,145.83,Sin ajustes especiales
+Edificio D — Old Quarter,2025,35,2025-08-25,71.2,False,Demanda media,127.49,114.74,140.24,Sin ajustes especiales
+Edificio D — Old Quarter,2025,36,2025-09-01,70.1,False,Demanda media,130.02,117.02,143.03,Sin ajustes especiales
+Edificio D — Old Quarter,2025,37,2025-09-08,71.5,False,Demanda media,127.71,114.94,140.49,Sin ajustes especiales
+Edificio D — Old Quarter,2025,38,2025-09-15,71.5,False,Demanda media,127.71,114.94,140.49,Sin ajustes especiales
+Edificio D — Old Quarter,2025,39,2025-09-22,71.5,False,Demanda media,133.37,120.03,146.71,Sin ajustes especiales
+Edificio D — Old Quarter,2025,40,2025-09-29,71.5,False,Demanda media,136.55,122.9,150.21,Sin ajustes especiales
+Edificio D — Old Quarter,2025,41,2025-10-06,70.0,False,Demanda media,132.8,119.52,146.08,Sin ajustes especiales
+Edificio D — Old Quarter,2025,42,2025-10-13,66.7,False,Demanda media,125.37,112.84,137.91,Sin ajustes especiales
+Edificio D — Old Quarter,2025,43,2025-10-20,66.7,False,Demanda media,123.74,111.36,136.11,Sin ajustes especiales
+Edificio D — Old Quarter,2025,44,2025-10-27,61.3,False,Demanda media,115.53,103.98,127.08,Sin ajustes especiales
+Edificio D — Old Quarter,2025,45,2025-11-03,59.2,False,Demanda media,109.77,98.79,120.74,Sin ajustes especiales
+Edificio D — Old Quarter,2025,46,2025-11-10,59.0,False,Demanda media,109.77,98.79,120.74,Sin ajustes especiales
+Edificio D — Old Quarter,2025,47,2025-11-17,59.0,False,Demanda media,109.77,98.79,120.74,Sin ajustes especiales
+Edificio D — Old Quarter,2025,48,2025-11-24,59.0,False,Demanda media,109.77,98.79,120.74,Sin ajustes especiales
+Edificio D — Old Quarter,2025,49,2025-12-01,59.0,False,Demanda media,114.0,102.6,125.4,Sin ajustes especiales
+Edificio D — Old Quarter,2025,50,2025-12-08,58.1,False,Demanda media,99.55,89.59,109.5,Sin ajustes especiales
+Edificio D — Old Quarter,2025,51,2025-12-15,58.1,False,Demanda media,99.85,89.87,109.84,Sin ajustes especiales
+Edificio D — Old Quarter,2025,52,2025-12-22,57.2,False,Demanda media,103.44,93.1,113.79,Sin ajustes especiales
+Edificio E — Budget Inn,2025,1,2024-12-30,60.1,False,Demanda media,87.81,79.03,96.6,Sin ajustes especiales
+Edificio E — Budget Inn,2025,2,2025-01-06,60.1,False,Demanda media,87.02,78.32,95.72,Sin ajustes especiales
+Edificio E — Budget Inn,2025,3,2025-01-13,61.4,False,Demanda media,86.36,77.72,95.0,Sin ajustes especiales
+Edificio E — Budget Inn,2025,4,2025-01-20,62.0,False,Demanda media,85.04,76.54,93.55,Sin ajustes especiales
+Edificio E — Budget Inn,2025,5,2025-01-27,62.0,False,Demanda media,85.5,76.95,94.05,Sin ajustes especiales
+Edificio E — Budget Inn,2025,6,2025-02-03,62.0,False,Demanda media,85.5,76.95,94.05,Sin ajustes especiales
+Edificio E — Budget Inn,2025,7,2025-02-10,62.0,False,Demanda media,85.5,76.95,94.05,Sin ajustes especiales
+Edificio E — Budget Inn,2025,8,2025-02-17,65.5,False,Demanda media,83.77,75.4,92.15,Sin ajustes especiales
+Edificio E — Budget Inn,2025,9,2025-02-24,63.9,False,Demanda media,83.23,74.9,91.55,Sin ajustes especiales
+Edificio E — Budget Inn,2025,10,2025-03-03,66.6,False,Demanda media,91.74,82.57,100.92,Sin ajustes especiales
+Edificio E — Budget Inn,2025,11,2025-03-10,67.4,False,Demanda media,92.56,83.31,101.82,Sin ajustes especiales
+Edificio E — Budget Inn,2025,12,2025-03-17,68.1,False,Demanda media,92.21,82.99,101.43,Sin ajustes especiales
+Edificio E — Budget Inn,2025,13,2025-03-24,69.9,False,Demanda media,98.35,88.52,108.19,Sin ajustes especiales
+Edificio E — Budget Inn,2025,14,2025-03-31,69.9,False,Demanda media,105.0,94.5,115.5,Sin ajustes especiales
+Edificio E — Budget Inn,2025,15,2025-04-07,69.9,False,Demanda media,106.66,95.99,117.32,Sin ajustes especiales
+Edificio E — Budget Inn,2025,16,2025-04-14,69.9,False,Demanda media,103.65,93.28,114.01,Sin ajustes especiales
+Edificio E — Budget Inn,2025,17,2025-04-21,70.7,False,Demanda media,96.88,87.19,106.57,Sin ajustes especiales
+Edificio E — Budget Inn,2025,18,2025-04-28,71.5,False,Demanda media,97.13,87.41,106.84,Sin ajustes especiales
+Edificio E — Budget Inn,2025,19,2025-05-05,71.5,False,Demanda media,97.13,87.41,106.84,Sin ajustes especiales
+Edificio E — Budget Inn,2025,20,2025-05-12,71.5,False,Demanda media,97.13,87.41,106.84,Sin ajustes especiales
+Edificio E — Budget Inn,2025,21,2025-05-19,71.5,False,Demanda media,99.2,89.28,109.12,Sin ajustes especiales
+Edificio E — Budget Inn,2025,22,2025-05-26,71.5,False,Demanda media,99.2,89.28,109.12,Sin ajustes especiales
+Edificio E — Budget Inn,2025,23,2025-06-02,71.5,False,Demanda media,100.17,90.16,110.19,Sin ajustes especiales
+Edificio E — Budget Inn,2025,24,2025-06-09,71.5,False,Demanda media,101.01,90.91,111.11,Sin ajustes especiales
+Edificio E — Budget Inn,2025,25,2025-06-16,72.4,False,Demanda media,106.79,96.11,117.47,Sin ajustes especiales
+Edificio E — Budget Inn,2025,26,2025-06-23,73.0,False,Demanda media,106.79,96.11,117.47,Sin ajustes especiales
+Edificio E — Budget Inn,2025,27,2025-06-30,73.0,False,Demanda media,110.04,99.04,121.04,Sin ajustes especiales
+Edificio E — Budget Inn,2025,28,2025-07-07,73.0,False,Demanda media,110.59,99.53,121.65,Sin ajustes especiales
+Edificio E — Budget Inn,2025,29,2025-07-14,72.9,False,Demanda media,117.98,106.18,129.78,Sin ajustes especiales
+Edificio E — Budget Inn,2025,30,2025-07-21,72.9,False,Demanda media,117.41,105.67,129.15,Sin ajustes especiales
+Edificio E — Budget Inn,2025,31,2025-07-28,74.3,False,Demanda media,115.28,103.75,126.81,Sin ajustes especiales
+Edificio E — Budget Inn,2025,32,2025-08-04,75.2,False,Demanda media,116.69,105.02,128.36,Sin ajustes especiales
+Edificio E — Budget Inn,2025,33,2025-08-11,74.6,False,Demanda media,112.03,100.83,123.23,Sin ajustes especiales
+Edificio E — Budget Inn,2025,34,2025-08-18,74.6,False,Demanda media,112.03,100.83,123.23,Sin ajustes especiales
+Edificio E — Budget Inn,2025,35,2025-08-25,70.9,False,Demanda media,113.74,102.36,125.11,Sin ajustes especiales
+Edificio E — Budget Inn,2025,36,2025-09-01,69.8,False,Demanda media,116.03,104.42,127.63,Sin ajustes especiales
+Edificio E — Budget Inn,2025,37,2025-09-08,71.2,False,Demanda media,112.76,101.49,124.04,Sin ajustes especiales
+Edificio E — Budget Inn,2025,38,2025-09-15,71.2,False,Demanda media,112.76,101.49,124.04,Sin ajustes especiales
+Edificio E — Budget Inn,2025,39,2025-09-22,71.2,False,Demanda media,115.31,103.78,126.84,Sin ajustes especiales
+Edificio E — Budget Inn,2025,40,2025-09-29,71.2,False,Demanda media,118.07,106.26,129.88,Sin ajustes especiales
+Edificio E — Budget Inn,2025,41,2025-10-06,70.6,False,Demanda media,109.42,98.48,120.36,Sin ajustes especiales
+Edificio E — Budget Inn,2025,42,2025-10-13,70.1,False,Demanda media,110.93,99.84,122.03,Sin ajustes especiales
+Edificio E — Budget Inn,2025,43,2025-10-20,70.1,False,Demanda media,109.06,98.16,119.97,Sin ajustes especiales
+Edificio E — Budget Inn,2025,44,2025-10-27,66.8,False,Demanda media,103.42,93.08,113.76,Sin ajustes especiales
+Edificio E — Budget Inn,2025,45,2025-11-03,63.4,False,Demanda media,95.89,86.3,105.48,Sin ajustes especiales
+Edificio E — Budget Inn,2025,46,2025-11-10,63.4,False,Demanda media,95.89,86.3,105.48,Sin ajustes especiales
+Edificio E — Budget Inn,2025,47,2025-11-17,63.4,False,Demanda media,95.89,86.3,105.48,Sin ajustes especiales
+Edificio E — Budget Inn,2025,48,2025-11-24,63.4,False,Demanda media,95.89,86.3,105.48,Sin ajustes especiales
+Edificio E — Budget Inn,2025,49,2025-12-01,63.4,False,Demanda media,99.04,89.14,108.95,Sin ajustes especiales
+Edificio E — Budget Inn,2025,50,2025-12-08,62.1,False,Demanda media,86.32,77.69,94.95,Sin ajustes especiales
+Edificio E — Budget Inn,2025,51,2025-12-15,62.1,False,Demanda media,86.26,77.63,94.88,Sin ajustes especiales
+Edificio E — Budget Inn,2025,52,2025-12-22,61.2,False,Demanda media,87.93,79.14,96.72,Sin ajustes especiales

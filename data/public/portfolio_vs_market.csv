@@ -1,0 +1,5 @@
+entity,source,adr,occupancy_pct,revpar,listing_count,booking_score,segment,notes
+Nuestro Portfolio,Smoobu/Booking,126,77.8,98.0,44.0,7.79,Mixed Portfolio,Datos reales Booking.com + Smoobu
+Mercado Bilbao (mediana),Inside Airbnb,137,51.2,70.0,914.0,,All entire apts,Mediana mercado Airbnb Bilbao 2024
+Mercado Bilbao (p75),Inside Airbnb,200,,,,,Top 25%,Cuartil superior del mercado
+Mercado Bilbao (p25),Inside Airbnb,88,,,,,Bottom 25%,Cuartil inferior del mercado

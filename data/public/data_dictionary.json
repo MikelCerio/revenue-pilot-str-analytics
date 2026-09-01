@@ -1,0 +1,42 @@
+{
+  "project": "Bilbao STR Revenue Analytics",
+  "description": "Análisis de revenue management de un portfolio de apartamentos turísticos en Bilbao. Datos anonimizados.",
+  "period": "2019-2026",
+  "total_reservations": "~34.000",
+  "total_reviews": "6.298",
+  "buildings": 5,
+  "anonymization": {
+    "buildings": "Renombrados Edificio A-E con descriptor de zona",
+    "guests": "Nombres y emails eliminados",
+    "staff": "Nombres de empleados sustituidos por [staff] en reviews",
+    "revenue": "Valores reales mantenidos para validez del análisis",
+    "dates": "Fechas reales mantenidas (necesarias para estacionalidad)",
+    "city": "Bilbao (dato público, parte del contexto del análisis)"
+  },
+  "tables": {
+    "fact_reservations": "Reservas individuales con ADR, noches, canal, edificio",
+    "fact_gastos": "Gastos operativos por categoría, edificio y mes",
+    "fact_benchmark": "KPIs del portfolio vs mercado Bilbao STR",
+    "fact_reviews": "6.298 valoraciones Booking.com con NLP (sentimiento + temas)",
+    "fact_kpis_monthly": "KPIs agregados mensuales por edificio (precalculados)",
+    "predictions_export": "Predicciones de demanda, precio y cancelación 2025",
+    "dim_property": "Dimensión edificios con coordenadas, segmento, score Booking",
+    "dim_date": "Calendario completo 2019-2026 con semana, mes, temporada",
+    "dim_channel": "Canales de venta (OTA Principal, OTA Secundaria, Directo, etc.)",
+    "dim_event": "Eventos de Bilbao con impacto en demanda (Aste Nagusia, etc.)"
+  },
+  "key_metrics": {
+    "ADR_portfolio_avg": "€126/noche",
+    "ADR_market_bilbao": "€185/noche",
+    "occupancy_avg": "77.8%",
+    "occupancy_market": "47.6%",
+    "net_margin": "41.1%",
+    "revenue_opportunity": "€382k–€928k/año",
+    "booking_score_range": "6.32–8.98"
+  },
+  "ml_models": {
+    "Model_A_Demand": "LightGBM — Predicción de ocupación semanal. MAE: ±17.8pp",
+    "Model_B_Cancellation": "LightGBM — Probabilidad de cancelación. AUC: 0.821",
+    "Model_C_Price": "LightGBM — Precio óptimo recomendado. MAE: ±€43/noche"
+  }
+}

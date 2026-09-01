@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RevenuePilot — STR Revenue Intelligence Platform</title>
+  <meta name="description" content="End-to-end Revenue Management analytics platform for short-term rental portfolios. Python, LightGBM ML, Power BI, NLP. Built by Mikel Cerio.">
+  <meta name="author" content="Mikel Cerio">
+  <meta property="og:title" content="RevenuePilot — STR Revenue Intelligence">
+  <meta property="og:description" content="Data-driven revenue management for a 50-unit short-term rental portfolio in Bilbao. ML models, Power BI, interactive dashboards.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+  <link rel="stylesheet" href="assets/css/landing.css">
+</head>
+<body>
+
+<!-- Background Effects -->
+<div class="bg-grid"></div>
+<div class="bg-gradient"></div>
+
+<!-- ═══ NAVIGATION ═══════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">Revenue<span>Pilot</span></a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#pipeline">ML Pipeline</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#tech">Stack</a></li>
+    <li><a href="https://github.com/MikelCerio" target="_blank">GitHub</a></li>
+    <li><a href="https://linkedin.com/in/mikelcerio" target="_blank">LinkedIn</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div>
+        <div class="hero-badge">Revenue Intelligence Platform</div>
+        <h1>Revenue<span>Pilot</span></h1>
+        <p class="hero-subtitle">
+          End-to-end Revenue Management analytics system for a 50-unit short-term rental portfolio.
+          From raw booking data to ML-powered pricing recommendations.
+        </p>
+        <div class="hero-buttons">
+          <a href="outputs/RevenuePilot_Dashboard.html" class="btn btn-primary" id="btn-demo">
+            ⚡ Live Dashboard Demo
+          </a>
+          <a href="outputs/BilbaoMarketMap.html" class="btn btn-secondary" id="btn-map">
+            🗺️ Market Map
+          </a>
+          <a href="https://github.com/MikelCerio/revenue-pilot-str-analytics" class="btn btn-secondary" id="btn-source">
+            &lt;/&gt; Source Code
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-glow"></div>
+        <img src="assets/img/dashboard_preview.png" alt="RevenuePilot Dashboard Preview" class="hero-image" id="hero-img">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS BAR ════════════════════════════════════════════ -->
+<section class="container">
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-number" data-count="2.25" data-prefix="€" data-suffix="M">€0</div>
+      <div class="stat-label">Revenue Analyzed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-count="34000" data-prefix="" data-suffix="+">0</div>
+      <div class="stat-label">Bookings Processed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-count="3" data-prefix="" data-suffix=" Models">0</div>
+      <div class="stat-label">ML Pipeline</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-count="50" data-prefix="" data-suffix=" Units">0</div>
+      <div class="stat-label">Portfolio Size</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROBLEM → SOLUTION ═══════════════════════════════════ -->
+<section class="problem-section" id="problem">
+  <div class="container">
+    <div class="section-label fade-in">Case Study</div>
+    <h2 class="section-title fade-in">From Spreadsheets to Intelligence</h2>
+    <p class="section-desc fade-in">
+      A real-world portfolio of 50 tourist apartments across 5 buildings in Bilbao was operating with zero centralized analytics.
+    </p>
+
+    <div class="problem-grid">
+      <div class="problem-card fade-in">
+        <div class="card-icon">🔴</div>
+        <div class="card-title">THE PROBLEM</div>
+        <ul class="card-list">
+          <li>Revenue tracked in scattered Excel spreadsheets</li>
+          <li>Static pricing — same rate regardless of demand</li>
+          <li>No cancellation risk management or early warnings</li>
+          <li>No market benchmarking vs. Bilbao STR competition</li>
+          <li>500+ orphan gaps per year — nights impossible to sell</li>
+        </ul>
+      </div>
+      <div class="solution-card fade-in">
+        <div class="card-icon">🟢</div>
+        <div class="card-title">THE SOLUTION</div>
+        <ul class="card-list">
+          <li>Unified ETL pipeline: 3 data sources → 1 clean dataset</li>
+          <li>ML-powered dynamic pricing based on fill speed</li>
+          <li>Cancellation risk scoring with LightGBM (AUC 0.82)</li>
+          <li>Market positioning with 1,561 Airbnb listings analyzed</li>
+          <li>Interactive dashboards with automated revenue alerts</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURES ══════════════════════════════════════════════ -->
+<section class="features-section" id="features">
+  <div class="container">
+    <div class="section-label fade-in">Platform Features</div>
+    <h2 class="section-title fade-in">Full-Stack Revenue Intelligence</h2>
+    <p class="section-desc fade-in">
+      Every component built from scratch — from data ingestion to ML models to interactive visualizations.
+    </p>
+
+    <div class="features-grid">
+      <div class="feature-card fade-in">
+        <span class="feature-icon">📊</span>
+        <div class="feature-title">Power BI Dashboard</div>
+        <p class="feature-desc">7-page interactive report with star schema, 40+ DAX measures, row-level security, and KPI drill-downs.</p>
+        <span class="feature-tag">Star Schema</span>
+        <span class="feature-tag">40+ DAX</span>
+        <span class="feature-tag">RLS</span>
+      </div>
+
+      <div class="feature-card fade-in">
+        <span class="feature-icon">🤖</span>
+        <div class="feature-title">ML Pipeline</div>
+        <p class="feature-desc">3 chained LightGBM models: demand forecasting, cancellation risk detection, and price recommendation engine.</p>
+        <span class="feature-tag">LightGBM</span>
+        <span class="feature-tag">47 Features</span>
+        <span class="feature-tag">Temporal Split</span>
+      </div>
+
+      <div class="feature-card fade-in">
+        <span class="feature-icon">🗺️</span>
+        <div class="feature-title">Market Intelligence</div>
+        <p class="feature-desc">Interactive Leaflet.js map with 1,561 Airbnb listings, GeoJSON choropleth, and portfolio positioning analysis.</p>
+        <span class="feature-tag">GeoJSON</span>
+        <span class="feature-tag">Leaflet.js</span>
+        <span class="feature-tag">Inside Airbnb</span>
+      </div>
+
+      <div class="feature-card fade-in">
+        <span class="feature-icon">💬</span>
+        <div class="feature-title">NLP Review Analysis</div>
+        <p class="feature-desc">Sentiment and topic extraction from 6,298 multilingual guest reviews across 5 languages (ES, EN, FR, DE, IT).</p>
+        <span class="feature-tag">Multilingual</span>
+        <span class="feature-tag">6,298 Reviews</span>
+      </div>
+
+      <div class="feature-card fade-in">
+        <span class="feature-icon">📈</span>
+        <div class="feature-title">Revenue Simulator</div>
+        <p class="feature-desc">Interactive price elasticity model. Simulate ADR changes and visualize the optimal pricing point with demand curves.</p>
+        <span class="feature-tag">Elasticity</span>
+        <span class="feature-tag">What-If</span>
+      </div>
+
+      <div class="feature-card fade-in">
+        <span class="feature-icon">🔄</span>
+        <div class="feature-title">ETL Pipeline</div>
+        <p class="feature-desc">9-phase Python pipeline: data cleaning, KPI computation, pattern detection, ML training, and Power BI export.</p>
+        <span class="feature-tag">9 Phases</span>
+        <span class="feature-tag">Python</span>
+        <span class="feature-tag">Parquet</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SHOWCASE (Screenshots) ═══════════════════════════════ -->
+<section class="showcase-section" id="showcase">
+  <div class="container">
+    <div class="section-label fade-in">Live Demos</div>
+    <h2 class="section-title fade-in">See It In Action</h2>
+    <p class="section-desc fade-in">
+      Click any preview to open the interactive demo — no installation required.
+    </p>
+
+    <div class="showcase-grid">
+      <a href="outputs/RevenuePilot_Dashboard.html" class="showcase-item fade-in" id="showcase-dashboard">
+        <img src="assets/img/dashboard_preview.png" alt="RevenuePilot Dashboard" loading="lazy">
+        <div class="showcase-overlay">
+          <div class="showcase-tag">Interactive Dashboard</div>
+          <div class="showcase-title">Revenue Intelligence Hub</div>
+          <div class="showcase-desc">KPIs, alerts, channel analysis, trends & price simulator</div>
+        </div>
+      </a>
+      <a href="outputs/BilbaoMarketMap.html" class="showcase-item fade-in" id="showcase-map">
+        <img src="assets/img/map_preview.png" alt="Bilbao Market Map" loading="lazy">
+        <div class="showcase-overlay">
+          <div class="showcase-tag">Market Map</div>
+          <div class="showcase-title">Bilbao STR Market Analysis</div>
+          <div class="showcase-desc">1,561 listings · Price heatmap · Portfolio positioning</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ML PIPELINE ══════════════════════════════════════════ -->
+<section class="ml-section" id="pipeline">
+  <div class="container">
+    <div class="section-label fade-in">Machine Learning</div>
+    <h2 class="section-title fade-in">Stacked ML Pipeline Architecture</h2>
+    <p class="section-desc fade-in">
+      Three LightGBM models chained together — demand prediction feeds into price recommendation, while cancellation risk triggers operational alerts.
+    </p>
+
+    <div class="pipeline-flow fade-in">
+      <div class="pipeline-step">
+        <span class="pipeline-icon">📊</span>
+        <div class="pipeline-name">Model A</div>
+        <div class="pipeline-detail">Demand Forecasting</div>
+        <div class="pipeline-metric">MAE ±17.8pp</div>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Weekly occupancy by building. Temporal cyclicity + lag-52w features.</p>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step">
+        <span class="pipeline-icon">⚠️</span>
+        <div class="pipeline-name">Model B</div>
+        <div class="pipeline-detail">Cancellation Risk</div>
+        <div class="pipeline-metric">AUC 0.821</div>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Binary classification. Lead time is #1 predictor. Threshold 0.25–0.35.</p>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step">
+        <span class="pipeline-icon">💰</span>
+        <div class="pipeline-name">Model C</div>
+        <div class="pipeline-detail">Price Recommendation</div>
+        <div class="pipeline-metric">MAE ±€43</div>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Uses Model A output as feature. Optimal ADR per building + week.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESULTS ═══════════════════════════════════════════════ -->
+<section class="results-section" id="results">
+  <div class="container">
+    <div class="section-label fade-in">Key Results</div>
+    <h2 class="section-title fade-in">Measurable Impact</h2>
+    <p class="section-desc fade-in">
+      Real findings from analyzing 7 years of booking data across a live STR portfolio.
+    </p>
+
+    <div class="results-grid">
+      <div class="result-card fade-in">
+        <div class="result-value">€195K</div>
+        <div class="result-label">Revenue upside identified</div>
+        <div class="result-context">Pricing optimization alone</div>
+      </div>
+      <div class="result-card fade-in">
+        <div class="result-value">77.8%</div>
+        <div class="result-label">Portfolio occupancy</div>
+        <div class="result-context">vs. 47.6% market average</div>
+      </div>
+      <div class="result-card fade-in">
+        <div class="result-value">41.1%</div>
+        <div class="result-label">Net operating margin</div>
+        <div class="result-context">After all commissions & costs</div>
+      </div>
+      <div class="result-card fade-in">
+        <div class="result-value">+891%</div>
+        <div class="result-label">Revenue growth 2020→2025</div>
+        <div class="result-context">Post-COVID recovery</div>
+      </div>
+      <div class="result-card fade-in">
+        <div class="result-value">571</div>
+        <div class="result-label">Orphan gaps detected</div>
+        <div class="result-context">~€84K in lost nights/year</div>
+      </div>
+      <div class="result-card fade-in">
+        <div class="result-value">6,298</div>
+        <div class="result-label">Reviews analyzed (NLP)</div>
+        <div class="result-context">5 languages · Sentiment + topics</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TECH STACK ════════════════════════════════════════════ -->
+<section class="tech-section" id="tech">
+  <div class="container">
+    <div class="section-label fade-in">Technology</div>
+    <h2 class="section-title fade-in">Built With</h2>
+
+    <div class="tech-grid fade-in">
+      <div class="tech-item">
+        <span class="tech-icon">🐍</span>
+        <div class="tech-name">Python</div>
+        <div class="tech-role">Core pipeline</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-icon">🐼</span>
+        <div class="tech-name">Pandas</div>
+        <div class="tech-role">Data wrangling</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-icon">🌿</span>
+        <div class="tech-name">LightGBM</div>
+        <div class="tech-role">ML models</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-icon">📊</span>
+        <div class="tech-name">Plotly</div>
+        <div class="tech-role">Interactive charts</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-icon">📈</span>
+        <div class="tech-name">Power BI</div>
+        <div class="tech-role">Executive reporting</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-icon">🚀</span>
+        <div class="tech-name">Streamlit</div>
+        <div class="tech-role">Dashboard app</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-icon">🗺️</span>
+        <div class="tech-name">Folium</div>
+        <div class="tech-role">Geospatial maps</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-icon">🔬</span>
+        <div class="tech-name">Scikit-learn</div>
+        <div class="tech-role">ML utilities</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-icon">💬</span>
+        <div class="tech-name">NLP</div>
+        <div class="tech-role">Review analysis</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-icon">🌍</span>
+        <div class="tech-name">GeoPandas</div>
+        <div class="tech-role">Spatial analysis</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══════════════════════════════════════════════════ -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="cta-box fade-in">
+      <h2 class="cta-title">Interested in this project?</h2>
+      <p class="cta-desc">
+        I'm looking for Revenue Management and Travel Tech roles where I can combine hospitality expertise with data engineering and ML skills.
+      </p>
+      <div class="cta-buttons">
+        <a href="https://linkedin.com/in/mikelcerio" class="btn btn-primary" target="_blank" id="btn-linkedin">
+          💼 Connect on LinkedIn
+        </a>
+        <a href="https://github.com/MikelCerio" class="btn btn-secondary" target="_blank" id="btn-github">
+          🐙 View GitHub Profile
+        </a>
+        <a href="mailto:mikelcchinchurreta@gmail.com" class="btn btn-secondary" id="btn-email">
+          📧 Email Me
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-text">
+        RevenuePilot · Built by Mikel Cerio · Bilbao, Spain · 2019–2026
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/MikelCerio" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/mikelcerio" target="_blank">LinkedIn</a>
+        <a href="mailto:mikelcchinchurreta@gmail.com">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/landing.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+﻿event_key,event_name,start_date,end_date,event_type,historical_adr_uplift_pct,fuente_demanda,year,duracion_dias,week_iso
+1,BBK Live,2026-07-09,2026-07-11,Festival,29.4,"80+ artistas, Kobetamendi, 20º aniversario",2026,3,28
+2,Aste Nagusia,2026-08-22,2026-08-30,Cultural,24.1,"Semana Grande, 9 días, 100+ conciertos gratis",2026,9,34
+3,Concierto Aitana,2026-09-18,2026-09-19,Concierto,24.1,"Cuarto Azul World Tour, Bizkaia Arena (BEC)",2026,2,38
+4,Concierto Dani Martin,2026-10-03,2026-10-03,Concierto,18.0,"Gira 25 pa' siempre, Bizkaia Arena (BEC)",2026,1,40
+5,Bilbao Night Run,2026-10-17,2026-10-17,Deportivo,8.0,"18ª ed., salida San Mamés, meta Guggenheim",2026,1,42
+6,Concierto ZETAK,2026-06-19,2026-06-20,Concierto,18.0,San Mamés (estadio),2026,2,25

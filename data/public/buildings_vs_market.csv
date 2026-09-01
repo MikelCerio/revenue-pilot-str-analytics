@@ -1,0 +1,6 @@
+building,our_adr,our_occupancy,our_score,market_median_adr,market_p25_adr,market_p75_adr,vs_market,percentile_est,latitude,longitude,gap_to_median,revenue_upside_annual
+Edif. A - Urban,98,72,6.32,137,88,200,-39,38,43.2603,-2.935,-39,102491.99999999999
+Edif. B - City Center,138,84,8.04,137,88,200,1,51,43.2627,-2.9253,1,0.0
+Edif. C - Riverside,121,79,7.89,137,88,200,-16,44,43.2649,-2.9422,-16,46136.0
+Edif. D - Old Quarter,164,82,8.98,137,88,200,27,65,43.2567,-2.9231,27,0.0
+Edif. E - Budget,71,76,6.72,88,60,120,-17,42,43.258,-2.9285,-17,47158.0

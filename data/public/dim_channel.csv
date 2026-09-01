@@ -1,0 +1,6 @@
+channel_key,channel_name,channel_type,typical_commission_pct
+1,OTA Principal,OTA,15.0
+2,OTA Secundaria,OTA,16.0
+3,Canal Directo,Directo,0.0
+4,Otros,Directo,0.0
+5,Otros,Interno,0.0

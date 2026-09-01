@@ -1,0 +1,15 @@
+﻿date,festivo,ambito,dia_semana,mes,week_iso,oportunidad
+2026-01-01,Año Nuevo,Nacional,Jueves,1,1,Puente (viernes)
+2026-01-06,Epifanía / Reyes,Nacional,Martes,1,2,Puente (lunes)
+2026-03-19,San José,Autonómico,Jueves,3,12,Puente (viernes)
+2026-04-02,Jueves Santo,Autonómico,Jueves,4,14,Puente (viernes)
+2026-04-03,Viernes Santo,Nacional,Viernes,4,14,Finde largo
+2026-04-06,Lunes de Pascua,Autonómico,Lunes,4,15,Finde largo
+2026-05-01,Día del Trabajo,Nacional,Viernes,5,18,Finde largo
+2026-07-25,Santiago Apóstol,Nacional,Sábado,7,30,-
+2026-07-31,San Ignacio de Loyola,Foral (Bizkaia),Viernes,7,31,Finde largo
+2026-08-15,Asunción de la Virgen,Nacional,Sábado,8,33,-
+2026-08-28,Semana Grande (Bilbao),Local (Bilbao),Viernes,8,35,Finde largo
+2026-10-12,Fiesta Nacional,Nacional,Lunes,10,42,Finde largo
+2026-12-08,Inmaculada Concepción,Nacional,Martes,12,50,Puente (lunes)
+2026-12-25,Navidad,Nacional,Viernes,12,52,Finde largo

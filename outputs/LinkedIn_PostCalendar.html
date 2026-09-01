@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn Post Calendar — Revenue Management | [staff]</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',system-ui,sans-serif; background:#0f172a; color:#e2e8f0; }
+
+.page-header {
+  background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+  padding: 40px 40px 30px;
+  border-bottom: 1px solid #1e3a5f;
+}
+.page-header h1 { font-size:1.8rem; font-weight:800; color:#38bdf8; }
+.page-header p { color:#94a3b8; margin-top:6px; font-size:0.9rem; }
+.notice {
+  margin-top:16px; padding:12px 16px;
+  background:#0f2a1e; border:1px solid #166534; border-radius:8px;
+  font-size:0.82rem; color:#86efac; line-height:1.5;
+}
+
+.controls {
+  padding:20px 40px;
+  display:flex; gap:12px; flex-wrap:wrap; align-items:center;
+  border-bottom:1px solid #1e293b;
+}
+.filter-btn {
+  padding:6px 14px; border-radius:20px; border:1px solid #334155;
+  background:transparent; color:#94a3b8; cursor:pointer; font-size:0.78rem;
+  transition:all 0.2s;
+}
+.filter-btn:hover, .filter-btn.active { background:#1e3a5f; border-color:#38bdf8; color:#38bdf8; }
+.lang-toggle {
+  margin-left:auto; display:flex; gap:8px; align-items:center;
+  font-size:0.78rem; color:#64748b;
+}
+.lang-btn {
+  padding:5px 12px; border-radius:6px; border:1px solid #334155;
+  background:transparent; color:#94a3b8; cursor:pointer; font-size:0.78rem; transition:all 0.2s;
+}
+.lang-btn.active { background:#1e3a5f; border-color:#38bdf8; color:#38bdf8; }
+
+.calendar-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap:20px;
+  padding:24px 40px 40px;
+}
+
+.post-card {
+  background:#1e293b; border-radius:14px; border:1px solid #334155;
+  overflow:hidden; transition:border-color 0.2s, transform 0.2s;
+}
+.post-card:hover { border-color:#38bdf8; transform:translateY(-2px); }
+
+.card-header {
+  padding:14px 18px 10px;
+  display:flex; align-items:flex-start; gap:12px;
+  border-bottom:1px solid #334155;
+}
+.week-badge {
+  background:#0f172a; color:#38bdf8; border:1px solid #1e3a5f;
+  padding:3px 10px; border-radius:20px; font-size:0.68rem; font-weight:700;
+  white-space:nowrap; margin-top:2px;
+}
+.card-meta { flex:1; }
+.card-title { font-size:0.92rem; font-weight:700; color:#e2e8f0; line-height:1.3; }
+.card-tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+.tag {
+  font-size:0.62rem; font-weight:700; padding:2px 8px; border-radius:10px;
+  text-transform:uppercase; letter-spacing:0.5px;
+}
+.tag-data    { background:#1e3a5f; color:#7dd3fc; }
+.tag-insight { background:#3b1d6b; color:#c4b5fd; }
+.tag-tip     { background:#064e3b; color:#6ee7b7; }
+.tag-story   { background:#451a03; color:#fcd34d; }
+.tag-tool    { background:#450a0a; color:#fca5a5; }
+
+.format-badge {
+  font-size:0.62rem; font-weight:700; padding:3px 9px; border-radius:6px;
+  background:#1e293b; border:1px solid #475569; color:#94a3b8; white-space:nowrap;
+}
+.format-carousel { border-color:#818cf8; color:#818cf8; }
+.format-text     { border-color:#34d399; color:#34d399; }
+.format-poll     { border-color:#fb923c; color:#fb923c; }
+.format-article  { border-color:#38bdf8; color:#38bdf8; }
+
+.card-body { padding:16px 18px; }
+.lang-section { display:none; }
+.lang-section.visible { display:block; }
+
+.post-content {
+  font-size:0.81rem; line-height:1.65; color:#cbd5e1;
+  white-space:pre-wrap; word-break:break-word;
+}
+.post-content strong { color:#e2e8f0; }
+.post-content em { color:#94a3b8; font-style:italic; }
+
+.data-pill {
+  display:inline-block; margin-top:10px;
+  padding:6px 12px; border-radius:8px;
+  background:#0f172a; border:1px solid #1e3a5f;
+  font-size:0.73rem; color:#38bdf8;
+}
+.data-pill span { color:#fbbf24; font-weight:700; }
+
+.hashtags {
+  margin-top:12px; font-size:0.72rem; color:#3b82f6; word-break:break-all;
+  line-height:1.6;
+}
+
+.copy-btn {
+  margin-top:12px; padding:7px 14px;
+  background:#1e3a5f; border:1px solid #3b82f6;
+  border-radius:8px; color:#7dd3fc; font-size:0.75rem;
+  cursor:pointer; transition:all 0.2s; width:100%;
+}
+.copy-btn:hover { background:#1d4ed8; color:white; }
+.copy-btn.copied { background:#064e3b; border-color:#34d399; color:#34d399; }
+
+.stat-bar {
+  display:flex; gap:16px; margin-top:12px; padding-top:12px;
+  border-top:1px solid #334155;
+}
+.stat { text-align:center; }
+.stat-val { font-size:0.82rem; font-weight:700; color:#38bdf8; }
+.stat-lbl { font-size:0.6rem; color:#64748b; text-transform:uppercase; }
+
+.month-divider {
+  grid-column: 1 / -1;
+  padding:8px 0 4px;
+  font-size:0.7rem; font-weight:800; color:#64748b;
+  text-transform:uppercase; letter-spacing:2px;
+  border-top: 1px solid #1e293b;
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>📅 LinkedIn Content Calendar — Revenue Management</h1>
+  <p>12 semanas · 12 posts · EN + ES · Datos reales anonimizados · Sin información sensible</p>
+  <div class="notice">
+    ✅ <strong>Protocolo de privacidad:</strong> Todos los posts usan "un portfolio de apartamentos turísticos que analicé" o "datos de mercado público". No se menciona nombre de empresa, ciudad específica, ni datos económicos reales. Los porcentajes y tendencias son reales pero presentados como hallazgos de análisis genérico.
+  </div>
+</div>
+
+<div class="controls">
+  <span style="font-size:0.75rem;color:#64748b;font-weight:700;">FILTRAR:</span>
+  <button class="filter-btn active" onclick="filterPosts('all')">Todos (12)</button>
+  <button class="filter-btn" onclick="filterPosts('data')">📊 Datos</button>
+  <button class="filter-btn" onclick="filterPosts('insight')">💡 Insight</button>
+  <button class="filter-btn" onclick="filterPosts('tip')">🛠 Tip</button>
+  <button class="filter-btn" onclick="filterPosts('story')">📖 Historia</button>
+  <button class="filter-btn" onclick="filterPosts('tool')">⚙️ Tool/Tech</button>
+  <div class="lang-toggle">
+    <span>Idioma:</span>
+    <button class="lang-btn active" onclick="setLang('es')" id="btn-es">🇪🇸 ES</button>
+    <button class="lang-btn" onclick="setLang('en')" id="btn-en">🇬🇧 EN</button>
+  </div>
+</div>
+
+<div class="calendar-grid" id="grid">
+
+  <!-- SEMANA 1 -->
+  <div class="month-divider">MAYO 2026 — Weeks 1–2</div>
+
+  <div class="post-card" data-tags="data">
+    <div class="card-header">
+      <div class="week-badge">SEMANA 1</div>
+      <div class="card-meta">
+        <div class="card-title">El efecto umbral del 8.5 en Booking.com</div>
+        <div class="card-tags">
+          <span class="tag tag-data">📊 Datos</span>
+          <span class="tag tag-insight">💡 Insight</span>
+          <span class="format-badge format-text">Texto</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="lang-section visible" data-lang="es">
+        <div class="post-content">¿Sabías que en Booking.com hay un umbral invisible que cambia todo?
+
+Un portfolio de apartamentos turísticos que analicé tenía algunos apartamentos justo por debajo de 8.5 y otros por encima.
+
+La diferencia en visibilidad orgánica era <strong>significativa</strong>.
+
+El algoritmo de Booking.com trata el 8.5 como un punto de inflexión real, no como una línea imaginaria.
+
+Aquí está lo que encontré en los datos de reseñas de más de 6.000 valoraciones:
+
+→ El <strong>tema #1 que arrastraba la nota</strong> no era la limpieza ni la ubicación.
+→ Era el <strong>proceso de check-in y los accesos</strong>.
+→ Y ese problema tiene una solución operativa, no una solución de marketing.
+
+La mayoría de los operadores buscan subir puntuaciones con respuestas amables a las reseñas negativas.
+
+Los mejores operadores buscan los <strong>3 procesos</strong> que generan el 80% de las quejas y los eliminan.
+
+¿En qué categoría estás tú?
+
+<em>→ En los próximos posts voy a compartir qué reveló el análisis NLP de 6.000+ reseñas reales.</em></div>
+        <div class="data-pill">📊 Basado en análisis NLP de <span>6.298 reseñas</span> reales · Umbral Booking.com: <span>8.5/10</span></div>
+        <div class="hashtags">#RevenueManagement #Airbnb #BookingCom #HotelRevenue #STR #GuestExperience #DataAnalytics #Hospitality</div>
+      </div>
+      <div class="lang-section" data-lang="en">
+        <div class="post-content">Did you know Booking.com has an invisible threshold that changes everything?
+
+A tourist apartment portfolio I analyzed had some units just below 8.5 and others above.
+
+The difference in organic visibility was <strong>significant</strong>.
+
+Booking.com's algorithm treats 8.5 as a real inflection point — not an imaginary line.
+
+Here's what I found after analyzing 6,000+ guest reviews with NLP:
+
+→ The <strong>#1 topic dragging scores down</strong> wasn't cleanliness or location.
+→ It was <strong>check-in process and access issues</strong>.
+→ And that problem has an operational fix — not a marketing fix.
+
+Most operators try to improve scores by writing friendly replies to negative reviews.
+
+The best operators identify the <strong>3 processes</strong> generating 80% of complaints — and eliminate them.
+
+Which type are you?
+
+<em>→ In upcoming posts I'll share what NLP analysis of 6,000+ real reviews revealed.</em></div>
+        <div class="data-pill">📊 Based on NLP analysis of <span>6,298 reviews</span> · Booking.com threshold: <span>8.5/10</span></div>
+        <div class="hashtags">#RevenueManagement #STR #BookingCom #HotelRevenue #GuestExperience #DataAnalytics #Hospitality #PropertyManagement</div>
+      </div>
+      <button class="copy-btn" onclick="copyPost(this)">📋 Copiar post</button>
+      <div class="stat-bar">
+        <div class="stat"><div class="stat-val">~800</div><div class="stat-lbl">Palabras est.</div></div>
+        <div class="stat"><div class="stat-val">Lun</div><div class="stat-lbl">Día ideal</div></div>
+        <div class="stat"><div class="stat-val">Alto</div><div class="stat-lbl">Potencial eng.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEMANA 2 -->
+  <div class="post-card" data-tags="data insight">
+    <div class="card-header">
+      <div class="week-badge">SEMANA 2</div>
+      <div class="card-meta">
+        <div class="card-title">El precio del viernes no puede ser el precio del lunes</div>
+        <div class="card-tags">
+          <span class="tag tag-data">📊 Datos</span>
+          <span class="format-badge format-carousel">Carrusel</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="lang-section visible" data-lang="es">
+        <div class="post-content">Desliza → un análisis real de pricing de fin de semana que cambió mi forma de ver la tarificación.
+
+<strong>Slide 1 — El problema</strong>
+La mayoría de los apartamentos turísticos usan el mismo precio toda la semana.
+Es el error más caro del sector.
+
+<strong>Slide 2 — Los datos</strong>
+En un portfolio de 5 edificios que analicé:
+→ El diferencial viernes-domingo vs. lunes-jueves era del <strong>+46% a +62%</strong> según el edificio.
+→ Pero NO todos lo tenían configurado igual.
+→ El edificio con menor premium tenía un 46%... y era el que más hueco de oportunidad tenía.
+
+<strong>Slide 3 — El mecanismo</strong>
+La demanda de fin de semana en short-term rentals viene de un perfil diferente:
+→ Mayor disposición a pagar.
+→ Estancias más cortas (1-2 noches).
+→ Búsqueda más tardía (last minute premium real).
+
+<strong>Slide 4 — La acción</strong>
+Si tu channel manager no tiene un rule automático de +X% para viernes-sábado...
+estás dejando dinero sobre la mesa cada semana del año.
+
+<strong>Slide 5 — El cálculo rápido</strong>
+Con 10 apartamentos a €100/noche base:
+→ Sin weekend premium: €100 × 10 × 104 fines de semana = <strong>€104.000</strong>
+→ Con +50% premium: €150 × 10 × 104 = <strong>€156.000</strong>
+→ Diferencia: <strong>+€52.000/año</strong> sin añadir ni una sola unidad.</div>
+        <div class="data-pill">📊 Weekend premium real detectado: <span>+46% a +62%</span> según edificio</div>
+        <div class="hashtags">#RevenueManagement #DynamicPricing #STR #ApartamentosTuristicos #PricingStrategy #YieldManagement #Smoobu #ChannelManager</div>
+      </div>
+      <div class="lang-section" data-lang="en">
+        <div class="post-content">Swipe → a real pricing analysis that changed how I think about weekend rates.
+
+<strong>Slide 1 — The problem</strong>
+Most tourist apartments use the same price all week.
+It's the most expensive mistake in the sector.
+
+<strong>Slide 2 — The data</strong>
+In a 5-building portfolio I analyzed:
+→ Friday-Sunday vs. Monday-Thursday differential ranged from <strong>+46% to +62%</strong> depending on the property.
+→ But NOT all buildings had it configured the same way.
+→ The building with the lowest premium (46%) had the most untapped opportunity.
+
+<strong>Slide 3 — The mechanism</strong>
+Weekend demand in short-term rentals comes from a different guest profile:
+→ Higher willingness to pay.
+→ Shorter stays (1-2 nights).
+→ Later booking window (real last-minute premium).
+
+<strong>Slide 4 — The action</strong>
+If your channel manager doesn't have an automatic rule for +X% on Friday-Saturday...
+you're leaving money on the table every single week.
+
+<strong>Slide 5 — Quick math</strong>
+With 10 apartments at €100/night base:
+→ No weekend premium: €100 × 10 × 104 weekends = <strong>€104,000</strong>
+→ With +50% premium: €150 × 10 × 104 = <strong>€156,000</strong>
+→ Difference: <strong>+€52,000/year</strong> without adding a single unit.</div>
+        <div class="data-pill">📊 Real weekend premium detected: <span>+46% to +62%</span> by building</div>
+        <div class="hashtags">#RevenueManagement #DynamicPricing #STR #PricingStrategy #YieldManagement #ChannelManager #ShortTermRental #HospitalityData</div>
+      </div>
+      <button class="copy-btn" onclick="copyPost(this)">📋 Copiar post</button>
+    </div>
+  </div>
+
+  <!-- SEMANA 3 -->
+  <div class="month-divider">MAYO–JUNIO 2026 — Weeks 3–4</div>
+
+  <div class="post-card" data-tags="insight">
+    <div class="card-header">
+      <div class="week-badge">SEMANA 3</div>
+      <div class="card-meta">
+        <div class="card-title">ADR vs RevPAR: cuál de las dos te está mintiendo</div>
+        <div class="card-tags">
+          <span class="tag tag-insight">💡 Insight</span>
+          <span class="format-badge format-text">Texto</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="lang-section visible" data-lang="es">
+        <div class="post-content">Hay operadores de apartamentos turísticos que miran solo el ADR y se sienten bien.
+
+Están viendo la mitad del cuadro.
+
+El ADR (Average Daily Rate) te dice cuánto cobras cuando vendes.
+El RevPAR (Revenue Per Available Room/Unit) te dice cuánto generas sobre lo que PODRÍAS haber vendido.
+
+La diferencia es el hueco de ocupación.
+
+<strong>Un ejemplo real:</strong>
+→ Edificio A: ADR €130 · Ocupación 60% → RevPAR: €78
+→ Edificio B: ADR €110 · Ocupación 85% → RevPAR: €93.5
+
+¿Cuál tiene mejor performance? <strong>El B, claramente.</strong>
+
+El operador del edificio A puede sentirse bien con su "alto ADR" mientras el B genera un 20% más de revenue real por unidad disponible.
+
+<strong>La trampa común:</strong>
+Subir precios agresivamente sube el ADR pero puede hundir la ocupación.
+El resultado: RevPAR estancado o incluso menor.
+
+<strong>La métrica que uso:</strong>
+RevPAR = ADR × Ocupación
+
+Y la tarea semanal es simple: ¿mi RevPAR creció respecto a la semana anterior y al mismo periodo del año pasado?
+
+Si no tienes este dato calculado en tiempo real, estás navegando sin GPS.
+
+¿Con qué frecuencia revisas tu RevPAR?</div>
+        <div class="data-pill">KPI clave: <span>RevPAR = ADR × Ocupación</span> — la métrica que no miente</div>
+        <div class="hashtags">#RevPAR #ADR #RevenueManagement #KPI #HotelMetrics #STR #ApartamentosTuristicos #DataDriven #Hospitality</div>
+      </div>
+      <div class="lang-section" data-lang="en">
+        <div class="post-content">There are short-term rental operators who only look at ADR and feel great.
+
+They're seeing half the picture.
+
+ADR (Average Daily Rate) tells you what you charge when you sell.
+RevPAR (Revenue Per Available Room/Unit) tells you what you generate vs. what you COULD have sold.
+
+The difference is your occupancy gap.
+
+<strong>A real example:</strong>
+→ Building A: ADR €130 · Occupancy 60% → RevPAR: €78
+→ Building B: ADR €110 · Occupancy 85% → RevPAR: €93.5
+
+Which performs better? <strong>B, clearly.</strong>
+
+Building A's operator can feel great about their "high ADR" while B generates 20% more actual revenue per available unit.
+
+<strong>The common trap:</strong>
+Aggressive price increases raise ADR but can tank occupancy.
+Result: RevPAR flat or even lower.
+
+<strong>The metric I use:</strong>
+RevPAR = ADR × Occupancy
+
+Weekly task: did my RevPAR grow vs. last week and the same period last year?
+
+If you don't have this calculated in real time, you're navigating without GPS.
+
+How often do you review your RevPAR?</div>
+        <div class="data-pill">Key KPI: <span>RevPAR = ADR × Occupancy</span> — the metric that doesn't lie</div>
+        <div class="hashtags">#RevPAR #ADR #RevenueManagement #KPI #HotelMetrics #STR #DataDriven #Hospitality #PropertyManagement</div>
+      </div>
+      <button class="copy-btn" onclick="copyPost(this)">📋 Copiar post</button>
+    </div>
+  </div>
+
+  <!-- SEMANA 4 -->
+  <div class="post-card" data-tags="tool">
+    <div class="card-header">
+      <div class="week-badge">SEMANA 4</div>
+      <div class="card-meta">
+        <div class="card-title">Usé Machine Learning para predecir demanda en STR. Esto aprendí.</div>
+        <div class="card-tags">
+          <span class="tag tag-tool">⚙️ Tool/Tech</span>
+          <span class="tag tag-data">📊 Datos</span>
+          <span class="format-badge format-article">Artículo</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="lang-section visible" data-lang="es">
+        <div class="post-content">Entrené un modelo de ML para predecir ocupación futura en un portfolio de apartamentos turísticos.
+
+Aquí está lo que aprendí — y lo que me sorprendió.
+
+<strong>El modelo:</strong> LightGBM (gradient boosting)
+<strong>Variables de entrada:</strong> histórico de ocupación, día de semana, festivos, booking window, canal, estancia media, eventos locales.
+<strong>Resultado:</strong> MAE de ±17.8 puntos porcentuales a 90 días vista.
+
+¿Es perfecto? No. ¿Es accionable? <strong>Completamente.</strong>
+
+<strong>Las 3 cosas que me sorprendieron:</strong>
+
+1️⃣ <strong>El booking window importa más que el precio</strong>
+Las reservas que entran con >60 días de antelación tienen un perfil radicalmente diferente a las de last minute. Tratarlas igual en pricing es un error.
+
+2️⃣ <strong>Los festivos locales son mejores predictores que los nacionales</strong>
+Eventos de ciudad específicos generaban picos que el calendario nacional no recogía.
+
+3️⃣ <strong>La señal de cancelación llegaba antes de la cancelación</strong>
+El modelo de cancelaciones (AUC 0.821) detectaba reservas de alto riesgo por su perfil de booking: canal, antelación, precio pagado vs. precio de mercado.
+
+<strong>La aplicación práctica:</strong>
+Cuando el modelo predice >75% de ocupación en una fecha → precio de restricción.
+Cuando predice <40% → activar descuentos early-bird automáticos.
+
+El revenue management ya no es intuición + Excel.
+Es datos + modelos + acción.
+
+¿Tu equipo ya usa forecasting predictivo?</div>
+        <div class="data-pill">Modelos reales: Demanda MAE <span>±17.8pp</span> · Cancelaciones AUC <span>0.821</span> · Precio MAE <span>±€43</span></div>
+        <div class="hashtags">#MachineLearning #RevenueManagement #LightGBM #DemandForecasting #STR #DataScience #Hospitality #PredictiveAnalytics #Python</div>
+      </div>
+      <div class="lang-section" data-lang="en">
+        <div class="post-content">I trained a Machine Learning model to predict future demand in a short-term rental portfolio.
+
+Here's what I learned — and what surprised me.
+
+<strong>The model:</strong> LightGBM (gradient boosting)
+<strong>Input features:</strong> occupancy history, day of week, holidays, booking window, channel, average length of stay, local events.
+<strong>Result:</strong> MAE of ±17.8 percentage points at 90-day horizon.
+
+Is it perfect? No. Is it actionable? <strong>Completely.</strong>
+
+<strong>3 things that surprised me:</strong>
+
+1️⃣ <strong>Booking window matters more than price</strong>
+Reservations coming in 60+ days ahead have a radically different profile from last-minute bookings. Treating them the same in pricing is a mistake.
+
+2️⃣ <strong>Local holidays are better predictors than national ones</strong>
+City-specific events generated demand spikes that the national calendar didn't capture.
+
+3️⃣ <strong>The cancellation signal arrived before the cancellation</strong>
+The cancellation model (AUC 0.821) detected high-risk bookings from their booking profile: channel, lead time, price paid vs. market rate.
+
+<strong>Practical application:</strong>
+When model predicts >75% occupancy on a date → restriction pricing.
+When it predicts <40% → activate automatic early-bird discounts.
+
+Revenue management is no longer intuition + Excel.
+It's data + models + action.
+
+Is your team using predictive forecasting yet?</div>
+        <div class="data-pill">Real models: Demand MAE <span>±17.8pp</span> · Cancellations AUC <span>0.821</span> · Price MAE <span>±€43</span></div>
+        <div class="hashtags">#MachineLearning #RevenueManagement #LightGBM #DemandForecasting #STR #DataScience #Hospitality #PredictiveAnalytics #Python</div>
+      </div>
+      <button class="copy-btn" onclick="copyPost(this)">📋 Copiar post</button>
+    </div>
+  </div>
+
+  <!-- SEMANA 5 -->
+  <div class="month-divider">JUNIO 2026 — Weeks 5–6</div>
+
+  <div class="post-card" data-tags="data insight">
+    <div class="card-header">
+      <div class="week-badge">SEMANA 5</div>
+      <div class="card-meta">
+        <div class="card-title">Airbnb vs. Booking.com: el canal que más ingreso genera por reserva no es el que crees</div>
+        <div class="card-tags">
+          <span class="tag tag-data">📊 Datos</span>
+          <span class="format-badge format-carousel">Carrusel</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="lang-section visible" data-lang="es">
+        <div class="post-content"><strong>Slide 1</strong>
+La mayoría de los operadores de STR optimizan para volumen de reservas.
+Deberían optimizar para <strong>revenue neto por canal</strong>.
+
+<strong>Slide 2 — Los datos (portfolio real analizado)</strong>
+Canal · Reservas · Ticket medio
+→ Booking.com: 73% del volumen · Ticket ~€177
+→ Airbnb: 15% del volumen · Ticket ~€242
+→ Directo: 8% del volumen · Ticket ~€163
+
+Airbnb genera un <strong>37% más de ingreso por reserva</strong> que Booking.com.
+
+<strong>Slide 3 — El truco del volumen</strong>
+Booking.com domina el volumen porque tiene más tráfico.
+Pero su comisión (15-18%) + su perfil de huésped (precio-sensible) comprime el margen.
+
+<strong>Slide 4 — La estrategia óptima</strong>
+→ Booking.com: fill strategy en temporada baja + last minute.
+→ Airbnb: premium positioning en temporada alta + estancias largas.
+→ Directo: nurturing de repetidores + grupos.
+
+<strong>Slide 5 — Lo que falta en la mayoría de los dashboards</strong>
+Revenue bruto por canal ≠ Revenue neto por canal.
+Hasta que no calculas comisiones + coste de adquisición real, estás tomando decisiones de canal a ciegas.
+
+¿Tienes desglosado el revenue neto por canal en tu operación?</div>
+        <div class="data-pill">Dato real: Airbnb ticket medio <span>€242</span> vs Booking.com <span>€177</span> (+37%)</div>
+        <div class="hashtags">#ChannelManagement #Airbnb #BookingCom #RevenueManagement #STR #DistributionStrategy #OTA #NetRevenue #Hospitality</div>
+      </div>
+      <div class="lang-section" data-lang="en">
+        <div class="post-content"><strong>Slide 1</strong>
+Most STR operators optimize for booking volume.
+They should optimize for <strong>net revenue per channel</strong>.
+
+<strong>Slide 2 — Real data (analyzed portfolio)</strong>
+Channel · Bookings · Average ticket
+→ Booking.com: 73% of volume · Avg ticket ~€177
+→ Airbnb: 15% of volume · Avg ticket ~€242
+→ Direct: 8% of volume · Avg ticket ~€163
+
+Airbnb generates <strong>37% more revenue per booking</strong> than Booking.com.
+
+<strong>Slide 3 — The volume trick</strong>
+Booking.com dominates volume because it has more traffic.
+But its commission (15-18%) + price-sensitive guest profile compresses margins.
+
+<strong>Slide 4 — Optimal strategy</strong>
+→ Booking.com: fill strategy in low season + last minute.
+→ Airbnb: premium positioning in high season + longer stays.
+→ Direct: repeat guest nurturing + groups.
+
+<strong>Slide 5 — What's missing from most dashboards</strong>
+Gross revenue by channel ≠ Net revenue by channel.
+Until you calculate commissions + real acquisition cost, you're making channel decisions blind.
+
+Do you have net revenue broken down by channel in your operation?</div>
+        <div class="data-pill">Real data: Airbnb avg ticket <span>€242</span> vs Booking.com <span>€177</span> (+37%)</div>
+        <div class="hashtags">#ChannelManagement #Airbnb #BookingCom #RevenueManagement #STR #DistributionStrategy #OTA #NetRevenue #Hospitality</div>
+      </div>
+      <button class="copy-btn" onclick="copyPost(this)">📋 Copiar post</button>
+    </div>
+  </div>
+
+  <!-- SEMANA 6 -->
+  <div class="post-card" data-tags="tip">
+    <div class="card-header">
+      <div class="week-badge">SEMANA 6</div>
+      <div class="card-meta">
+        <div class="card-title">Cómo hacer benchmarking de tu portfolio sin pagar €500/mes en herramientas</div>
+        <div class="card-tags">
+          <span class="tag tag-tip">🛠 Tip</span>
+          <span class="format-badge format-text">Texto</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="lang-section visible" data-lang="es">
+        <div class="post-content">Inside Airbnb publica datos de todos los mercados STR del mundo. Gratis.
+
+Aquí está cómo lo usé para hacer benchmarking de mercado real:
+
+<strong>Lo que hice:</strong>
+Descargué el dataset de listings de una ciudad turística española.
++1.500 apartamentos. Precio, disponibilidad, reviews, tipo de host.
+
+<strong>Lo que encontré:</strong>
+→ El <strong>33% de los hosts tienen 10+ propiedades</strong> (hosts profesionales).
+→ El 63% tienen 2 o más. Solo el 37% son hosts individuales.
+→ La mediana de precio del mercado: <strong>€136–€137/noche</strong> (apartamento entero).
+→ La ocupación implícita del mercado: ~47%.
+
+Con esos datos calculé dónde estaba cada edificio del portfolio en el ranking de mercado:
+→ ¿Percentil 38? Precio por debajo del mercado — hay upside.
+→ ¿Percentil 65? Por encima — bien posicionado.
+
+<strong>El coste de ese análisis: €0.</strong>
+El tiempo: medio día de Python.
+
+Herramientas que usé: pandas, geopandas, Leaflet.js para el mapa.
+
+No necesitas AirDNA ni PriceLabs para empezar a hacer revenue management basado en datos.
+Necesitas saber <strong>dónde buscar los datos públicos</strong>.
+
+¿Alguien quiere que comparta el script? Deja un comentario y lo preparo.</div>
+        <div class="data-pill">Mercado analizado: <span>1.561 listings</span> · Mediana mercado <span>€136/noche</span> · Ocupación implícita <span>47.6%</span></div>
+        <div class="hashtags">#InsideAirbnb #RevenueManagement #OpenData #STR #Benchmarking #Python #DataAnalytics #ApartamentosTuristicos #Hospitality</div>
+      </div>
+      <div class="lang-section" data-lang="en">
+        <div class="post-content">Inside Airbnb publishes data on every STR market in the world. For free.
+
+Here's how I used it for real market benchmarking:
+
+<strong>What I did:</strong>
+Downloaded the listings dataset for a Spanish tourist city.
+1,500+ apartments. Price, availability, reviews, host type.
+
+<strong>What I found:</strong>
+→ <strong>33% of hosts have 10+ properties</strong> (professional hosts).
+→ 63% have 2 or more. Only 37% are individual hosts.
+→ Market median price: <strong>€136–137/night</strong> (entire apartment).
+→ Implied market occupancy: ~47%.
+
+With that data I calculated where each portfolio building ranked in the market:
+→ Percentile 38? Price below market — upside available.
+→ Percentile 65? Above market — well positioned.
+
+<strong>Cost of that analysis: €0.</strong>
+Time: half a day of Python.
+
+Tools: pandas, geopandas, Leaflet.js for the map.
+
+You don't need AirDNA or PriceLabs to start data-driven revenue management.
+You need to know <strong>where to find public data</strong>.
+
+Anyone want me to share the script? Drop a comment and I'll put it together.</div>
+        <div class="data-pill">Market analyzed: <span>1,561 listings</span> · Market median <span>€136/night</span> · Implied occupancy <span>47.6%</span></div>
+        <div class="hashtags">#InsideAirbnb #RevenueManagement #OpenData #STR #Benchmarking #Python #DataAnalytics #Hospitality #PropertyManagement</div>
+      </div>
+      <button class="copy-btn" onclick="copyPost(this)">📋 Copiar post</button>
+    </div>
+  </div>
+
+  <!-- SEMANA 7 -->
+  <div class="month-divider">JUNIO–JULIO 2026 — Weeks 7–8</div>
+
+  <div class="post-card" data-tags="story insight">
+    <div class="card-header">
+      <div class="week-badge">SEMANA 7</div>
+      <div class="card-meta">
+        <div class="card-title">Analicé 6.298 reseñas con NLP. Esto es lo que los huéspedes realmente dicen.</div>
+        <div class="card-tags">
+          <span class="tag tag-story">📖 Historia</span>
+          <span class="tag tag-data">📊 Datos</span>
+          <span class="format-badge format-carousel">Carrusel</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="lang-section visible" data-lang="es">
+        <div class="post-content"><strong>Slide 1</strong>
+Procesé 6.298 reseñas de huéspedes con NLP (Natural Language Processing).
+Idiomas: español, inglés, francés, alemán, italiano.
+Resultado: un mapa de lo que realmente importa a los huéspedes.
+
+<strong>Slide 2 — Los 5 temas más frecuentes</strong>
+1. Ubicación y accesibilidad
+2. Limpieza
+3. Check-in / acceso / llaves
+4. Comunicación con el anfitrión
+5. Equipamiento y comodidades
+
+<strong>Slide 3 — El hallazgo contraintuitivo</strong>
+El tema que MÁS correlaciona con puntuaciones bajas NO es el que más aparece.
+Check-in problemático = detonador de reseñas de 1 estrella.
+Aunque aparece menos frecuente, su impacto en la nota es desproporcionado.
+
+<strong>Slide 4 — La oportunidad</strong>
+El análisis de sentimiento por tema permite priorizar:
+→ ¿Qué solucionar primero para subir la nota más rápido?
+→ ¿Qué reforzar en las respuestas para mejorar percepción?
+→ ¿Qué mencionar en la descripción del anuncio?
+
+<strong>Slide 5 — La conclusión</strong>
+Los operadores que responden a todas las reseñas pero no analizan los patrones
+están invirtiendo tiempo en el síntoma, no en la causa.
+
+Un buen análisis de reviews no es marketing. Es operaciones.</div>
+        <div class="data-pill">NLP en <span>6.298 reseñas</span> · Multilingüe (5 idiomas) · Detección automática de temas</div>
+        <div class="hashtags">#NLP #RevenueManagement #GuestExperience #STR #DataAnalytics #SentimentAnalysis #Hospitality #Reviews #Python</div>
+      </div>
+      <div class="lang-section" data-lang="en">
+        <div class="post-content"><strong>Slide 1</strong>
+I processed 6,298 guest reviews with NLP (Natural Language Processing).
+Languages: Spanish, English, French, German, Italian.
+Result: a map of what guests actually care about.
+
+<strong>Slide 2 — Top 5 most frequent topics</strong>
+1. Location and accessibility
+2. Cleanliness
+3. Check-in / access / keys
+4. Host communication
+5. Amenities and equipment
+
+<strong>Slide 3 — The counterintuitive finding</strong>
+The topic that MOST correlates with low scores is NOT the most frequent one.
+Problematic check-in = trigger for 1-star reviews.
+Even though it appears less often, its impact on scores is disproportionate.
+
+<strong>Slide 4 — The opportunity</strong>
+Sentiment analysis by topic allows you to prioritize:
+→ What to fix first to raise scores fastest?
+→ What to reinforce in replies to improve perception?
+→ What to highlight in your listing description?
+
+<strong>Slide 5 — The conclusion</strong>
+Operators who respond to every review but don't analyze patterns
+are investing time in the symptom, not the cause.
+
+Good review analysis isn't marketing. It's operations.</div>
+        <div class="data-pill">NLP on <span>6,298 reviews</span> · Multilingual (5 languages) · Automatic topic detection</div>
+        <div class="hashtags">#NLP #RevenueManagement #GuestExperience #STR #DataAnalytics #SentimentAnalysis #Hospitality #Reviews #Python</div>
+      </div>
+      <button class="copy-btn" onclick="copyPost(this)">📋 Copiar post</button>
+    </div>
+  </div>
+
+  <!-- SEMANA 8 -->
+  <div class="post-card" data-tags="tip insight">
+    <div class="card-header">
+      <div class="week-badge">SEMANA 8</div>
+      <div class="card-meta">
+        <div class="card-title">La estancia mínima es la palanca de revenue más infravalorada del sector</div>
+        <div class="card-tags">
+          <span class="tag tag-tip">🛠 Tip</span>
+          <span class="format-badge format-text">Texto</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="lang-section visible" data-lang="es">
+        <div class="post-content">Todos hablan de precio dinámico. Pocos hablan de estancia mínima dinámica.
+
+Es uno de los errores más caros del sector STR.
+
+<strong>El problema:</strong>
+Poner 3 noches mínimas en temporada baja para "proteger" el RevPAR significa que en muchos periodos no entras en los resultados de búsqueda de usuarios que buscan 1-2 noches.
+
+Resultado: huecos en el calendario que no se llenan.
+
+<strong>El dato que encontré en un portfolio real:</strong>
+Algunos apartamentos tenían estancia mínima ≥4 noches en temporada baja.
+Eso representaba más de 200 días al año con esa restricción.
+En temporada baja, la demanda de 1-2 noches es la dominante.
+
+<strong>La solución: LOS (Length of Stay) dinámico</strong>
+→ Temporada alta: mínimo 3-5 noches (para evitar vender fin de semana y dejar vacío lunes-jueves)
+→ Temporada baja: mínimo 1-2 noches (para capturar toda la demanda disponible)
+→ Last minute (< 3 días): siempre 1 noche mínima
+
+Esto se puede automatizar en cualquier channel manager con rules de calendario.
+
+<strong>El impacto:</strong>
+Reducir la estancia mínima en temporada baja puede aumentar la ocupación un 8-15%
+sin tocar el precio.
+
+¿Tu estancia mínima es estática o dinámica?</div>
+        <div class="data-pill">Alerta real detectada: <span>+200 días/año</span> con EM ≥4 en temporada baja en algunos apartamentos</div>
+        <div class="hashtags">#LOS #MinimumStay #RevenueManagement #STR #DynamicPricing #YieldManagement #ChannelManager #Hospitality #ApartamentosTuristicos</div>
+      </div>
+      <div class="lang-section" data-lang="en">
+        <div class="post-content">Everyone talks about dynamic pricing. Few talk about dynamic minimum stay.
+
+It's one of the most expensive mistakes in the STR industry.
+
+<strong>The problem:</strong>
+Setting 3-night minimums in low season to "protect" RevPAR means you don't appear in search results for users looking for 1-2 nights.
+
+Result: calendar gaps that don't fill.
+
+<strong>What I found in a real portfolio:</strong>
+Some apartments had minimum stays ≥4 nights during low season.
+That represented over 200 days per year with that restriction.
+In low season, 1-2 night demand is the dominant type.
+
+<strong>The solution: Dynamic LOS (Length of Stay)</strong>
+→ High season: 3-5 night minimum (to avoid selling weekends and leaving Mon-Thu empty)
+→ Low season: 1-2 night minimum (to capture all available demand)
+→ Last minute (< 3 days): always 1-night minimum
+
+This can be automated in any channel manager with calendar rules.
+
+<strong>The impact:</strong>
+Reducing minimum stay in low season can increase occupancy by 8-15%
+without touching the price.
+
+Is your minimum stay static or dynamic?</div>
+        <div class="data-pill">Real alert detected: <span>+200 days/year</span> with min stay ≥4 during low season in some units</div>
+        <div class="hashtags">#LOS #MinimumStay #RevenueManagement #STR #DynamicPricing #YieldManagement #ChannelManager #Hospitality #ShortTermRental</div>
+      </div>
+      <button class="copy-btn" onclick="copyPost(this)">📋 Copiar post</button>
+    </div>
+  </div>
+
+  <!-- SEMANA 9 -->
+  <div class="month-divider">JULIO 2026 — Weeks 9–10</div>
+
+  <div class="post-card" data-tags="data story">
+    <div class="card-header">
+      <div class="week-badge">SEMANA 9</div>
+      <div class="card-meta">
+        <div class="card-title">El mercado STR de las ciudades medias españolas está más profesionalizado de lo que crees</div>
+        <div class="card-tags">
+          <span class="tag tag-data">📊 Datos</span>
+          <span class="tag tag-story">📖 Historia</span>
+          <span class="format-badge format-carousel">Carrusel</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="lang-section visible" data-lang="es">
+        <div class="post-content"><strong>Slide 1</strong>
+Muchos operadores piensan que compiten contra particulares que alquilan su piso de vez en cuando.
+
+Los datos dicen otra cosa.
+
+<strong>Slide 2 — El perfil real del mercado</strong>
+En una ciudad turística española de tamaño medio que analicé (datos Inside Airbnb):
+→ <strong>33%</strong> de los hosts tienen 10+ propiedades (host profesional)
+→ <strong>63%</strong> tienen 2+ propiedades
+→ Solo el <strong>37%</strong> son hosts individuales con 1 propiedad
+
+¿Compites contra particulares? No. Compites contra operadores.
+
+<strong>Slide 3 — La implicación en pricing</strong>
+Los hosts profesionales tienen:
+→ Herramientas de dynamic pricing (PriceLabs, Beyond, Wheelhouse)
+→ Procesos operativos más eficientes (menor coste por noche)
+→ Más reviews = mejor posicionamiento orgánico
+
+En este mercado, el precio solo no es suficiente.
+
+<strong>Slide 4 — La ventaja competitiva real</strong>
+En un mercado profesionalizado, la diferenciación viene de:
+1. Score de valoraciones (arriba del umbral crítico)
+2. Fotografía y descripción premium
+3. Respuesta a reviews y comunicación
+4. Pricing dinámico adaptado a demanda local
+
+<strong>Slide 5</strong>
+Si no estás midiendo tu posición en el mercado con datos reales...
+tu competencia probablemente sí lo está haciendo.</div>
+        <div class="data-pill">Dato mercado real: <span>33%</span> hosts profesionales (10+ propiedades) · <span>63%</span> multi-listing</div>
+        <div class="hashtags">#STR #Airbnb #RevenueManagement #InsideAirbnb #MarketAnalysis #Hospitality #ProfessionalHosts #CompetitiveAnalysis #OpenData</div>
+      </div>
+      <div class="lang-section" data-lang="en">
+        <div class="post-content"><strong>Slide 1</strong>
+Many operators think they're competing against individuals renting their apartment occasionally.
+
+The data says something different.
+
+<strong>Slide 2 — The real market profile</strong>
+In a mid-size Spanish tourist city I analyzed (Inside Airbnb data):
+→ <strong>33%</strong> of hosts have 10+ properties (professional host)
+→ <strong>63%</strong> have 2+ properties
+→ Only <strong>37%</strong> are individual hosts with 1 property
+
+Are you competing against individuals? No. You're competing against operators.
+
+<strong>Slide 3 — The pricing implication</strong>
+Professional hosts have:
+→ Dynamic pricing tools (PriceLabs, Beyond, Wheelhouse)
+→ More efficient operational processes (lower cost per night)
+→ More reviews = better organic ranking
+
+In this market, price alone isn't enough.
+
+<strong>Slide 4 — The real competitive advantage</strong>
+In a professionalized market, differentiation comes from:
+1. Review scores (above the critical threshold)
+2. Premium photography and descriptions
+3. Review responses and communication quality
+4. Dynamic pricing adapted to local demand
+
+<strong>Slide 5</strong>
+If you're not tracking your market position with real data...
+your competition probably is.</div>
+        <div class="data-pill">Real market data: <span>33%</span> professional hosts (10+ props) · <span>63%</span> multi-listing</div>
+        <div class="hashtags">#STR #Airbnb #RevenueManagement #InsideAirbnb #MarketAnalysis #Hospitality #ProfessionalHosts #CompetitiveAnalysis #OpenData</div>
+      </div>
+      <button class="copy-btn" onclick="copyPost(this)">📋 Copiar post</button>
+    </div>
+  </div>
+
+  <!-- SEMANA 10 -->
+  <div class="post-card" data-tags="tip tool">
+    <div class="card-header">
+      <div class="week-badge">SEMANA 10</div>
+      <div class="card-meta">
+        <div class="card-title">Mi stack de Revenue Management para apartamentos turísticos (lo que uso y lo que evitaría)</div>
+        <div class="card-tags">
+          <span class="tag tag-tip">🛠 Tip</span>
+          <span class="tag tag-tool">⚙️ Tool/Tech</span>
+          <span class="format-badge format-text">Texto</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="lang-section visible" data-lang="es">
+        <div class="post-content">Me preguntan mucho qué herramientas uso para revenue management en STR.
+
+Aquí está mi stack honesto:
+
+<strong>📊 PMS / Channel Manager</strong>
+Smoobu (para portfolio mediano-pequeño, buena relación calidad-precio).
+Alternativas sólidas: Lodgify, Hostaway, Guesty.
+
+<strong>📈 Reporting personalizado</strong>
+Power BI con star schema propio:
+→ fact_reservations, dim_property, dim_date, dim_channel
+→ +40 DAX measures: RevPAR, ADR, Occupancy, cancellation rate, booking window
+→ Row Level Security para acceso por edificio
+
+<strong>🤖 Forecasting y pricing</strong>
+Python (pandas + LightGBM) para modelos de demanda y cancelación.
+Los datos salen de Smoobu vía API + Inside Airbnb como benchmark de mercado.
+
+<strong>📝 Análisis de reviews</strong>
+Python + langdetect + keyword NLP.
+Procesa miles de reseñas en minutos y genera heat maps por tema.
+
+<strong>Lo que evitaría:</strong>
+Herramientas de pricing automático "black box" sin capacidad de auditar las decisiones.
+Si no entiendes por qué sube o baja el precio, no puedes aprender de ello.
+
+<strong>El principio:</strong>
+Cualquier herramienta que no te da los datos crudos exportables
+te hace dependiente de su propia lógica.
+
+Propietario de tus datos = control sobre tu estrategia.
+
+¿Qué herramientas usáis vosotros?</div>
+        <div class="hashtags">#RevenueManagement #PropTech #Smoobu #PowerBI #Python #STR #ChannelManager #DataStack #Hospitality #TechStack</div>
+      </div>
+      <div class="lang-section" data-lang="en">
+        <div class="post-content">People often ask what tools I use for STR revenue management.
+
+Here's my honest stack:
+
+<strong>📊 PMS / Channel Manager</strong>
+Smoobu (for small-medium portfolios, good value for money).
+Solid alternatives: Lodgify, Hostaway, Guesty.
+
+<strong>📈 Custom reporting</strong>
+Power BI with custom star schema:
+→ fact_reservations, dim_property, dim_date, dim_channel
+→ 40+ DAX measures: RevPAR, ADR, Occupancy, cancellation rate, booking window
+→ Row Level Security for building-level access
+
+<strong>🤖 Forecasting and pricing</strong>
+Python (pandas + LightGBM) for demand and cancellation models.
+Data from Smoobu API + Inside Airbnb as market benchmark.
+
+<strong>📝 Review analysis</strong>
+Python + langdetect + keyword NLP.
+Processes thousands of reviews in minutes, generates topic heat maps.
+
+<strong>What I'd avoid:</strong>
+"Black box" automatic pricing tools with no ability to audit decisions.
+If you don't understand why the price goes up or down, you can't learn from it.
+
+<strong>The principle:</strong>
+Any tool that doesn't give you raw exportable data
+makes you dependent on its own logic.
+
+Own your data = control your strategy.
+
+What tools are you using?</div>
+        <div class="hashtags">#RevenueManagement #PropTech #Smoobu #PowerBI #Python #STR #ChannelManager #DataStack #Hospitality #TechStack</div>
+      </div>
+      <button class="copy-btn" onclick="copyPost(this)">📋 Copiar post</button>
+    </div>
+  </div>
+
+  <!-- SEMANA 11 -->
+  <div class="month-divider">AGOSTO 2026 — Weeks 11–12</div>
+
+  <div class="post-card" data-tags="insight story">
+    <div class="card-header">
+      <div class="week-badge">SEMANA 11</div>
+      <div class="card-meta">
+        <div class="card-title">El coste real de una cancelación (no es solo el ingreso perdido)</div>
+        <div class="card-tags">
+          <span class="tag tag-insight">💡 Insight</span>
+          <span class="format-badge format-text">Texto</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="lang-section visible" data-lang="es">
+        <div class="post-content">Cuando un huésped cancela, la mayoría de los operadores piensan solo en el ingreso perdido de esa reserva.
+
+El coste real es 3-4 veces mayor.
+
+<strong>Desglose del coste real de una cancelación:</strong>
+
+1️⃣ <strong>Ingreso perdido de la reserva original</strong>
+Lo más obvio. Pero es solo la punta del iceberg.
+
+2️⃣ <strong>Precio de rebooking inferior</strong>
+Cuando una unidad se queda libre a corto plazo, el precio óptimo ya no está disponible.
+Las fechas se llenan con precio de last-minute, que puede ser un 20-30% inferior al precio original.
+
+3️⃣ <strong>Coste operativo de reactivación</strong>
+Actualizar calendarios, gestionar la disponibilidad en canales, posibles no-shows de sustitución.
+
+4️⃣ <strong>Coste de oportunidad de la demanda desplazada</strong>
+Si cancelaron 4 semanas antes, otros huéspedes interesados ya eligieron otro alojamiento.
+
+<strong>Lo que construí para mitigarlo:</strong>
+Un modelo predictivo de cancelaciones que detecta reservas de alto riesgo
+basado en: canal, antelación de reserva, precio pagado vs. mercado, historial del apartamento.
+
+AUC: 0.821 (bastante bueno para el sector).
+
+Con esas predicciones activo el overbooking controlado solo en las unidades con mayor riesgo.
+
+<strong>El resultado:</strong>
+El revenue management de cancelaciones es un juego asimétrico:
+cada cancelación no anticipada te cuesta 3x.
+Cada cancelación bien gestionada te cuesta 0.3x.
+
+¿Mides tu tasa de cancelación por canal?</div>
+        <div class="data-pill">Modelo cancelaciones: AUC <span>0.821</span> · Variables: canal, booking window, precio vs. mercado</div>
+        <div class="hashtags">#Cancellations #RevenueManagement #STR #YieldManagement #Overbooking #DataScience #Hospitality #PredictiveAnalytics</div>
+      </div>
+      <div class="lang-section" data-lang="en">
+        <div class="post-content">When a guest cancels, most operators only think about the lost revenue from that booking.
+
+The real cost is 3-4x higher.
+
+<strong>Real cost breakdown of a cancellation:</strong>
+
+1️⃣ <strong>Lost revenue from the original booking</strong>
+The most obvious. But it's just the tip of the iceberg.
+
+2️⃣ <strong>Lower rebooking price</strong>
+When a unit becomes available short-term, the optimal price is no longer available.
+Dates fill at last-minute pricing, which can be 20-30% below the original rate.
+
+3️⃣ <strong>Reactivation operational cost</strong>
+Updating calendars, managing channel availability, potential no-shows from replacement bookings.
+
+4️⃣ <strong>Opportunity cost from displaced demand</strong>
+If they cancelled 4 weeks out, other interested guests already chose somewhere else.
+
+<strong>What I built to mitigate it:</strong>
+A predictive cancellation model that detects high-risk bookings
+based on: channel, booking lead time, price paid vs. market, unit history.
+
+AUC: 0.821 (quite good for the sector).
+
+With those predictions I activate controlled overbooking only on units with the highest risk.
+
+<strong>The result:</strong>
+Cancellation revenue management is an asymmetric game:
+every unanticipated cancellation costs you 3x.
+Every well-managed cancellation costs you 0.3x.
+
+Are you measuring your cancellation rate by channel?</div>
+        <div class="data-pill">Cancellation model: AUC <span>0.821</span> · Features: channel, booking window, price vs. market</div>
+        <div class="hashtags">#Cancellations #RevenueManagement #STR #YieldManagement #Overbooking #DataScience #Hospitality #PredictiveAnalytics</div>
+      </div>
+      <button class="copy-btn" onclick="copyPost(this)">📋 Copiar post</button>
+    </div>
+  </div>
+
+  <!-- SEMANA 12 -->
+  <div class="post-card" data-tags="insight data">
+    <div class="card-header">
+      <div class="week-badge">SEMANA 12</div>
+      <div class="card-meta">
+        <div class="card-title">Las 3 métricas que todo revenue manager STR debería tener en su dashboard (y casi nadie tiene)</div>
+        <div class="card-tags">
+          <span class="tag tag-insight">💡 Insight</span>
+          <span class="tag tag-tip">🛠 Tip</span>
+          <span class="format-badge format-carousel">Carrusel</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="lang-section visible" data-lang="es">
+        <div class="post-content"><strong>Slide 1</strong>
+Todos los operadores STR miran ocupación, ADR y revenue total.
+
+Hay 3 métricas más que marcan la diferencia entre operar y optimizar.
+
+<strong>Slide 2 — Métrica 1: Booking Window Distribution</strong>
+¿Con cuánta antelación media te reservan?
+→ Si tu booking window se está acortando → señal de baja demanda o precio alto.
+→ Si se está alargando → demanda fuerte, puedes subir el precio en esas fechas.
+Calcúlalo por edificio, por canal, y por temporada. Las diferencias te sorprenderán.
+
+<strong>Slide 3 — Métrica 2: RevPAR Index (RGI)</strong>
+RevPAR Index = Tu RevPAR / RevPAR del mercado comparable × 100
+→ RGI > 100: estás por encima del mercado. Bien.
+→ RGI < 100: el mercado está creciendo más que tú. Problema.
+Con datos de Inside Airbnb puedes calcular el denominador gratis.
+
+<strong>Slide 4 — Métrica 3: Pricing Gap</strong>
+¿Cuánto se desvía tu ADR real del precio que tienes publicado en el calendario?
+Si tu ADR real es sistemáticamente inferior al precio del calendario...
+alguien está dando descuentos que no has autorizado, o tu política de OTA tiene errores.
+
+<strong>Slide 5 — El dashboard ideal</strong>
+Un buen dashboard STR tiene:
+✅ RevPAR vs. año anterior
+✅ Booking window trend
+✅ RGI vs. mercado
+✅ Pricing gap por canal
+✅ Cancellation rate por canal
+✅ Score Booking.com vs. umbral 8.5
+
+¿Cuál de estas seis tienes ya calculada?</div>
+        <div class="data-pill">Métricas avanzadas: Booking Window · RevPAR Index · <span>Pricing Gap</span> — pocas empresas las miden</div>
+        <div class="hashtags">#RevenueManagement #KPI #Dashboard #PowerBI #STR #RevPAR #BookingWindow #DataAnalytics #Hospitality #PropTech</div>
+      </div>
+      <div class="lang-section" data-lang="en">
+        <div class="post-content"><strong>Slide 1</strong>
+All STR operators look at occupancy, ADR and total revenue.
+
+There are 3 more metrics that separate operating from optimizing.
+
+<strong>Slide 2 — Metric 1: Booking Window Distribution</strong>
+What's your average booking lead time?
+→ If your booking window is shrinking → signal of low demand or high pricing.
+→ If it's growing → strong demand, you can push prices higher for those dates.
+Calculate it by building, by channel, and by season. The differences will surprise you.
+
+<strong>Slide 3 — Metric 2: RevPAR Index (RGI)</strong>
+RevPAR Index = Your RevPAR / Comparable Market RevPAR × 100
+→ RGI > 100: you're above market. Good.
+→ RGI < 100: the market is growing faster than you. Problem.
+With Inside Airbnb data you can calculate the denominator for free.
+
+<strong>Slide 4 — Metric 3: Pricing Gap</strong>
+How much does your real ADR deviate from your published calendar price?
+If your real ADR is systematically below your calendar price...
+someone is giving unauthorized discounts, or your OTA policy has errors.
+
+<strong>Slide 5 — The ideal dashboard</strong>
+A good STR dashboard has:
+✅ RevPAR vs. prior year
+✅ Booking window trend
+✅ RGI vs. market
+✅ Pricing gap by channel
+✅ Cancellation rate by channel
+✅ Booking.com score vs. 8.5 threshold
+
+Which of these six do you already have calculated?</div>
+        <div class="data-pill">Advanced metrics: Booking Window · RevPAR Index · <span>Pricing Gap</span> — few companies track them</div>
+        <div class="hashtags">#RevenueManagement #KPI #Dashboard #PowerBI #STR #RevPAR #BookingWindow #DataAnalytics #Hospitality #PropTech</div>
+      </div>
+      <button class="copy-btn" onclick="copyPost(this)">📋 Copiar post</button>
+    </div>
+  </div>
+
+</div><!-- end grid -->
+
+<script>
+let currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.querySelectorAll('.lang-section').forEach(el => {
+    el.classList.toggle('visible', el.dataset.lang === lang);
+  });
+}
+
+function filterPosts(tag) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.post-card').forEach(card => {
+    if (tag === 'all') {
+      card.style.display = '';
+    } else {
+      const tags = card.dataset.tags || '';
+      card.style.display = tags.includes(tag) ? '' : 'none';
+    }
+  });
+  // Hide dividers if all cards in section are hidden
+  document.querySelectorAll('.month-divider').forEach(div => {
+    div.style.display = '';
+  });
+}
+
+function copyPost(btn) {
+  const card = btn.closest('.post-card');
+  const visibleSection = card.querySelector('.lang-section.visible');
+  const content = visibleSection.querySelector('.post-content').innerText;
+  const hashtags = visibleSection.querySelector('.hashtags')?.innerText || '';
+  const fullText = content + '\n\n' + hashtags;
+  navigator.clipboard.writeText(fullText).then(() => {
+    btn.textContent = '✅ Copiado!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '📋 Copiar post';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+edificio,year,week_iso,semana,mes,mes_num,ocupacion_pred_pct,adr_recomendado,adr_finde,rango_min,rango_max,revpar_estimado,is_evento,evento,is_festivo,festivo,senal_demanda,ajustes,apt_public
+A,2026,27,29-Jun a 05-Jul,June,6,97.1,94.44,137.26,84.99,103.88,91.72,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,27,29-Jun a 05-Jul,June,6,86.7,134.68,195.99,121.22,148.15,116.78,False,,False,,Alta — subir precio,Ocupación alta esperada,B-01
+C,2026,27,29-Jun a 05-Jul,June,6,85.3,117.67,182.13,105.91,129.44,100.39,False,,False,,Alta — subir precio,Ocupación alta esperada,C-01
+D,2026,27,29-Jun a 05-Jul,June,6,93.8,141.99,197.7,127.8,156.19,133.22,False,,False,,Alta — subir precio,Ocupación alta esperada,D-01
+E,2026,27,29-Jun a 05-Jul,June,6,98.5,52.52,77.26,47.27,57.77,51.72,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01
+A,2026,28,06-Jul a 12-Jul,July,7,89.8,107.14,129.45,96.43,117.85,96.23,True,BBK Live,False,,Alta — subir precio,Evento: BBK Live (+29% hist.) | Ocupación alta esperada,A-01
+B,2026,28,06-Jul a 12-Jul,July,7,88.9,151.53,190.96,136.38,166.69,134.66,True,BBK Live,False,,Alta — subir precio,Evento: BBK Live (+29% hist.) | Ocupación alta esperada,B-01
+C,2026,28,06-Jul a 12-Jul,July,7,86.3,142.72,181.2,128.45,156.99,123.15,True,BBK Live,False,,Alta — subir precio,Evento: BBK Live (+29% hist.) | Ocupación alta esperada,C-01
+D,2026,28,06-Jul a 12-Jul,July,7,94.4,151.9,191.71,136.71,167.09,143.41,True,BBK Live,False,,Alta — subir precio,Evento: BBK Live (+29% hist.) | Ocupación alta esperada,D-01
+E,2026,28,06-Jul a 12-Jul,July,7,98.3,61.39,78.65,55.26,67.53,60.32,True,BBK Live,False,,Alta — subir precio,Evento: BBK Live (+29% hist.) | Ocupación alta esperada,E-01
+A,2026,29,13-Jul a 19-Jul,July,7,90.6,103.21,125.84,92.89,113.53,93.5,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,29,13-Jul a 19-Jul,July,7,84.3,147.99,189.64,133.19,162.79,124.8,False,,False,,Alta — subir precio,Ocupación alta esperada,B-01
+C,2026,29,13-Jul a 19-Jul,July,7,86.6,145.27,182.3,130.75,159.8,125.84,False,,False,,Alta — subir precio,Ocupación alta esperada,C-01
+D,2026,29,13-Jul a 19-Jul,July,7,94.2,153.44,192.07,138.1,168.79,144.56,False,,False,,Alta — subir precio,Ocupación alta esperada,D-01
+E,2026,29,13-Jul a 19-Jul,July,7,97.9,57.04,71.38,51.33,62.74,55.84,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01
+A,2026,30,20-Jul a 26-Jul,July,7,91.2,119.71,131.49,107.74,131.68,109.19,False,,True,Santiago Apóstol,Alta — subir precio,Festivo: Santiago Apóstol | Ocupación alta esperada,A-01
+B,2026,30,20-Jul a 26-Jul,July,7,89.1,152.45,191.09,137.2,167.69,135.76,False,,True,Santiago Apóstol,Alta — subir precio,Festivo: Santiago Apóstol | Ocupación alta esperada,B-01
+C,2026,30,20-Jul a 26-Jul,July,7,85.9,144.2,180.95,129.78,158.62,123.8,False,,True,Santiago Apóstol,Alta — subir precio,Festivo: Santiago Apóstol | Ocupación alta esperada,C-01
+D,2026,30,20-Jul a 26-Jul,July,7,94.4,153.58,198.59,138.23,168.94,145.0,False,,True,Santiago Apóstol,Alta — subir precio,Festivo: Santiago Apóstol | Ocupación alta esperada,D-01
+E,2026,30,20-Jul a 26-Jul,July,7,98.1,61.3,74.36,55.17,67.43,60.12,False,,True,Santiago Apóstol,Alta — subir precio,Festivo: Santiago Apóstol | Ocupación alta esperada,E-01
+A,2026,31,27-Jul a 02-Aug,July,7,90.9,116.03,130.17,104.43,127.63,105.52,False,,True,San Ignacio de Loyola,Alta — subir precio,Festivo: San Ignacio de Loyola | Ocupación alta esperada,A-01
+B,2026,31,27-Jul a 02-Aug,July,7,86.2,160.88,200.07,144.79,176.97,138.72,False,,True,San Ignacio de Loyola,Alta — subir precio,Festivo: San Ignacio de Loyola | Ocupación alta esperada,B-01
+C,2026,31,27-Jul a 02-Aug,July,7,68.7,163.6,205.61,147.24,179.96,112.42,False,,True,San Ignacio de Loyola,Media,Festivo: San Ignacio de Loyola,C-01
+D,2026,31,27-Jul a 02-Aug,July,7,79.2,166.21,210.91,149.59,182.84,131.64,False,,True,San Ignacio de Loyola,Media,Festivo: San Ignacio de Loyola,D-01
+E,2026,31,27-Jul a 02-Aug,July,7,96.4,62.56,77.93,56.3,68.81,60.33,False,,True,San Ignacio de Loyola,Alta — subir precio,Festivo: San Ignacio de Loyola | Ocupación alta esperada,E-01
+A,2026,32,03-Aug a 09-Aug,August,8,92.2,127.26,136.75,114.54,139.99,117.33,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,32,03-Aug a 09-Aug,August,8,89.7,201.58,223.2,181.42,221.74,180.79,False,,False,,Alta — subir precio,Ocupación alta esperada,B-01
+C,2026,32,03-Aug a 09-Aug,August,8,79.9,169.27,207.69,152.35,186.2,135.21,False,,False,,Media,Sin ajustes,C-01
+D,2026,32,03-Aug a 09-Aug,August,8,95.8,227.25,262.33,204.52,249.97,217.6,False,,False,,Alta — subir precio,Ocupación alta esperada,D-01
+E,2026,32,03-Aug a 09-Aug,August,8,98.1,68.25,81.24,61.42,75.07,66.97,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01
+A,2026,33,10-Aug a 16-Aug,August,8,92.3,145.99,155.49,131.39,160.59,134.73,False,,True,Asunción de la Virgen,Alta — subir precio,Festivo: Asunción de la Virgen | Ocupación alta esperada,A-01
+B,2026,33,10-Aug a 16-Aug,August,8,89.9,222.07,268.66,199.86,244.27,199.54,False,,True,Asunción de la Virgen,Alta — subir precio,Festivo: Asunción de la Virgen | Ocupación alta esperada,B-01
+C,2026,33,10-Aug a 16-Aug,August,8,88.6,168.81,208.63,151.93,185.7,149.58,False,,True,Asunción de la Virgen,Alta — subir precio,Festivo: Asunción de la Virgen | Ocupación alta esperada,C-01
+D,2026,33,10-Aug a 16-Aug,August,8,95.5,227.87,270.05,205.08,250.66,217.63,False,,True,Asunción de la Virgen,Alta — subir precio,Festivo: Asunción de la Virgen | Ocupación alta esperada,D-01
+E,2026,33,10-Aug a 16-Aug,August,8,97.6,76.85,86.19,69.17,84.54,75.04,False,,True,Asunción de la Virgen,Alta — subir precio,Festivo: Asunción de la Virgen | Ocupación alta esperada,E-01
+A,2026,34,17-Aug a 23-Aug,August,8,93.1,148.31,156.88,133.48,163.14,138.11,True,Aste Nagusia,False,,Alta — subir precio,Evento: Aste Nagusia (+24% hist.) | Ocupación alta esperada,A-01
+B,2026,34,17-Aug a 23-Aug,August,8,89.9,217.74,261.52,195.97,239.51,195.65,True,Aste Nagusia,False,,Alta — subir precio,Evento: Aste Nagusia (+24% hist.) | Ocupación alta esperada,B-01
+C,2026,34,17-Aug a 23-Aug,August,8,88.9,172.49,210.92,155.24,189.74,153.39,True,Aste Nagusia,False,,Alta — subir precio,Evento: Aste Nagusia (+24% hist.) | Ocupación alta esperada,C-01
+D,2026,34,17-Aug a 23-Aug,August,8,95.5,223.54,262.91,201.19,245.9,213.5,True,Aste Nagusia,False,,Alta — subir precio,Evento: Aste Nagusia (+24% hist.) | Ocupación alta esperada,D-01
+E,2026,34,17-Aug a 23-Aug,August,8,98.2,77.26,86.95,69.53,84.98,75.85,True,Aste Nagusia,False,,Alta — subir precio,Evento: Aste Nagusia (+24% hist.) | Ocupación alta esperada,E-01
+A,2026,35,24-Aug a 30-Aug,August,8,91.0,111.09,133.25,99.98,122.2,101.12,True,Aste Nagusia,True,Semana Grande (Bilbao),Alta — subir precio,Evento: Aste Nagusia (+24% hist.) | Festivo: Semana Grande (Bilbao) | Ocupación alta esperada,A-01
+B,2026,35,24-Aug a 30-Aug,August,8,85.3,152.92,195.56,137.63,168.21,130.45,True,Aste Nagusia,True,Semana Grande (Bilbao),Alta — subir precio,Evento: Aste Nagusia (+24% hist.) | Festivo: Semana Grande (Bilbao) | Ocupación alta esperada,B-01
+C,2026,35,24-Aug a 30-Aug,August,8,71.5,165.18,210.86,148.66,181.7,118.15,True,Aste Nagusia,True,Semana Grande (Bilbao),Media,Evento: Aste Nagusia (+24% hist.) | Festivo: Semana Grande (Bilbao),C-01
+D,2026,35,24-Aug a 30-Aug,August,8,93.8,152.81,194.85,137.53,168.09,143.41,True,Aste Nagusia,True,Semana Grande (Bilbao),Alta — subir precio,Evento: Aste Nagusia (+24% hist.) | Festivo: Semana Grande (Bilbao) | Ocupación alta esperada,D-01
+E,2026,35,24-Aug a 30-Aug,August,8,97.2,59.95,71.66,53.95,65.94,58.25,True,Aste Nagusia,True,Semana Grande (Bilbao),Alta — subir precio,Evento: Aste Nagusia (+24% hist.) | Festivo: Semana Grande (Bilbao) | Ocupación alta esperada,E-01
+A,2026,36,31-Aug a 06-Sep,August,8,90.7,106.51,136.71,95.86,117.17,96.59,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,36,31-Aug a 06-Sep,August,8,87.4,149.73,206.76,134.75,164.7,130.84,False,,False,,Alta — subir precio,Ocupación alta esperada,B-01
+C,2026,36,31-Aug a 06-Sep,August,8,81.1,148.22,195.5,133.4,163.04,120.27,False,,False,,Alta — subir precio,Ocupación alta esperada,C-01
+D,2026,36,31-Aug a 06-Sep,August,8,92.6,153.94,210.69,138.54,169.33,142.5,False,,False,,Alta — subir precio,Ocupación alta esperada,D-01
+E,2026,36,31-Aug a 06-Sep,August,8,97.0,57.65,70.62,51.88,63.41,55.95,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01
+A,2026,37,07-Sep a 13-Sep,September,9,87.3,98.51,137.0,88.66,108.36,85.98,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,37,07-Sep a 13-Sep,September,9,84.6,147.09,218.54,132.38,161.8,124.39,False,,False,,Alta — subir precio,Ocupación alta esperada,B-01
+C,2026,37,07-Sep a 13-Sep,September,9,82.2,132.03,193.47,118.83,145.24,108.49,False,,False,,Alta — subir precio,Ocupación alta esperada,C-01
+D,2026,37,07-Sep a 13-Sep,September,9,92.8,146.74,218.54,132.07,161.42,136.23,False,,False,,Alta — subir precio,Ocupación alta esperada,D-01
+E,2026,37,07-Sep a 13-Sep,September,9,96.7,58.0,72.56,52.2,63.8,56.11,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01
+A,2026,38,14-Sep a 20-Sep,September,9,87.9,102.47,139.44,92.22,112.71,90.02,True,Concierto Aitana,False,,Alta — subir precio,Evento: Concierto Aitana (+24% hist.) | Ocupación alta esperada,A-01
+B,2026,38,14-Sep a 20-Sep,September,9,83.9,141.54,219.84,127.38,155.69,118.81,True,Concierto Aitana,False,,Alta — subir precio,Evento: Concierto Aitana (+24% hist.) | Ocupación alta esperada,B-01
+C,2026,38,14-Sep a 20-Sep,September,9,82.6,132.87,201.85,119.59,146.16,109.7,True,Concierto Aitana,False,,Alta — subir precio,Evento: Concierto Aitana (+24% hist.) | Ocupación alta esperada,C-01
+D,2026,38,14-Sep a 20-Sep,September,9,93.4,145.58,225.39,131.02,160.14,136.02,True,Concierto Aitana,False,,Alta — subir precio,Evento: Concierto Aitana (+24% hist.) | Ocupación alta esperada,D-01
+E,2026,38,14-Sep a 20-Sep,September,9,96.9,59.34,72.53,53.41,65.28,57.51,True,Concierto Aitana,False,,Alta — subir precio,Evento: Concierto Aitana (+24% hist.) | Ocupación alta esperada,E-01
+A,2026,39,21-Sep a 27-Sep,September,9,87.5,108.63,150.64,97.77,119.5,95.01,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,39,21-Sep a 27-Sep,September,9,83.5,147.18,225.49,132.46,161.9,122.97,False,,False,,Alta — subir precio,Ocupación alta esperada,B-01
+C,2026,39,21-Sep a 27-Sep,September,9,82.2,132.0,203.82,118.8,145.2,108.46,False,,False,,Alta — subir precio,Ocupación alta esperada,C-01
+D,2026,39,21-Sep a 27-Sep,September,9,93.2,208.09,292.18,187.28,228.9,193.99,False,,False,,Alta — subir precio,Ocupación alta esperada,D-01
+E,2026,39,21-Sep a 27-Sep,September,9,96.7,58.1,72.66,52.29,63.91,56.21,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01
+A,2026,40,28-Sep a 04-Oct,September,9,88.0,108.08,140.12,97.27,118.89,95.09,True,Concierto Dani Martin,False,,Alta — subir precio,Evento: Concierto Dani Martin (+18% hist.) | Ocupación alta esperada,A-01
+B,2026,40,28-Sep a 04-Oct,September,9,84.1,146.58,224.73,131.92,161.24,123.23,True,Concierto Dani Martin,False,,Alta — subir precio,Evento: Concierto Dani Martin (+18% hist.) | Ocupación alta esperada,B-01
+C,2026,40,28-Sep a 04-Oct,September,9,81.9,136.49,200.54,122.84,150.14,111.82,True,Concierto Dani Martin,False,,Alta — subir precio,Evento: Concierto Dani Martin (+18% hist.) | Ocupación alta esperada,C-01
+D,2026,40,28-Sep a 04-Oct,September,9,93.6,144.68,223.15,130.21,159.15,135.43,True,Concierto Dani Martin,False,,Alta — subir precio,Evento: Concierto Dani Martin (+18% hist.) | Ocupación alta esperada,D-01
+E,2026,40,28-Sep a 04-Oct,September,9,97.0,58.12,70.67,52.31,63.93,56.39,True,Concierto Dani Martin,False,,Alta — subir precio,Evento: Concierto Dani Martin (+18% hist.) | Ocupación alta esperada,E-01
+A,2026,41,05-Oct a 11-Oct,October,10,90.3,83.12,120.19,74.81,91.44,75.1,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,41,05-Oct a 11-Oct,October,10,87.7,155.27,216.59,139.74,170.8,136.18,False,,False,,Alta — subir precio,Ocupación alta esperada,B-01
+C,2026,41,05-Oct a 11-Oct,October,10,85.4,140.41,195.24,126.37,154.45,119.86,False,,False,,Alta — subir precio,Ocupación alta esperada,C-01
+D,2026,41,05-Oct a 11-Oct,October,10,93.0,158.26,219.93,142.44,174.09,147.13,False,,False,,Alta — subir precio,Ocupación alta esperada,D-01
+E,2026,41,05-Oct a 11-Oct,October,10,96.9,58.36,69.16,52.53,64.2,56.54,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01
+A,2026,42,12-Oct a 18-Oct,October,10,91.2,109.06,137.09,98.16,119.97,99.41,True,Bilbao Night Run,True,Fiesta Nacional,Alta — subir precio,Evento: Bilbao Night Run (+8% hist.) | Festivo: Fiesta Nacional | Ocupación alta esperada,A-01
+B,2026,42,12-Oct a 18-Oct,October,10,88.5,151.07,224.17,135.96,166.18,133.68,True,Bilbao Night Run,True,Fiesta Nacional,Alta — subir precio,Evento: Bilbao Night Run (+8% hist.) | Festivo: Fiesta Nacional | Ocupación alta esperada,B-01
+C,2026,42,12-Oct a 18-Oct,October,10,82.0,132.75,192.41,119.47,146.02,108.83,True,Bilbao Night Run,True,Fiesta Nacional,Alta — subir precio,Evento: Bilbao Night Run (+8% hist.) | Festivo: Fiesta Nacional | Ocupación alta esperada,C-01
+D,2026,42,12-Oct a 18-Oct,October,10,93.6,152.27,227.5,137.04,167.49,142.46,True,Bilbao Night Run,True,Fiesta Nacional,Alta — subir precio,Evento: Bilbao Night Run (+8% hist.) | Festivo: Fiesta Nacional | Ocupación alta esperada,D-01
+E,2026,42,12-Oct a 18-Oct,October,10,97.9,60.76,71.93,54.68,66.83,59.5,True,Bilbao Night Run,True,Fiesta Nacional,Alta — subir precio,Evento: Bilbao Night Run (+8% hist.) | Festivo: Fiesta Nacional | Ocupación alta esperada,E-01
+A,2026,43,19-Oct a 25-Oct,October,10,90.2,97.24,131.58,87.51,106.96,87.67,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,43,19-Oct a 25-Oct,October,10,86.7,142.51,201.95,128.26,156.76,123.54,False,,False,,Alta — subir precio,Ocupación alta esperada,B-01
+C,2026,43,19-Oct a 25-Oct,October,10,83.7,123.01,179.17,110.71,135.31,102.92,False,,False,,Alta — subir precio,Ocupación alta esperada,C-01
+D,2026,43,19-Oct a 25-Oct,October,10,93.2,153.58,217.54,138.22,168.94,143.06,False,,False,,Alta — subir precio,Ocupación alta esperada,D-01
+E,2026,43,19-Oct a 25-Oct,October,10,97.8,56.97,67.17,51.27,62.66,55.7,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01
+A,2026,44,26-Oct a 01-Nov,October,10,90.4,96.38,121.37,86.74,106.02,87.11,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,44,26-Oct a 01-Nov,October,10,85.4,142.94,191.45,128.65,157.24,122.04,False,,False,,Alta — subir precio,Ocupación alta esperada,B-01
+C,2026,44,26-Oct a 01-Nov,October,10,82.7,127.97,166.32,115.17,140.76,105.83,False,,False,,Alta — subir precio,Ocupación alta esperada,C-01
+D,2026,44,26-Oct a 01-Nov,October,10,90.8,157.33,210.43,141.59,173.06,142.84,False,,False,,Alta — subir precio,Ocupación alta esperada,D-01
+E,2026,44,26-Oct a 01-Nov,October,10,97.7,55.8,64.6,50.22,61.38,54.53,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01
+A,2026,45,02-Nov a 08-Nov,November,11,93.9,72.66,96.65,65.39,79.92,68.25,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,45,02-Nov a 08-Nov,November,11,86.7,136.23,177.37,122.61,149.86,118.1,False,,False,,Alta — subir precio,Ocupación alta esperada,B-01
+C,2026,45,02-Nov a 08-Nov,November,11,83.4,119.32,161.58,107.39,131.25,99.55,False,,False,,Alta — subir precio,Ocupación alta esperada,C-01
+D,2026,45,02-Nov a 08-Nov,November,11,91.1,149.61,194.98,134.65,164.57,136.32,False,,False,,Alta — subir precio,Ocupación alta esperada,D-01
+E,2026,45,02-Nov a 08-Nov,November,11,95.5,52.85,63.27,47.56,58.13,50.48,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01
+A,2026,46,09-Nov a 15-Nov,November,11,93.1,71.34,96.06,64.21,78.48,66.44,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,46,09-Nov a 15-Nov,November,11,86.3,134.85,166.26,121.36,148.33,116.41,False,,False,,Alta — subir precio,Ocupación alta esperada,B-01
+C,2026,46,09-Nov a 15-Nov,November,11,64.9,115.68,167.54,104.12,127.25,75.06,False,,False,,Media,Sin ajustes,C-01
+D,2026,46,09-Nov a 15-Nov,November,11,71.5,146.2,197.01,131.58,160.82,104.55,False,,False,,Media,Sin ajustes,D-01
+E,2026,46,09-Nov a 15-Nov,November,11,95.4,50.49,60.06,45.44,55.54,48.19,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01
+A,2026,47,16-Nov a 22-Nov,November,11,92.9,70.82,96.26,63.74,77.9,65.79,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,47,16-Nov a 22-Nov,November,11,85.2,130.98,172.69,117.88,144.08,111.66,False,,False,,Alta — subir precio,Ocupación alta esperada,B-01
+C,2026,47,16-Nov a 22-Nov,November,11,66.4,92.75,130.63,83.48,102.03,61.55,False,,False,,Media,Sin ajustes,C-01
+D,2026,47,16-Nov a 22-Nov,November,11,88.2,135.24,178.88,121.72,148.76,119.27,False,,False,,Alta — subir precio,Ocupación alta esperada,D-01
+E,2026,47,16-Nov a 22-Nov,November,11,95.9,50.31,59.87,45.28,55.34,48.26,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01
+A,2026,48,23-Nov a 29-Nov,November,11,92.8,63.86,89.42,57.47,70.25,59.28,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,48,23-Nov a 29-Nov,November,11,86.7,136.2,174.93,122.58,149.82,118.07,False,,False,,Alta — subir precio,Ocupación alta esperada,B-01
+C,2026,48,23-Nov a 29-Nov,November,11,59.2,94.07,129.37,84.66,103.47,55.73,False,,False,,Media,Sin ajustes,C-01
+D,2026,48,23-Nov a 29-Nov,November,11,90.7,135.79,176.2,122.21,149.37,123.19,False,,False,,Alta — subir precio,Ocupación alta esperada,D-01
+E,2026,48,23-Nov a 29-Nov,November,11,92.7,40.68,53.36,36.61,44.75,37.73,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01
+A,2026,49,30-Nov a 06-Dec,November,11,91.2,105.29,113.31,94.76,115.82,95.98,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,49,30-Nov a 06-Dec,November,11,85.2,138.63,173.03,124.77,152.49,118.18,False,,False,,Alta — subir precio,Ocupación alta esperada,B-01
+C,2026,49,30-Nov a 06-Dec,November,11,59.4,128.2,166.91,115.38,141.02,76.16,False,,False,,Media,Sin ajustes,C-01
+D,2026,49,30-Nov a 06-Dec,November,11,91.3,152.97,201.15,137.67,168.27,139.71,False,,False,,Alta — subir precio,Ocupación alta esperada,D-01
+E,2026,49,30-Nov a 06-Dec,November,11,96.1,52.37,61.64,47.13,57.61,50.32,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01
+A,2026,50,07-Dec a 13-Dec,December,12,93.1,65.93,92.71,59.33,72.52,61.41,False,,True,Inmaculada Concepción,Alta — subir precio,Festivo: Inmaculada Concepción | Ocupación alta esperada,A-01
+B,2026,50,07-Dec a 13-Dec,December,12,87.0,94.55,121.4,85.1,104.01,82.28,False,,True,Inmaculada Concepción,Alta — subir precio,Festivo: Inmaculada Concepción | Ocupación alta esperada,B-01
+C,2026,50,07-Dec a 13-Dec,December,12,46.9,78.9,117.37,71.01,86.79,37.03,False,,True,Inmaculada Concepción,Baja — descuento last-minute,Festivo: Inmaculada Concepción,C-01
+D,2026,50,07-Dec a 13-Dec,December,12,92.5,92.54,115.88,83.29,101.8,85.57,False,,True,Inmaculada Concepción,Alta — subir precio,Festivo: Inmaculada Concepción | Ocupación alta esperada,D-01
+E,2026,50,07-Dec a 13-Dec,December,12,91.0,36.28,47.97,32.65,39.9,33.01,False,,True,Inmaculada Concepción,Alta — subir precio,Festivo: Inmaculada Concepción | Ocupación alta esperada,E-01
+A,2026,51,14-Dec a 20-Dec,December,12,93.3,61.07,87.55,54.96,67.18,56.96,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,51,14-Dec a 20-Dec,December,12,87.8,96.58,124.69,86.92,106.24,84.81,False,,False,,Alta — subir precio,Ocupación alta esperada,B-01
+C,2026,51,14-Dec a 20-Dec,December,12,48.4,83.83,125.94,75.45,92.22,40.62,False,,False,,Baja — descuento last-minute,Sin ajustes,C-01
+D,2026,51,14-Dec a 20-Dec,December,12,90.1,126.87,172.62,114.18,139.55,114.27,False,,False,,Alta — subir precio,Ocupación alta esperada,D-01
+E,2026,51,14-Dec a 20-Dec,December,12,92.0,35.26,46.82,31.74,38.79,32.44,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01
+A,2026,52,21-Dec a 27-Dec,December,12,95.3,75.05,100.41,67.54,82.55,71.52,False,,True,Navidad,Alta — subir precio,Festivo: Navidad | Ocupación alta esperada,A-01
+B,2026,52,21-Dec a 27-Dec,December,12,86.2,138.4,188.62,124.56,152.24,119.25,False,,True,Navidad,Alta — subir precio,Festivo: Navidad | Ocupación alta esperada,B-01
+C,2026,52,21-Dec a 27-Dec,December,12,58.7,120.58,165.26,108.52,132.64,70.78,False,,True,Navidad,Media,Festivo: Navidad,C-01
+D,2026,52,21-Dec a 27-Dec,December,12,91.5,151.79,209.92,136.61,166.96,138.84,False,,True,Navidad,Alta — subir precio,Festivo: Navidad | Ocupación alta esperada,D-01
+E,2026,52,21-Dec a 27-Dec,December,12,97.2,47.6,58.04,42.84,52.36,46.27,False,,True,Navidad,Alta — subir precio,Festivo: Navidad | Ocupación alta esperada,E-01
+A,2026,53,28-Dec a 03-Jan,December,12,87.6,90.04,111.86,81.04,99.04,78.86,False,,False,,Alta — subir precio,Ocupación alta esperada,A-01
+B,2026,53,28-Dec a 03-Jan,December,12,72.1,150.87,199.45,135.79,165.96,108.83,False,,False,,Media,Sin ajustes,B-01
+C,2026,53,28-Dec a 03-Jan,December,12,54.3,122.1,159.94,109.89,134.31,66.36,False,,False,,Media,Sin ajustes,C-01
+D,2026,53,28-Dec a 03-Jan,December,12,84.7,148.84,204.83,133.95,163.72,126.05,False,,False,,Alta — subir precio,Ocupación alta esperada,D-01
+E,2026,53,28-Dec a 03-Jan,December,12,91.6,39.13,51.43,35.21,43.04,35.83,False,,False,,Alta — subir precio,Ocupación alta esperada,E-01

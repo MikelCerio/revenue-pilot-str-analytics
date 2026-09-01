@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RevenuePilot — STR Intelligence Platform</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+<style>
+  :root {
+    --navy: #1a2e4a;
+    --blue: #1e5fa8;
+    --blue-light: #3b82f6;
+    --teal: #0ea5e9;
+    --green: #10b981;
+    --amber: #f59e0b;
+    --red: #ef4444;
+    --surface: #f8fafc;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --muted: #64748b;
+    --gradient: linear-gradient(135deg, #1a2e4a 0%, #1e5fa8 100%);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--surface); color: var(--text); }
+
+  /* NAV */
+  nav {
+    background: var(--gradient);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px; position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  }
+  .logo { display: flex; align-items: center; gap: 10px; color: white; font-size: 1.3rem; font-weight: 700; letter-spacing: -0.5px; }
+  .logo-icon { width: 32px; height: 32px; background: var(--teal); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .nav-pills { display: flex; gap: 4px; }
+  .nav-pill { color: rgba(255,255,255,0.7); padding: 6px 14px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; border: none; background: none; }
+  .nav-pill.active, .nav-pill:hover { background: rgba(255,255,255,0.15); color: white; }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .badge-live { background: var(--green); color: white; font-size: 0.7rem; padding: 3px 8px; border-radius: 20px; font-weight: 600; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+  .btn-demo { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 7px 16px; border-radius: 6px; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; }
+  .btn-demo:hover { background: white; color: var(--navy); }
+
+  /* HERO BANNER */
+  .hero { background: var(--gradient); color: white; padding: 2rem 2rem 3rem; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; right: -100px; top: -100px; width: 400px; height: 400px; background: rgba(14,165,233,0.1); border-radius: 50%; }
+  .hero::after { content: ''; position: absolute; right: 100px; bottom: -150px; width: 300px; height: 300px; background: rgba(255,255,255,0.05); border-radius: 50%; }
+  .hero-content { max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--teal); font-weight: 600; margin-bottom: 8px; }
+  .hero-title { font-size: 1.7rem; font-weight: 700; margin-bottom: 6px; }
+  .hero-subtitle { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .hero-filters { display: flex; gap: 12px; flex-wrap: wrap; }
+  .filter-group { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 8px 14px; }
+  .filter-label { font-size: 0.75rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
+  select.filter-select { background: transparent; border: none; color: white; font-size: 0.9rem; font-weight: 600; cursor: pointer; outline: none; }
+  select.filter-select option { background: var(--navy); }
+
+  /* MAIN LAYOUT */
+  .main { max-width: 1400px; margin: -1.5rem auto 0; padding: 0 2rem 3rem; position: relative; z-index: 1; }
+
+  /* KPI CARDS */
+  .kpi-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+  @media(max-width:1200px){ .kpi-grid { grid-template-columns: repeat(3,1fr); } }
+  .kpi-card {
+    background: var(--card); border-radius: 12px; padding: 1.2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+    border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+  .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 12px 12px 0 0; }
+  .kpi-card.green::before { background: var(--green); }
+  .kpi-card.blue::before { background: var(--blue-light); }
+  .kpi-card.teal::before { background: var(--teal); }
+  .kpi-card.amber::before { background: var(--amber); }
+  .kpi-card.red::before { background: var(--red); }
+  .kpi-card.navy::before { background: var(--navy); }
+  .kpi-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 600; margin-bottom: 6px; }
+  .kpi-value { font-size: 1.8rem; font-weight: 700; color: var(--text); line-height: 1; margin-bottom: 6px; }
+  .kpi-delta { font-size: 0.78rem; display: flex; align-items: center; gap: 4px; }
+  .kpi-delta.up { color: var(--green); }
+  .kpi-delta.down { color: var(--red); }
+  .kpi-delta.neutral { color: var(--muted); }
+  .kpi-sub { font-size: 0.72rem; color: var(--muted); margin-top: 4px; }
+
+  /* GRID LAYOUTS */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
+  .grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
+  .grid-1-2 { display: grid; grid-template-columns: 1fr 2fr; gap: 1.2rem; margin-bottom: 1.2rem; }
+  @media(max-width:900px){ .grid-2,.grid-3,.grid-2-1,.grid-1-2 { grid-template-columns:1fr; } }
+
+  /* CARDS */
+  .card { background: var(--card); border-radius: 12px; padding: 1.4rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border: 1px solid var(--border); }
+  .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .card-title { font-size: 0.95rem; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+  .card-icon.blue { background: #dbeafe; }
+  .card-icon.green { background: #d1fae5; }
+  .card-icon.amber { background: #fef3c7; }
+  .card-icon.red { background: #fee2e2; }
+  .card-icon.purple { background: #ede9fe; }
+  .card-badge { font-size: 0.7rem; padding: 3px 9px; border-radius: 20px; font-weight: 600; }
+  .card-badge.green { background: #d1fae5; color: #065f46; }
+  .card-badge.amber { background: #fef3c7; color: #92400e; }
+  .card-badge.red { background: #fee2e2; color: #991b1b; }
+  .card-badge.blue { background: #dbeafe; color: #1e40af; }
+
+  /* SECTION LABELS */
+  .section-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 700; margin-bottom: 0.8rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+
+  /* BUILDING TABLE */
+  .building-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .building-table th { text-align: left; padding: 8px 10px; color: var(--muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid var(--border); }
+  .building-table td { padding: 10px 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  .building-table tr:last-child td { border-bottom: none; }
+  .building-table tr:hover td { background: var(--surface); }
+  .score-pill { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-weight: 700; font-size: 0.82rem; }
+  .score-pill.excellent { background: #d1fae5; color: #065f46; }
+  .score-pill.good { background: #dbeafe; color: #1e40af; }
+  .score-pill.warning { background: #fef3c7; color: #92400e; }
+  .score-pill.danger { background: #fee2e2; color: #991b1b; }
+  .trend-up { color: var(--green); font-weight: 600; }
+  .trend-down { color: var(--red); font-weight: 600; }
+  .trend-flat { color: var(--muted); }
+  .progress-bar-wrap { background: var(--surface); border-radius: 4px; height: 6px; width: 80px; overflow: hidden; }
+  .progress-bar { height: 100%; border-radius: 4px; }
+
+  /* RECOMMENDATIONS */
+  .rec-list { display: flex; flex-direction: column; gap: 10px; }
+  .rec-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px; border-radius: 10px; border: 1px solid var(--border); transition: all 0.2s; cursor: pointer; }
+  .rec-item:hover { border-color: var(--blue-light); background: #f0f7ff; }
+  .rec-priority { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+  .rec-priority.critical { background: #fee2e2; color: #dc2626; }
+  .rec-priority.high { background: #fef3c7; color: #d97706; }
+  .rec-priority.medium { background: #d1fae5; color: #059669; }
+  .rec-body { flex: 1; }
+  .rec-title { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+  .rec-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.4; }
+  .rec-impact { font-size: 0.72rem; color: var(--green); font-weight: 600; margin-top: 4px; }
+
+  /* BENCHMARK BAR */
+  .bench-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .bench-label { font-size: 0.78rem; width: 90px; color: var(--muted); text-align: right; flex-shrink: 0; }
+  .bench-bars { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+  .bench-bar-wrap { display: flex; align-items: center; gap: 8px; }
+  .bench-bar-bg { flex: 1; background: var(--surface); border-radius: 4px; height: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .bench-bar-fill { height: 100%; border-radius: 4px; transition: width 1s ease; }
+  .bench-bar-val { font-size: 0.75rem; font-weight: 700; width: 50px; }
+  .bench-name { font-size: 0.68rem; color: var(--muted); }
+
+  /* REVIEW SCORES */
+  .review-scores { display: flex; flex-direction: column; gap: 10px; }
+  .score-row { display: flex; align-items: center; gap: 10px; }
+  .score-name { font-size: 0.78rem; width: 120px; color: var(--muted); }
+  .score-bar-wrap { flex: 1; background: var(--surface); border-radius: 4px; height: 8px; overflow: hidden; }
+  .score-bar { height: 100%; border-radius: 4px; transition: width 1.2s ease; }
+  .score-val { font-size: 0.8rem; font-weight: 700; width: 35px; text-align: right; }
+
+  /* OPPORTUNITY METER */
+  .opportunity-box { background: linear-gradient(135deg, #1a2e4a, #1e5fa8); border-radius: 12px; padding: 1.4rem; color: white; text-align: center; }
+  .opp-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.6); margin-bottom: 8px; }
+  .opp-value { font-size: 2.4rem; font-weight: 800; color: #34d399; margin-bottom: 4px; }
+  .opp-sub { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin-bottom: 16px; }
+  .opp-scenarios { display: flex; flex-direction: column; gap: 8px; }
+  .opp-scenario { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.08); border-radius: 8px; padding: 8px 12px; font-size: 0.8rem; }
+  .opp-scenario-name { color: rgba(255,255,255,0.8); }
+  .opp-scenario-val { color: #34d399; font-weight: 700; }
+
+  /* ML PREDICTIONS */
+  .ml-badge { display: inline-flex; align-items: center; gap: 5px; background: #ede9fe; color: #6d28d9; font-size: 0.7rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .prediction-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .prediction-row:last-child { border-bottom: none; }
+  .pred-building { font-size: 0.82rem; font-weight: 600; }
+  .pred-detail { font-size: 0.75rem; color: var(--muted); }
+  .pred-price { font-size: 1rem; font-weight: 700; color: var(--blue); }
+  .pred-range { font-size: 0.7rem; color: var(--muted); }
+  .pred-upside { font-size: 0.75rem; color: var(--green); font-weight: 600; }
+
+  /* FOOTER / CTA */
+  .cta-section { background: var(--gradient); border-radius: 16px; padding: 2.5rem; text-align: center; color: white; margin-top: 2rem; position: relative; overflow: hidden; }
+  .cta-section::before { content: ''; position: absolute; left: -80px; top: -80px; width: 250px; height: 250px; background: rgba(14,165,233,0.15); border-radius: 50%; }
+  .cta-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; position: relative; }
+  .cta-sub { color: rgba(255,255,255,0.75); margin-bottom: 1.5rem; font-size: 0.9rem; position: relative; }
+  .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; }
+  .btn-primary { background: #10b981; color: white; border: none; padding: 12px 28px; border-radius: 8px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+  .btn-primary:hover { background: #059669; transform: translateY(-1px); }
+  .btn-secondary { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 12px 28px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .btn-secondary:hover { background: rgba(255,255,255,0.2); }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; position: relative; }
+  .feature-item { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 1rem; text-align: left; }
+  .feature-icon { font-size: 1.4rem; margin-bottom: 6px; }
+  .feature-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
+  .feature-desc { font-size: 0.75rem; color: rgba(255,255,255,0.65); line-height: 1.4; }
+
+  /* TOOLTIP */
+  .chart-container { position: relative; }
+
+  /* TABS */
+  .tabs { display: flex; gap: 4px; margin-bottom: 1rem; background: var(--surface); border-radius: 8px; padding: 4px; border: 1px solid var(--border); }
+  .tab { padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; color: var(--muted); border: none; background: none; transition: all 0.2s; }
+  .tab.active { background: white; color: var(--navy); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+
+  /* HEATMAP */
+  .heatmap { display: grid; gap: 3px; }
+  .heatmap-cell { border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 600; color: white; cursor: pointer; transition: transform 0.1s; }
+  .heatmap-cell:hover { transform: scale(1.1); z-index: 1; position: relative; }
+
+  /* CHART CANVAS */
+  canvas { max-height: 260px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-icon">📈</div>
+    RevenuePilot
+  </div>
+  <div class="nav-pills">
+    <button class="nav-pill active">Dashboard</button>
+    <button class="nav-pill">Reservas</button>
+    <button class="nav-pill">Reviews</button>
+    <button class="nav-pill">Benchmarking</button>
+    <button class="nav-pill">Predicciones ML</button>
+  </div>
+  <div class="nav-right">
+    <span class="badge-live">● LIVE</span>
+    <button class="btn-demo" onclick="alert('Demo mode — conecta tus datos para activar la plataforma completa.')">Conectar mis datos</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-label">Portfolio STR Analytics · Bilbao, País Vasco</div>
+    <div class="hero-title">Revenue Management Intelligence</div>
+    <div class="hero-subtitle">5 edificios · ~44 apartamentos · 34.167 reservas · 6.298 reviews analizadas · 3 modelos ML activos</div>
+    <div class="hero-filters">
+      <div class="filter-group">
+        <span class="filter-label">Año</span>
+        <select class="filter-select" onchange="updateYear(this.value)">
+          <option>2024</option><option>2023</option><option>2022</option><option>Todo el período</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Edificio</span>
+        <select class="filter-select">
+          <option>Todos los edificios</option>
+          <option>Edificio A — Urban</option>
+          <option>Edificio B — City Center</option>
+          <option>Edificio C — Riverside</option>
+          <option>Edificio D — Old Quarter ⭐</option>
+          <option>Edificio E — Budget</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Canal</span>
+        <select class="filter-select">
+          <option>Todos</option><option>OTA Principal</option><option>OTA Secundaria</option><option>Directo</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- KPI CARDS -->
+  <div class="kpi-grid" style="margin-top:1.5rem;">
+    <div class="kpi-card green">
+      <div class="kpi-label">Revenue Total</div>
+      <div class="kpi-value" id="kpi-revenue">€2.25M</div>
+      <div class="kpi-delta up">▲ +15.4% vs 2023</div>
+      <div class="kpi-sub">€1.95M en 2023</div>
+    </div>
+    <div class="kpi-card blue">
+      <div class="kpi-label">ADR Medio</div>
+      <div class="kpi-value">€128</div>
+      <div class="kpi-delta up">▲ +€4 vs 2023</div>
+      <div class="kpi-sub">Mercado Bilbao: €185</div>
+    </div>
+    <div class="kpi-card teal">
+      <div class="kpi-label">RevPAR</div>
+      <div class="kpi-value">€103</div>
+      <div class="kpi-delta up">▲ +6.2% vs 2023</div>
+      <div class="kpi-sub">Mercado: €88</div>
+    </div>
+    <div class="kpi-card navy">
+      <div class="kpi-label">Ocupación</div>
+      <div class="kpi-value">80.0%</div>
+      <div class="kpi-delta up">▲ +2pp vs 2023</div>
+      <div class="kpi-sub">Mercado Bilbao: 47.6%</div>
+    </div>
+    <div class="kpi-card amber">
+      <div class="kpi-label">Score Booking</div>
+      <div class="kpi-value">7.79</div>
+      <div class="kpi-delta neutral">→ Media portfolio</div>
+      <div class="kpi-sub">Umbral premium: 8.5</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">Margen Neto</div>
+      <div class="kpi-value">41.1%</div>
+      <div class="kpi-delta up">▲ Sector: ~35-38%</div>
+      <div class="kpi-sub">Beneficio: €1.73M</div>
+    </div>
+  </div>
+
+  <!-- ROW 1: Revenue trend + Building ranking -->
+  <div class="grid-2-1">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon blue">📊</div>
+          Revenue Mensual — Portfolio Completo
+        </div>
+        <div class="tabs">
+          <button class="tab active" onclick="switchRevenueChart('monthly',this)">Mensual</button>
+          <button class="tab" onclick="switchRevenueChart('yearly',this)">Anual</button>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas id="revenueChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon green">🏠</div>
+          Revenue por Edificio
+        </div>
+        <span class="card-badge blue">2024</span>
+      </div>
+      <div class="chart-container">
+        <canvas id="buildingChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: Building table + Opportunity -->
+  <div class="grid-2-1">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon blue">🏢</div>
+          Rendimiento por Edificio — 2024
+        </div>
+      </div>
+      <table class="building-table">
+        <thead>
+          <tr>
+            <th>Edificio</th>
+            <th>ADR</th>
+            <th>Ocupación</th>
+            <th>RevPAR</th>
+            <th>Score</th>
+            <th>Tendencia</th>
+            <th>Margen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Edif. D — Old Quarter</b><br><span style="font-size:0.7rem;color:var(--muted)">Premium · 8 unidades</span></td>
+            <td><b>€164</b></td>
+            <td>
+              <div style="display:flex;align-items:center;gap:6px;">
+                82%
+                <div class="progress-bar-wrap"><div class="progress-bar" style="width:82%;background:var(--green)"></div></div>
+              </div>
+            </td>
+            <td>€134</td>
+            <td><span class="score-pill excellent">8.98 ⭐</span></td>
+            <td class="trend-up">↑ +0.14</td>
+            <td>~46%</td>
+          </tr>
+          <tr>
+            <td><b>Edif. B — City Center</b><br><span style="font-size:0.7rem;color:var(--muted)">Mid-scale · 12 unidades</span></td>
+            <td><b>€138</b></td>
+            <td>
+              <div style="display:flex;align-items:center;gap:6px;">
+                84%
+                <div class="progress-bar-wrap"><div class="progress-bar" style="width:84%;background:var(--green)"></div></div>
+              </div>
+            </td>
+            <td>€116</td>
+            <td><span class="score-pill good">8.04</span></td>
+            <td class="trend-up">↑ +0.35</td>
+            <td>~46%</td>
+          </tr>
+          <tr>
+            <td><b>Edif. C — Riverside</b><br><span style="font-size:0.7rem;color:var(--muted)">Upscale · 10 unidades</span></td>
+            <td><b>€121</b></td>
+            <td>
+              <div style="display:flex;align-items:center;gap:6px;">
+                79%
+                <div class="progress-bar-wrap"><div class="progress-bar" style="width:79%;background:var(--amber)"></div></div>
+              </div>
+            </td>
+            <td>€96</td>
+            <td><span class="score-pill warning">7.89</span></td>
+            <td class="trend-down">↓ -0.29</td>
+            <td>~42%</td>
+          </tr>
+          <tr>
+            <td><b>Edif. E — Budget Inn</b><br><span style="font-size:0.7rem;color:var(--muted)">Hostal · 4 unidades</span></td>
+            <td><b>€71</b></td>
+            <td>
+              <div style="display:flex;align-items:center;gap:6px;">
+                76%
+                <div class="progress-bar-wrap"><div class="progress-bar" style="width:76%;background:var(--amber)"></div></div>
+              </div>
+            </td>
+            <td>€54</td>
+            <td><span class="score-pill warning">6.72</span></td>
+            <td class="trend-up">↑ +0.81</td>
+            <td>~29%</td>
+          </tr>
+          <tr>
+            <td><b>Edif. A — Urban</b><br><span style="font-size:0.7rem;color:var(--muted)">Economy · 10 unidades</span></td>
+            <td><b>€98</b></td>
+            <td>
+              <div style="display:flex;align-items:center;gap:6px;">
+                72%
+                <div class="progress-bar-wrap"><div class="progress-bar" style="width:72%;background:var(--red)"></div></div>
+              </div>
+            </td>
+            <td>€71</td>
+            <td><span class="score-pill danger">6.32 ⚠</span></td>
+            <td class="trend-down">↓ -0.73</td>
+            <td>~35%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="opportunity-box">
+      <div class="opp-label">Oportunidad de Revenue</div>
+      <div class="opp-value">+€382K</div>
+      <div class="opp-sub">revenue adicional/año — escenario conservador</div>
+      <div class="opp-scenarios">
+        <div class="opp-scenario">
+          <span class="opp-scenario-name">🟢 Conservador (ADR €145)</span>
+          <span class="opp-scenario-val">+€382K/año</span>
+        </div>
+        <div class="opp-scenario">
+          <span class="opp-scenario-name">🟡 Moderado (ADR €160)</span>
+          <span class="opp-scenario-val">+€618K/año</span>
+        </div>
+        <div class="opp-scenario">
+          <span class="opp-scenario-name">🔵 Optimista (ADR €185)</span>
+          <span class="opp-scenario-val">+€928K/año</span>
+        </div>
+      </div>
+      <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.15);">
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.5);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">Gap ADR vs Mercado Bilbao</div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="flex:1;background:rgba(255,255,255,0.1);border-radius:6px;height:12px;overflow:hidden;">
+            <div style="width:68%;height:100%;background:#34d399;border-radius:6px;"></div>
+          </div>
+          <div style="font-size:0.85rem;color:white;font-weight:700;">€128 / €185</div>
+        </div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.5);margin-top:4px;">Portfolio actual vs mercado comparable</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: Occupancy heatmap + Booking window -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon amber">🌡️</div>
+          Mapa de Calor — Ocupación por Mes y Edificio
+        </div>
+      </div>
+      <div style="overflow-x:auto;">
+        <div id="heatmap-container" style="min-width:500px;"></div>
+        <div style="display:flex;align-items:center;gap:6px;margin-top:10px;font-size:0.7rem;color:var(--muted);">
+          <span>Baja</span>
+          <div style="display:flex;gap:2px;">
+            <div style="width:18px;height:10px;border-radius:2px;background:#fee2e2;"></div>
+            <div style="width:18px;height:10px;border-radius:2px;background:#fbbf24;"></div>
+            <div style="width:18px;height:10px;border-radius:2px;background:#34d399;"></div>
+            <div style="width:18px;height:10px;border-radius:2px;background:#059669;"></div>
+          </div>
+          <span>Alta</span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon purple">⏱️</div>
+          Antelación de Reserva (Booking Window)
+        </div>
+        <span class="card-badge amber">⚠ Oportunidad pricing</span>
+      </div>
+      <div class="chart-container">
+        <canvas id="bookingWindowChart"></canvas>
+      </div>
+      <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px;margin-top:12px;font-size:0.78rem;color:#92400e;">
+        <b>⚠ Insight:</b> El 28% de reservas son last-minute (0-1 días) vs 20% del mercado. Las reservas con +91 días de antelación están un ~20% por debajo del precio de mercado — dinero perdido en el segmento más fiel.
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: Reviews + Benchmarking -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon red">⭐</div>
+          Reputación Online — 6.298 Reviews Analizadas
+        </div>
+        <span class="card-badge red">0.1% tasa respuesta</span>
+      </div>
+      <div class="section-label">Puntuaciones por subcategoría (media portfolio)</div>
+      <div class="review-scores">
+        <div class="score-row">
+          <div class="score-name">Confort</div>
+          <div class="score-bar-wrap"><div class="score-bar" style="width:86%;background:var(--green)"></div></div>
+          <div class="score-val" style="color:var(--green)">8.56</div>
+        </div>
+        <div class="score-row">
+          <div class="score-name">Limpieza</div>
+          <div class="score-bar-wrap"><div class="score-bar" style="width:82%;background:var(--green)"></div></div>
+          <div class="score-val" style="color:var(--green)">8.22</div>
+        </div>
+        <div class="score-row">
+          <div class="score-name">Instalaciones</div>
+          <div class="score-bar-wrap"><div class="score-bar" style="width:81%;background:var(--green)"></div></div>
+          <div class="score-val" style="color:var(--green)">8.10</div>
+        </div>
+        <div class="score-row">
+          <div class="score-name">Ubicación</div>
+          <div class="score-bar-wrap"><div class="score-bar" style="width:80%;background:var(--blue-light)"></div></div>
+          <div class="score-val" style="color:var(--blue-light)">8.03</div>
+        </div>
+        <div class="score-row">
+          <div class="score-name">Calidad-Precio</div>
+          <div class="score-bar-wrap"><div class="score-bar" style="width:77%;background:var(--amber)"></div></div>
+          <div class="score-val" style="color:var(--amber)">7.72</div>
+        </div>
+        <div class="score-row">
+          <div class="score-name">Personal ⚠</div>
+          <div class="score-bar-wrap"><div class="score-bar" style="width:72%;background:var(--red)"></div></div>
+          <div class="score-val" style="color:var(--red)">7.21</div>
+        </div>
+      </div>
+      <div style="margin-top:1rem;">
+        <div class="section-label">Temas más mencionados (NLP — 6.298 reviews)</div>
+        <div class="chart-container" style="max-height:160px;">
+          <canvas id="topicsChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon green">📊</div>
+          Benchmarking vs Mercado STR Bilbao
+        </div>
+        <span class="card-badge green">Datos AirROI + EUSTAT</span>
+      </div>
+      <div style="margin-bottom:1.2rem;">
+        <div class="bench-row">
+          <div class="bench-label">ADR (€/noche)</div>
+          <div class="bench-bars">
+            <div class="bench-bar-wrap">
+              <div class="bench-bar-bg"><div class="bench-bar-fill" style="width:68%;background:var(--blue)"></div></div>
+              <div class="bench-bar-val" style="color:var(--blue)">€128</div>
+            </div>
+            <div class="bench-bar-wrap">
+              <div class="bench-bar-bg"><div class="bench-bar-fill" style="width:100%;background:var(--green)"></div></div>
+              <div class="bench-bar-val" style="color:var(--green)">€185</div>
+            </div>
+            <div style="display:flex;gap:8px;font-size:0.68rem;color:var(--muted);">
+              <span style="color:var(--blue)">■</span> Portfolio &nbsp;
+              <span style="color:var(--green)">■</span> Mercado Bilbao
+            </div>
+          </div>
+        </div>
+        <div class="bench-row">
+          <div class="bench-label">Ocupación (%)</div>
+          <div class="bench-bars">
+            <div class="bench-bar-wrap">
+              <div class="bench-bar-bg"><div class="bench-bar-fill" style="width:80%;background:var(--blue)"></div></div>
+              <div class="bench-bar-val" style="color:var(--blue)">80%</div>
+            </div>
+            <div class="bench-bar-wrap">
+              <div class="bench-bar-bg"><div class="bench-bar-fill" style="width:47.6%;background:var(--green)"></div></div>
+              <div class="bench-bar-val" style="color:var(--green)">47.6%</div>
+            </div>
+          </div>
+        </div>
+        <div class="bench-row">
+          <div class="bench-label">RevPAR (€)</div>
+          <div class="bench-bars">
+            <div class="bench-bar-wrap">
+              <div class="bench-bar-bg"><div class="bench-bar-fill" style="width:100%;background:var(--blue)"></div></div>
+              <div class="bench-bar-val" style="color:var(--blue)">€103</div>
+            </div>
+            <div class="bench-bar-wrap">
+              <div class="bench-bar-bg"><div class="bench-bar-fill" style="width:85%;background:var(--green)"></div></div>
+              <div class="bench-bar-val" style="color:var(--green)">€88</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:0.5rem;">
+        <div class="section-label">Evolución ADR mensual vs mercado (2024)</div>
+        <div class="chart-container">
+          <canvas id="benchmarkChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 5: ML Predictions + Recommendations -->
+  <div class="grid-1-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon purple">🤖</div>
+          Predicciones ML — Sem. Actual
+        </div>
+        <span class="ml-badge">🧠 LightGBM</span>
+      </div>
+      <div style="font-size:0.75rem;color:var(--muted);margin-bottom:12px;">
+        3 modelos: Demanda (MAE ±17.8pp) · Cancelación (AUC 0.821) · Precio (MAE ±€43)
+      </div>
+      <div class="prediction-row">
+        <div>
+          <div class="pred-building">Edif. D — Old Quarter</div>
+          <div class="pred-detail">Ocupación predicha: 84% · Riesgo cancel.: BAJO</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="pred-price">€186/noche</div>
+          <div class="pred-range">rango €167–€205</div>
+          <div class="pred-upside">▲ +€22 vs actual</div>
+        </div>
+      </div>
+      <div class="prediction-row">
+        <div>
+          <div class="pred-building">Edif. B — City Center</div>
+          <div class="pred-detail">Ocupación predicha: 78% · Riesgo cancel.: MEDIO</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="pred-price">€152/noche</div>
+          <div class="pred-range">rango €136–€167</div>
+          <div class="pred-upside">▲ +€14 vs actual</div>
+        </div>
+      </div>
+      <div class="prediction-row">
+        <div>
+          <div class="pred-building">Edif. C — Riverside</div>
+          <div class="pred-detail">Ocupación predicha: 71% · Riesgo cancel.: MEDIO</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="pred-price">€138/noche</div>
+          <div class="pred-range">rango €122–€154</div>
+          <div class="pred-upside">▲ +€17 vs actual</div>
+        </div>
+      </div>
+      <div class="prediction-row">
+        <div>
+          <div class="pred-building">Edif. A — Urban</div>
+          <div class="pred-detail">Ocupación predicha: 68% · Riesgo cancel.: ALTO</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="pred-price">€94/noche</div>
+          <div class="pred-range">rango €82–€106</div>
+          <div class="pred-upside" style="color:var(--amber)">≈ sin upside</div>
+        </div>
+      </div>
+      <div class="prediction-row">
+        <div>
+          <div class="pred-building">Edif. E — Budget Inn</div>
+          <div class="pred-detail">Ocupación predicha: 79% · Riesgo cancel.: MEDIO</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="pred-price">€68/noche</div>
+          <div class="pred-range">rango €58–€78</div>
+          <div class="pred-upside" style="color:var(--amber)">≈ sin upside</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon red">🎯</div>
+          Plan de Acción — Recomendaciones Priorizadas
+        </div>
+        <span class="card-badge red">14 acciones identificadas</span>
+      </div>
+      <div class="rec-list">
+        <div class="rec-item">
+          <div class="rec-priority critical">R1</div>
+          <div class="rec-body">
+            <div class="rec-title">Responder el 100% de reviews nuevas</div>
+            <div class="rec-desc">Tasa actual: 0.1% de 6.298 reviews. Booking.com penaliza en visibilidad. Plantillas en 3 idiomas (ES/EN/FR).</div>
+            <div class="rec-impact">💰 Impacto: +0.3pts score · +visibilidad algoritmo · Coste: €0</div>
+          </div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-priority critical">R2</div>
+          <div class="rec-body">
+            <div class="rec-title">Auditoría urgente limpieza — Edificio A y E</div>
+            <div class="rec-desc">Sábanas/edredones mencionados como sucios en reviews 2026. Protocolo fotográfico obligatorio post-limpieza.</div>
+            <div class="rec-impact">💰 Impacto: Evitar reviews de 1★ · Coste: €300</div>
+          </div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-priority critical">R3</div>
+          <div class="rec-body">
+            <div class="rec-title">Email automático post-estancia (solicitar review)</div>
+            <div class="rec-desc">47% de huéspedes no deja texto — solo puntuación. Activar en Smoobu: email 24h post-checkout con enlace directo.</div>
+            <div class="rec-impact">💰 Impacto: +2.960 reviews/año con texto · Coste: €0</div>
+          </div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-priority high">R4</div>
+          <div class="rec-body">
+            <div class="rec-title">Pricing dinámico en Edificio D y B (score >8.0)</div>
+            <div class="rec-desc">Ambos edificios superan/alcanzan el umbral Booking premium. ML predice upside de +€14 a +€22/noche disponible.</div>
+            <div class="rec-impact">💰 Impacto: +€80-120K/año · Coste: ~€100/mes (PriceLabs)</div>
+          </div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-priority high">R5</div>
+          <div class="rec-body">
+            <div class="rec-title">Invertir curva de precios por antelación</div>
+            <div class="rec-desc">Reservas +91 días son actualmente las más baratas. Configurar en Smoobu: early booking = precio premium.</div>
+            <div class="rec-impact">💰 Impacto: +8-12% ADR en tramo anticipado · Coste: €0</div>
+          </div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-priority medium">R6</div>
+          <div class="rec-body">
+            <div class="rec-title">Mejorar proceso check-in (7.1% de quejas)</div>
+            <div class="rec-desc">Video 60s del acceso + WhatsApp 24h disponible. Impacto directo en score "Personal" (el más bajo: 7.21).</div>
+            <div class="rec-impact">💰 Impacto: +0.5pts Personal · Coste: €0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 6: Score evolution + Channel mix -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon amber">📈</div>
+          Evolución Score Booking por Edificio (2023–2026)
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas id="scoreEvolutionChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon blue">📡</div>
+          Mix de Canales — Revenue y Comisiones
+        </div>
+        <span class="card-badge amber">-€280K en comisiones</span>
+      </div>
+      <div class="chart-container">
+        <canvas id="channelChart"></canvas>
+      </div>
+      <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px;margin-top:12px;font-size:0.78rem;color:#1e40af;">
+        <b>💡 Oportunidad canal directo:</b> Subir del 8% al 15% ahorra ~€24K/año en comisiones sin cambiar precios.
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA SECTION -->
+  <div class="cta-section">
+    <div class="cta-title">¿Quieres este análisis para tu negocio?</div>
+    <div class="cta-sub">RevenuePilot conecta con tu PMS (Smoobu, Guesty, Lodgify, Cloudbeds) y Booking.com en menos de 10 minutos.<br>ML entrenado con datos reales del sector STR español. Sin conocimientos técnicos requeridos.</div>
+    <div class="cta-buttons">
+      <button class="btn-primary" onclick="alert('Demo disponible — contacta a hola@revenuepilot.io')">🚀 Solicitar demo gratuita</button>
+      <button class="btn-secondary" onclick="alert('Informe PDF descargable en la versión completa')">📄 Descargar informe PDF</button>
+      <button class="btn-secondary" onclick="alert('Conecta Power BI con nuestros datos via API REST')">📊 Conectar Power BI</button>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">🤖</div>
+        <div class="feature-title">3 Modelos ML incluidos</div>
+        <div class="feature-desc">Predicción de demanda, precios óptimos y riesgo de cancelación. Entrenados con +34.000 reservas reales del mercado STR español.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">⭐</div>
+        <div class="feature-title">NLP Multilingüe de Reviews</div>
+        <div class="feature-desc">Análisis automático de valoraciones en 8 idiomas. Detecta problemas antes de que destrocen tu score en Booking.com.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">Benchmarking de Mercado</div>
+        <div class="feature-desc">Compara tu ADR, ocupación y RevPAR contra el mercado local en tiempo real. Identifica el gap de pricing al instante.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+const MONTHS = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+
+const revenueData2024 = [58000,74000,89000,103000,128000,158000,218000,235000,182000,155000,96000,104000];
+const revenueData2023 = [48000,61000,76000,88000,112000,138000,192000,208000,161000,138000,83000,91000];
+const revenueYearly = { labels:['2019','2020','2021','2022','2023','2024','2025*'], data:[180,52,290,980,1950,2250,1100] };
+
+// ── CHART 1: Revenue mensual ──────────────────────────────────────────────────
+let revenueChart = new Chart(document.getElementById('revenueChart'), {
+  type: 'line',
+  data: {
+    labels: MONTHS,
+    datasets: [
+      {
+        label: '2024', data: revenueData2024,
+        borderColor: '#1e5fa8', backgroundColor: 'rgba(30,95,168,0.08)',
+        fill: true, tension: 0.4, borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#1e5fa8'
+      },
+      {
+        label: '2023', data: revenueData2023,
+        borderColor: '#94a3b8', backgroundColor: 'transparent',
+        fill: false, tension: 0.4, borderWidth: 1.5, borderDash: [5,4], pointRadius: 3, pointBackgroundColor: '#94a3b8'
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: true,
+    plugins: { legend: { position:'top', labels:{font:{size:11}} } },
+    scales: {
+      y: { ticks: { callback: v => '€'+Math.round(v/1000)+'K', font:{size:10} }, grid:{color:'#f1f5f9'} },
+      x: { ticks: { font:{size:10} }, grid:{display:false} }
+    }
+  }
+});
+
+function switchRevenueChart(type, el) {
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  if(type==='yearly') {
+    revenueChart.data.labels = revenueYearly.labels;
+    revenueChart.data.datasets = [{
+      label: 'Revenue (€K)', data: revenueYearly.data,
+      backgroundColor: ['#fee2e2','#fef3c7','#dbeafe','#d1fae5','#d1fae5','#1e5fa8','#e0f2fe'],
+      borderRadius: 6
+    }];
+    revenueChart.config.type = 'bar';
+  } else {
+    revenueChart.data.labels = MONTHS;
+    revenueChart.data.datasets = [
+      { label:'2024', data:revenueData2024, borderColor:'#1e5fa8', backgroundColor:'rgba(30,95,168,0.08)', fill:true, tension:0.4, borderWidth:2.5, type:'line', pointRadius:4, pointBackgroundColor:'#1e5fa8' },
+      { label:'2023', data:revenueData2023, borderColor:'#94a3b8', backgroundColor:'transparent', fill:false, tension:0.4, borderWidth:1.5, borderDash:[5,4], type:'line', pointRadius:3, pointBackgroundColor:'#94a3b8' }
+    ];
+    revenueChart.config.type = 'line';
+  }
+  revenueChart.update();
+}
+
+// ── CHART 2: Building donut ───────────────────────────────────────────────────
+new Chart(document.getElementById('buildingChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Edif. B — City Center','Edif. D — Old Quarter','Edif. C — Riverside','Edif. A — Urban','Edif. E — Budget'],
+    datasets: [{
+      data: [620,580,530,340,180],
+      backgroundColor: ['#1e5fa8','#10b981','#3b82f6','#f59e0b','#94a3b8'],
+      borderWidth: 2, borderColor: '#fff', hoverOffset: 6
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: true, cutout: '62%',
+    plugins: {
+      legend: { position:'bottom', labels:{font:{size:10}, padding:8} },
+      tooltip: { callbacks: { label: ctx => ` €${ctx.parsed}K (${Math.round(ctx.parsed/2250*100)}%)` } }
+    }
+  }
+});
+
+// ── CHART 3: Booking window ───────────────────────────────────────────────────
+new Chart(document.getElementById('bookingWindowChart'), {
+  type: 'bar',
+  data: {
+    labels: ['0-1 días\n(last-minute)','2-7 días','8-30 días','31-90 días','91+ días\n(anticipada)'],
+    datasets: [
+      { label: 'Portfolio', data: [28,31,25,10,6], backgroundColor:'#1e5fa8', borderRadius:5 },
+      { label: 'Mercado Bilbao', data: [20,30,25,15,10], backgroundColor:'#94a3b8', borderRadius:5 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: true,
+    plugins: { legend: { position:'top', labels:{font:{size:10}} } },
+    scales: {
+      y: { ticks: { callback: v => v+'%', font:{size:10} }, grid:{color:'#f1f5f9'} },
+      x: { ticks: { font:{size:9} }, grid:{display:false} }
+    }
+  }
+});
+
+// ── CHART 4: Topics NLP ───────────────────────────────────────────────────────
+new Chart(document.getElementById('topicsChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Limpieza','Ubicación','Comodidad','Check-in','Precio','Ruido','Servicio','Wi-Fi'],
+    datasets: [{
+      data: [744,738,754,328,277,271,213,37],
+      backgroundColor: ['#fee2e2','#d1fae5','#dbeafe','#fef3c7','#ede9fe','#fce7f3','#f3f4f6','#e0f2fe'],
+      borderColor:     ['#ef4444','#10b981','#3b82f6','#f59e0b','#8b5cf6','#ec4899','#6b7280','#06b6d4'],
+      borderWidth: 1.5, borderRadius: 4
+    }]
+  },
+  options: {
+    indexAxis: 'y', responsive:true, maintainAspectRatio:false,
+    plugins: { legend:{display:false} },
+    scales: { x:{ticks:{font:{size:9}},grid:{color:'#f1f5f9'}}, y:{ticks:{font:{size:9}},grid:{display:false}} }
+  }
+});
+
+// ── CHART 5: Score evolution ──────────────────────────────────────────────────
+new Chart(document.getElementById('scoreEvolutionChart'), {
+  type: 'line',
+  data: {
+    labels: ['2023','2024','2025','2026'],
+    datasets: [
+      { label:'Edif. D — Old Quarter', data:[8.95,8.94,9.02,9.09], borderColor:'#10b981', backgroundColor:'rgba(16,185,129,0.05)', fill:true, tension:0.3, borderWidth:2.5, pointRadius:5, pointBackgroundColor:'#10b981' },
+      { label:'Edif. B — City Center', data:[8.03,7.99,8.04,8.34], borderColor:'#1e5fa8', backgroundColor:'transparent', tension:0.3, borderWidth:2, pointRadius:4, pointBackgroundColor:'#1e5fa8' },
+      { label:'Edif. C — Riverside',   data:[7.92,8.01,7.80,7.63], borderColor:'#f59e0b', backgroundColor:'transparent', tension:0.3, borderWidth:2, pointRadius:4, pointBackgroundColor:'#f59e0b', borderDash:[4,3] },
+      { label:'Edif. E — Budget',      data:[6.38,6.55,7.13,7.19], borderColor:'#8b5cf6', backgroundColor:'transparent', tension:0.3, borderWidth:2, pointRadius:4, pointBackgroundColor:'#8b5cf6' },
+      { label:'Edif. A — Urban ⚠',    data:[6.59,6.30,6.27,5.86], borderColor:'#ef4444', backgroundColor:'transparent', tension:0.3, borderWidth:2, pointRadius:4, pointBackgroundColor:'#ef4444', borderDash:[4,3] },
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:true,
+    plugins: {
+      legend:{ position:'bottom', labels:{font:{size:10}, padding:6} },
+      annotation: { annotations: { threshold: { type:'line', yMin:8.5, yMax:8.5, borderColor:'#10b981', borderWidth:1.5, borderDash:[6,3], label:{display:true, content:'Umbral premium 8.5', position:'end', font:{size:9}, color:'#059669', backgroundColor:'#d1fae5', padding:3} } } }
+    },
+    scales: {
+      y:{ min:5.5, max:9.5, ticks:{font:{size:10}}, grid:{color:'#f1f5f9'} },
+      x:{ ticks:{font:{size:10}}, grid:{display:false} }
+    }
+  }
+});
+
+// ── CHART 6: Benchmark ADR mensual ────────────────────────────────────────────
+new Chart(document.getElementById('benchmarkChart'), {
+  type: 'line',
+  data: {
+    labels: MONTHS,
+    datasets: [
+      { label:'Portfolio ADR', data:[57,70,85,98,118,142,188,198,165,148,102,98], borderColor:'#1e5fa8', backgroundColor:'rgba(30,95,168,0.08)', fill:true, tension:0.4, borderWidth:2.5, pointRadius:4, pointBackgroundColor:'#1e5fa8' },
+      { label:'Mercado Bilbao', data:[120,132,148,158,172,188,215,225,195,178,145,138], borderColor:'#10b981', backgroundColor:'transparent', tension:0.4, borderWidth:2, borderDash:[5,3], pointRadius:3, pointBackgroundColor:'#10b981' }
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:true,
+    plugins:{ legend:{position:'top',labels:{font:{size:10}}} },
+    scales:{
+      y:{ticks:{callback:v=>'€'+v,font:{size:10}},grid:{color:'#f1f5f9'}},
+      x:{ticks:{font:{size:9}},grid:{display:false}}
+    }
+  }
+});
+
+// ── CHART 7: Channel mix ──────────────────────────────────────────────────────
+new Chart(document.getElementById('channelChart'), {
+  type: 'bar',
+  data: {
+    labels: ['OTA Principal\n(Booking.com)','OTA Secundaria\n(Airbnb)','Canal Directo','PMS/Otros'],
+    datasets: [
+      { label:'Revenue bruto', data:[1462,450,180,158], backgroundColor:'#1e5fa8', borderRadius:[6,0,0,6], borderSkipped:false },
+      { label:'Comisiones pagadas', data:[219,13.5,0,11], backgroundColor:'#ef4444', borderRadius:[0,6,6,0], borderSkipped:false }
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:true, indexAxis:'y',
+    plugins:{legend:{position:'top',labels:{font:{size:10}}}},
+    scales:{
+      x:{stacked:false, ticks:{callback:v=>'€'+v+'K',font:{size:9}},grid:{color:'#f1f5f9'}},
+      y:{ticks:{font:{size:9}},grid:{display:false}}
+    }
+  }
+});
+
+// ── HEATMAP: Ocupación por mes y edificio ─────────────────────────────────────
+const heatmapData = {
+  buildings: ['Edif. A','Edif. B','Edif. C','Edif. D','Edif. E'],
+  months: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+  values: [
+    [52,58,65,70,78,82,90,92,80,74,58,54],
+    [72,78,82,86,90,92,96,98,94,88,78,74],
+    [62,68,74,80,84,88,94,96,88,80,70,66],
+    [70,76,80,84,88,92,96,98,92,86,74,70],
+    [68,72,78,80,84,86,90,92,84,78,70,66],
+  ]
+};
+
+function getColor(v) {
+  if(v>=90) return '#059669';
+  if(v>=80) return '#34d399';
+  if(v>=70) return '#fbbf24';
+  if(v>=60) return '#fb923c';
+  return '#ef4444';
+}
+
+const heatmapEl = document.getElementById('heatmap-container');
+let html = '<table style="width:100%;border-collapse:collapse;font-size:0.72rem;">';
+html += '<tr><td style="padding:3px 6px;color:#94a3b8;"></td>';
+heatmapData.months.forEach(m => html += `<td style="text-align:center;padding:3px 2px;color:#94a3b8;font-weight:600;">${m}</td>`);
+html += '</tr>';
+heatmapData.buildings.forEach((b,bi) => {
+  html += `<tr><td style="padding:4px 6px;font-weight:600;font-size:0.72rem;color:#475569;white-space:nowrap;">${b}</td>`;
+  heatmapData.values[bi].forEach(v => {
+    html += `<td style="padding:2px;"><div style="background:${getColor(v)};color:white;border-radius:4px;padding:5px 2px;text-align:center;font-weight:700;cursor:pointer;" title="${v}% ocupación">${v}%</div></td>`;
+  });
+  html += '</tr>';
+});
+html += '</table>';
+heatmapEl.innerHTML = html;
+</script>
+
+</body>
+</html>
