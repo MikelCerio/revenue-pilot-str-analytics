@@ -222,14 +222,14 @@
     RevenuePilot
   </div>
   <div class="nav-pills">
-    <button class="nav-pill active">Dashboard</button>
-    <button class="nav-pill">Reservas</button>
-    <button class="nav-pill">Reviews</button>
-    <button class="nav-pill">Benchmarking</button>
-    <button class="nav-pill">Predicciones ML</button>
+    <button class="nav-pill active" onclick="navTo('sec-top',this)">Dashboard</button>
+    <button class="nav-pill" onclick="navTo('sec-reservas',this)">Reservas</button>
+    <button class="nav-pill" onclick="navTo('sec-reviews',this)">Reviews</button>
+    <button class="nav-pill" onclick="navTo('sec-bench',this)">Benchmarking</button>
+    <button class="nav-pill" onclick="navTo('sec-ml',this)">Predicciones ML</button>
   </div>
   <div class="nav-right">
-    <span class="badge-live">● LIVE</span>
+    
     <button class="btn-demo" onclick="alert('Demo mode — conecta tus datos para activar la plataforma completa.')">Conectar mis datos</button>
   </div>
 </nav>
@@ -237,19 +237,19 @@
 <!-- HERO -->
 <div class="hero">
   <div class="hero-content">
-    <div class="hero-label">Portfolio STR Analytics · Bilbao, País Vasco</div>
+    <div class="hero-label">Portfolio STR Analytics</div>
     <div class="hero-title">Revenue Management Intelligence</div>
-    <div class="hero-subtitle">5 edificios · ~44 apartamentos · 34.167 reservas · 6.298 reviews analizadas · 3 modelos ML activos</div>
+    <div class="hero-subtitle">5 edificios · 41 unidades · 34.167 reservas · 6.298 reviews analizadas · 3 modelos ML activos</div>
     <div class="hero-filters">
       <div class="filter-group">
         <span class="filter-label">Año</span>
-        <select class="filter-select" onchange="updateYear(this.value)">
+        <select class="filter-select" id="f-year" onchange="applyFilters()">
           <option>2024</option><option>2023</option><option>2022</option><option>Todo el período</option>
         </select>
       </div>
       <div class="filter-group">
         <span class="filter-label">Edificio</span>
-        <select class="filter-select">
+        <select class="filter-select" id="f-building" onchange="applyFilters()">
           <option>Todos los edificios</option>
           <option>Edificio A — Urban</option>
           <option>Edificio B — City Center</option>
@@ -260,7 +260,7 @@
       </div>
       <div class="filter-group">
         <span class="filter-label">Canal</span>
-        <select class="filter-select">
+        <select class="filter-select" id="f-channel" onchange="applyFilters()">
           <option>Todos</option><option>OTA Principal</option><option>OTA Secundaria</option><option>Directo</option>
         </select>
       </div>
@@ -275,44 +275,44 @@
   <div class="kpi-grid" style="margin-top:1.5rem;">
     <div class="kpi-card green">
       <div class="kpi-label">Revenue Total</div>
-      <div class="kpi-value" id="kpi-revenue">€2.25M</div>
-      <div class="kpi-delta up">▲ +15.4% vs 2023</div>
-      <div class="kpi-sub">€1.95M en 2023</div>
+      <div class="kpi-value" id="kpi-revenue">—</div>
+      <div class="kpi-delta up" id="kpi-revenue-delta">—</div>
+      <div class="kpi-sub" id="kpi-revenue-sub">—</div>
     </div>
     <div class="kpi-card blue">
       <div class="kpi-label">ADR Medio</div>
-      <div class="kpi-value">€128</div>
-      <div class="kpi-delta up">▲ +€4 vs 2023</div>
-      <div class="kpi-sub">Mercado Bilbao: €185</div>
+      <div class="kpi-value" id="kpi-adr">—</div>
+      <div class="kpi-delta up" id="kpi-adr-delta">—</div>
+      <div class="kpi-sub" id="kpi-adr-sub">—</div>
     </div>
     <div class="kpi-card teal">
       <div class="kpi-label">RevPAR</div>
-      <div class="kpi-value">€103</div>
-      <div class="kpi-delta up">▲ +6.2% vs 2023</div>
-      <div class="kpi-sub">Mercado: €88</div>
+      <div class="kpi-value" id="kpi-revpar">—</div>
+      <div class="kpi-delta up" id="kpi-revpar-delta">—</div>
+      <div class="kpi-sub" id="kpi-revpar-sub">—</div>
     </div>
     <div class="kpi-card navy">
       <div class="kpi-label">Ocupación</div>
-      <div class="kpi-value">80.0%</div>
-      <div class="kpi-delta up">▲ +2pp vs 2023</div>
-      <div class="kpi-sub">Mercado Bilbao: 47.6%</div>
+      <div class="kpi-value" id="kpi-occ">—</div>
+      <div class="kpi-delta up" id="kpi-occ-delta">—</div>
+      <div class="kpi-sub" id="kpi-occ-sub">—</div>
     </div>
     <div class="kpi-card amber">
       <div class="kpi-label">Score Booking</div>
-      <div class="kpi-value">7.79</div>
-      <div class="kpi-delta neutral">→ Media portfolio</div>
-      <div class="kpi-sub">Umbral premium: 8.5</div>
+      <div class="kpi-value" id="kpi-score">—</div>
+      <div class="kpi-delta neutral" id="kpi-score-delta">—</div>
+      <div class="kpi-sub" id="kpi-score-sub">—</div>
     </div>
     <div class="kpi-card green">
-      <div class="kpi-label">Margen Neto</div>
-      <div class="kpi-value">41.1%</div>
-      <div class="kpi-delta up">▲ Sector: ~35-38%</div>
-      <div class="kpi-sub">Beneficio: €1.73M</div>
+      <div class="kpi-label">Lead Time medio</div>
+      <div class="kpi-value" id="kpi-margin">—</div>
+      <div class="kpi-delta up" id="kpi-margin-delta">—</div>
+      <div class="kpi-sub" id="kpi-margin-sub">—</div>
     </div>
   </div>
 
   <!-- ROW 1: Revenue trend + Building ranking -->
-  <div class="grid-2-1">
+  <div class="grid-2-1" id="sec-reservas">
     <div class="card">
       <div class="card-header">
         <div class="card-title">
@@ -334,7 +334,7 @@
           <div class="card-icon green">🏠</div>
           Revenue por Edificio
         </div>
-        <span class="card-badge blue">2024</span>
+        <span class="card-badge blue" id="donut-badge">2024</span>
       </div>
       <div class="chart-container">
         <canvas id="buildingChart"></canvas>
@@ -348,7 +348,7 @@
       <div class="card-header">
         <div class="card-title">
           <div class="card-icon blue">🏢</div>
-          Rendimiento por Edificio — 2024
+          Rendimiento por Edificio — <span class="year-label">2024</span>
         </div>
       </div>
       <table class="building-table">
@@ -359,112 +359,26 @@
             <th>Ocupación</th>
             <th>RevPAR</th>
             <th>Score</th>
-            <th>Tendencia</th>
-            <th>Margen</th>
+            <th>Lead time</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td><b>Edif. D — Old Quarter</b><br><span style="font-size:0.7rem;color:var(--muted)">Premium · 8 unidades</span></td>
-            <td><b>€164</b></td>
-            <td>
-              <div style="display:flex;align-items:center;gap:6px;">
-                82%
-                <div class="progress-bar-wrap"><div class="progress-bar" style="width:82%;background:var(--green)"></div></div>
-              </div>
-            </td>
-            <td>€134</td>
-            <td><span class="score-pill excellent">8.98 ⭐</span></td>
-            <td class="trend-up">↑ +0.14</td>
-            <td>~46%</td>
-          </tr>
-          <tr>
-            <td><b>Edif. B — City Center</b><br><span style="font-size:0.7rem;color:var(--muted)">Mid-scale · 12 unidades</span></td>
-            <td><b>€138</b></td>
-            <td>
-              <div style="display:flex;align-items:center;gap:6px;">
-                84%
-                <div class="progress-bar-wrap"><div class="progress-bar" style="width:84%;background:var(--green)"></div></div>
-              </div>
-            </td>
-            <td>€116</td>
-            <td><span class="score-pill good">8.04</span></td>
-            <td class="trend-up">↑ +0.35</td>
-            <td>~46%</td>
-          </tr>
-          <tr>
-            <td><b>Edif. C — Riverside</b><br><span style="font-size:0.7rem;color:var(--muted)">Upscale · 10 unidades</span></td>
-            <td><b>€121</b></td>
-            <td>
-              <div style="display:flex;align-items:center;gap:6px;">
-                79%
-                <div class="progress-bar-wrap"><div class="progress-bar" style="width:79%;background:var(--amber)"></div></div>
-              </div>
-            </td>
-            <td>€96</td>
-            <td><span class="score-pill warning">7.89</span></td>
-            <td class="trend-down">↓ -0.29</td>
-            <td>~42%</td>
-          </tr>
-          <tr>
-            <td><b>Edif. E — Budget Inn</b><br><span style="font-size:0.7rem;color:var(--muted)">Hostal · 4 unidades</span></td>
-            <td><b>€71</b></td>
-            <td>
-              <div style="display:flex;align-items:center;gap:6px;">
-                76%
-                <div class="progress-bar-wrap"><div class="progress-bar" style="width:76%;background:var(--amber)"></div></div>
-              </div>
-            </td>
-            <td>€54</td>
-            <td><span class="score-pill warning">6.72</span></td>
-            <td class="trend-up">↑ +0.81</td>
-            <td>~29%</td>
-          </tr>
-          <tr>
-            <td><b>Edif. A — Urban</b><br><span style="font-size:0.7rem;color:var(--muted)">Economy · 10 unidades</span></td>
-            <td><b>€98</b></td>
-            <td>
-              <div style="display:flex;align-items:center;gap:6px;">
-                72%
-                <div class="progress-bar-wrap"><div class="progress-bar" style="width:72%;background:var(--red)"></div></div>
-              </div>
-            </td>
-            <td>€71</td>
-            <td><span class="score-pill danger">6.32 ⚠</span></td>
-            <td class="trend-down">↓ -0.73</td>
-            <td>~35%</td>
-          </tr>
-        </tbody>
+<tbody id="btBody"></tbody>
       </table>
     </div>
 
-    <div class="opportunity-box">
+    <div class="opportunity-box" id="sec-bench-opp">
       <div class="opp-label">Oportunidad de Revenue</div>
-      <div class="opp-value">+€382K</div>
-      <div class="opp-sub">revenue adicional/año — escenario conservador</div>
-      <div class="opp-scenarios">
-        <div class="opp-scenario">
-          <span class="opp-scenario-name">🟢 Conservador (ADR €145)</span>
-          <span class="opp-scenario-val">+€382K/año</span>
-        </div>
-        <div class="opp-scenario">
-          <span class="opp-scenario-name">🟡 Moderado (ADR €160)</span>
-          <span class="opp-scenario-val">+€618K/año</span>
-        </div>
-        <div class="opp-scenario">
-          <span class="opp-scenario-name">🔵 Optimista (ADR €185)</span>
-          <span class="opp-scenario-val">+€928K/año</span>
-        </div>
-      </div>
+      <div class="opp-value" id="opp-value">—</div>
+      <div class="opp-sub" id="opp-sub">—</div>
       <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.15);">
-        <div style="font-size:0.72rem;color:rgba(255,255,255,0.5);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">Gap ADR vs Mercado Bilbao</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.5);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">Gap ADR vs Mercado comparable (mediana)</div>
         <div style="display:flex;align-items:center;gap:10px;">
           <div style="flex:1;background:rgba(255,255,255,0.1);border-radius:6px;height:12px;overflow:hidden;">
-            <div style="width:68%;height:100%;background:#34d399;border-radius:6px;"></div>
+            <div id="opp-gap-bar" style="width:0%;height:100%;background:#34d399;border-radius:6px;transition:width .4s;"></div>
           </div>
-          <div style="font-size:0.85rem;color:white;font-weight:700;">€128 / €185</div>
+          <div id="opp-gap-val" style="font-size:0.85rem;color:white;font-weight:700;">—</div>
         </div>
-        <div style="font-size:0.72rem;color:rgba(255,255,255,0.5);margin-top:4px;">Portfolio actual vs mercado comparable</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.5);margin-top:4px;">Portfolio actual vs mediana de mercado comparable · upside = cierre del gap (fuente: buildings_vs_market)</div>
       </div>
     </div>
   </div>
@@ -503,55 +417,24 @@
       <div class="chart-container">
         <canvas id="bookingWindowChart"></canvas>
       </div>
-      <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px;margin-top:12px;font-size:0.78rem;color:#92400e;">
-        <b>⚠ Insight:</b> El 28% de reservas son last-minute (0-1 días) vs 20% del mercado. Las reservas con +91 días de antelación están un ~20% por debajo del precio de mercado — dinero perdido en el segmento más fiel.
+      <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px;margin-top:12px;font-size:0.78rem;color:#92400e;" id="bw-insight">
+        <b>⚠ Insight:</b> —
       </div>
     </div>
   </div>
 
   <!-- ROW 4: Reviews + Benchmarking -->
-  <div class="grid-2">
+  <div class="grid-2" id="sec-reviews">
     <div class="card">
       <div class="card-header">
         <div class="card-title">
           <div class="card-icon red">⭐</div>
-          Reputación Online — 6.298 Reviews Analizadas
+          <span id="reviews-title">Reputación Online — 6.298 Reviews Analizadas</span>
         </div>
-        <span class="card-badge red">0.1% tasa respuesta</span>
+        <span class="card-badge red" id="reviews-badge">0.1% tasa respuesta</span>
       </div>
       <div class="section-label">Puntuaciones por subcategoría (media portfolio)</div>
-      <div class="review-scores">
-        <div class="score-row">
-          <div class="score-name">Confort</div>
-          <div class="score-bar-wrap"><div class="score-bar" style="width:86%;background:var(--green)"></div></div>
-          <div class="score-val" style="color:var(--green)">8.56</div>
-        </div>
-        <div class="score-row">
-          <div class="score-name">Limpieza</div>
-          <div class="score-bar-wrap"><div class="score-bar" style="width:82%;background:var(--green)"></div></div>
-          <div class="score-val" style="color:var(--green)">8.22</div>
-        </div>
-        <div class="score-row">
-          <div class="score-name">Instalaciones</div>
-          <div class="score-bar-wrap"><div class="score-bar" style="width:81%;background:var(--green)"></div></div>
-          <div class="score-val" style="color:var(--green)">8.10</div>
-        </div>
-        <div class="score-row">
-          <div class="score-name">Ubicación</div>
-          <div class="score-bar-wrap"><div class="score-bar" style="width:80%;background:var(--blue-light)"></div></div>
-          <div class="score-val" style="color:var(--blue-light)">8.03</div>
-        </div>
-        <div class="score-row">
-          <div class="score-name">Calidad-Precio</div>
-          <div class="score-bar-wrap"><div class="score-bar" style="width:77%;background:var(--amber)"></div></div>
-          <div class="score-val" style="color:var(--amber)">7.72</div>
-        </div>
-        <div class="score-row">
-          <div class="score-name">Personal ⚠</div>
-          <div class="score-bar-wrap"><div class="score-bar" style="width:72%;background:var(--red)"></div></div>
-          <div class="score-val" style="color:var(--red)">7.21</div>
-        </div>
-      </div>
+      <div class="review-scores" id="reviewScores"></div>
       <div style="margin-top:1rem;">
         <div class="section-label">Temas más mencionados (NLP — 6.298 reviews)</div>
         <div class="chart-container" style="max-height:160px;">
@@ -560,61 +443,40 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" id="sec-bench">
       <div class="card-header">
         <div class="card-title">
           <div class="card-icon green">📊</div>
-          Benchmarking vs Mercado STR Bilbao
+          Benchmarking vs Mercado STR comparable
         </div>
-        <span class="card-badge green">Datos AirROI + EUSTAT</span>
+        <span class="card-badge green">Inside Airbnb (datos abiertos)</span>
       </div>
       <div style="margin-bottom:1.2rem;">
         <div class="bench-row">
           <div class="bench-label">ADR (€/noche)</div>
           <div class="bench-bars">
-            <div class="bench-bar-wrap">
-              <div class="bench-bar-bg"><div class="bench-bar-fill" style="width:68%;background:var(--blue)"></div></div>
-              <div class="bench-bar-val" style="color:var(--blue)">€128</div>
-            </div>
-            <div class="bench-bar-wrap">
-              <div class="bench-bar-bg"><div class="bench-bar-fill" style="width:100%;background:var(--green)"></div></div>
-              <div class="bench-bar-val" style="color:var(--green)">€185</div>
-            </div>
-            <div style="display:flex;gap:8px;font-size:0.68rem;color:var(--muted);">
-              <span style="color:var(--blue)">■</span> Portfolio &nbsp;
-              <span style="color:var(--green)">■</span> Mercado Bilbao
-            </div>
+            <div class="bench-bar-wrap"><div class="bench-bar-bg"><div class="bench-bar-fill" id="bm-adr-pw" style="width:0%;background:var(--blue)"></div></div><div class="bench-bar-val" id="bm-adr-p" style="color:var(--blue)">—</div></div>
+            <div class="bench-bar-wrap"><div class="bench-bar-bg"><div class="bench-bar-fill" id="bm-adr-mw" style="width:0%;background:var(--green)"></div></div><div class="bench-bar-val" id="bm-adr-m" style="color:var(--green)">—</div></div>
+            <div style="display:flex;gap:8px;font-size:0.68rem;color:var(--muted);"><span style="color:var(--blue)">■</span> Portfolio &nbsp;<span style="color:var(--green)">■</span> Mercado comparable</div>
           </div>
         </div>
         <div class="bench-row">
           <div class="bench-label">Ocupación (%)</div>
           <div class="bench-bars">
-            <div class="bench-bar-wrap">
-              <div class="bench-bar-bg"><div class="bench-bar-fill" style="width:80%;background:var(--blue)"></div></div>
-              <div class="bench-bar-val" style="color:var(--blue)">80%</div>
-            </div>
-            <div class="bench-bar-wrap">
-              <div class="bench-bar-bg"><div class="bench-bar-fill" style="width:47.6%;background:var(--green)"></div></div>
-              <div class="bench-bar-val" style="color:var(--green)">47.6%</div>
-            </div>
+            <div class="bench-bar-wrap"><div class="bench-bar-bg"><div class="bench-bar-fill" id="bm-occ-pw" style="width:0%;background:var(--blue)"></div></div><div class="bench-bar-val" id="bm-occ-p" style="color:var(--blue)">—</div></div>
+            <div class="bench-bar-wrap"><div class="bench-bar-bg"><div class="bench-bar-fill" id="bm-occ-mw" style="width:0%;background:var(--green)"></div></div><div class="bench-bar-val" id="bm-occ-m" style="color:var(--green)">—</div></div>
           </div>
         </div>
         <div class="bench-row">
           <div class="bench-label">RevPAR (€)</div>
           <div class="bench-bars">
-            <div class="bench-bar-wrap">
-              <div class="bench-bar-bg"><div class="bench-bar-fill" style="width:100%;background:var(--blue)"></div></div>
-              <div class="bench-bar-val" style="color:var(--blue)">€103</div>
-            </div>
-            <div class="bench-bar-wrap">
-              <div class="bench-bar-bg"><div class="bench-bar-fill" style="width:85%;background:var(--green)"></div></div>
-              <div class="bench-bar-val" style="color:var(--green)">€88</div>
-            </div>
+            <div class="bench-bar-wrap"><div class="bench-bar-bg"><div class="bench-bar-fill" id="bm-rev-pw" style="width:0%;background:var(--blue)"></div></div><div class="bench-bar-val" id="bm-rev-p" style="color:var(--blue)">—</div></div>
+            <div class="bench-bar-wrap"><div class="bench-bar-bg"><div class="bench-bar-fill" id="bm-rev-mw" style="width:0%;background:var(--green)"></div></div><div class="bench-bar-val" id="bm-rev-m" style="color:var(--green)">—</div></div>
           </div>
         </div>
       </div>
       <div style="margin-top:0.5rem;">
-        <div class="section-label">Evolución ADR mensual vs mercado (2024)</div>
+        <div class="section-label">Evolución ADR mensual vs mercado (<span class="year-label">2024</span>)</div>
         <div class="chart-container">
           <canvas id="benchmarkChart"></canvas>
         </div>
@@ -623,7 +485,7 @@
   </div>
 
   <!-- ROW 5: ML Predictions + Recommendations -->
-  <div class="grid-1-2">
+  <div class="grid-1-2" id="sec-ml">
     <div class="card">
       <div class="card-header">
         <div class="card-title">
@@ -814,223 +676,439 @@
 </div><!-- /main -->
 
 <script>
-// ── DATA ──────────────────────────────────────────────────────────────────────
-const MONTHS = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+// ================= RevenuePilot — motor de datos reales =================
+// Todos los cálculos derivan de DATA (agregados desde los datos reales del repo:
+// fact_reservations, fact_kpis_monthly, fact_gastos, fact_reviews, *_vs_market).
+const DATA = {"cube": [[2019, 5, 0, 0, 418, 355, 7, 7, 63, 0], [2019, 6, 0, 0, 5643, 4797, 58, 44, 846, 1], [2019, 7, 0, 0, 6180, 5253, 51, 33, 927, 0], [2019, 8, 0, 0, 7903, 6718, 52, 33, 1185, 0], [2019, 8, 1, 0, 25695, 21576, 159, 78, 4118, 0], [2019, 9, 0, 0, 4785, 4011, 47, 28, 774, 0], [2019, 9, 1, 0, 21252, 17640, 190, 91, 3611, 0], [2019, 10, 0, 0, 5405, 4504, 57, 25, 901, 0], [2019, 10, 1, 0, 23597, 19457, 178, 80, 4140, 0], [2019, 11, 0, 0, 2237, 1842, 38, 15, 395, 23], [2019, 11, 1, 0, 14764, 12042, 177, 66, 2722, 219], [2019, 12, 0, 0, 3161, 2652, 43, 22, 509, 499], [2019, 12, 1, 0, 10923, 9166, 135, 67, 1757, 1067], [2020, 1, 0, 0, 2735, 2295, 50, 17, 440, 370], [2020, 1, 1, 0, 9890, 8298, 129, 39, 1592, 695], [2020, 2, 0, 0, 2503, 2100, 35, 15, 403, 345], [2020, 2, 1, 0, 12260, 10286, 129, 48, 1974, 1205], [2020, 3, 0, 0, 1355, 1137, 17, 8, 218, 250], [2020, 3, 1, 0, 4993, 4316, 44, 21, 677, 333], [2020, 5, 0, 0, 160, 134, 2, 2, 26, 2], [2020, 5, 1, 0, 414, 347, 6, 4, 67, 2], [2020, 6, 0, 0, 359, 301, 5, 4, 58, 7], [2020, 6, 1, 0, 2133, 1790, 21, 10, 343, 14], [2020, 7, 0, 0, 1556, 1374, 22, 14, 182, 44], [2020, 7, 1, 0, 11845, 10033, 104, 59, 1812, 530], [2020, 8, 0, 0, 3249, 2726, 40, 20, 523, 75], [2020, 8, 1, 0, 19259, 16237, 163, 93, 3022, 485], [2020, 8, 2, 0, 1154, 968, 19, 7, 186, 2], [2020, 9, 0, 0, 2236, 1876, 34, 17, 360, 36], [2020, 9, 1, 0, 10175, 8561, 121, 79, 1614, 353], [2020, 9, 2, 0, 3575, 3000, 58, 25, 576, 43], [2020, 10, 0, 0, 1882, 1579, 31, 17, 303, 47], [2020, 10, 1, 0, 11433, 9676, 138, 74, 1757, 364], [2020, 10, 2, 0, 4472, 3802, 72, 26, 670, 88], [2020, 11, 0, 0, 1518, 1274, 27, 17, 244, 30], [2020, 11, 1, 0, 6387, 5402, 84, 51, 985, 259], [2020, 11, 2, 0, 2670, 2240, 47, 17, 430, 12], [2020, 12, 0, 0, 1677, 1434, 26, 20, 243, 102], [2020, 12, 1, 0, 7428, 6273, 81, 50, 1155, 120], [2020, 12, 2, 0, 2117, 1788, 34, 24, 330, 25], [2021, 1, 0, 0, 1615, 1355, 31, 20, 260, 42], [2021, 1, 1, 0, 7006, 5947, 100, 52, 1059, 99], [2021, 1, 2, 0, 5356, 4503, 94, 36, 853, 75], [2021, 2, 0, 0, 1308, 1097, 24, 15, 211, 60], [2021, 2, 1, 0, 4256, 3578, 66, 39, 678, 120], [2021, 2, 2, 0, 4031, 3404, 70, 29, 627, 73], [2021, 3, 0, 0, 1983, 1676, 33, 23, 307, 87], [2021, 3, 1, 0, 4204, 3540, 57, 39, 664, 212], [2021, 3, 2, 0, 6745, 5677, 113, 43, 1068, 162], [2021, 4, 0, 0, 1445, 1212, 23, 11, 233, 21], [2021, 4, 1, 0, 5894, 5041, 71, 44, 853, 231], [2021, 4, 2, 0, 3598, 3050, 54, 29, 548, 48], [2021, 5, 0, 0, 2029, 1727, 34, 13, 302, 24], [2021, 5, 1, 0, 8837, 7483, 106, 59, 1354, 294], [2021, 5, 2, 0, 3211, 2728, 50, 23, 483, 78], [2021, 6, 0, 0, 2124, 1782, 31, 16, 342, 51], [2021, 6, 1, 0, 11013, 9285, 114, 61, 1728, 489], [2021, 6, 2, 0, 5159, 4328, 67, 22, 831, 236], [2021, 7, 0, 0, 3566, 3066, 46, 32, 500, 191], [2021, 7, 1, 0, 18905, 15943, 167, 101, 2961, 645], [2021, 7, 2, 0, 11460, 9705, 128, 67, 1755, 481], [2021, 7, 4, 0, 1346, 1052, 30, 17, 186, 1], [2021, 8, 0, 0, 5550, 4725, 50, 26, 825, 327], [2021, 8, 1, 0, 33317, 27969, 198, 102, 5348, 1776], [2021, 8, 2, 0, 25891, 21744, 191, 88, 4147, 1451], [2021, 8, 4, 0, 28371, 23181, 435, 234, 4041, 803], [2021, 9, 0, 0, 3342, 2830, 45, 26, 513, 285], [2021, 9, 1, 0, 18029, 15142, 168, 94, 2887, 1340], [2021, 9, 2, 0, 10263, 8610, 103, 52, 1652, 638], [2021, 9, 4, 0, 14412, 12250, 304, 191, 2162, 784], [2021, 10, 0, 0, 3840, 3238, 50, 35, 602, 127], [2021, 10, 1, 0, 24767, 20904, 206, 117, 3863, 972], [2021, 10, 2, 0, 13755, 11540, 142, 73, 2214, 413], [2021, 11, 0, 0, 2148, 1803, 34, 19, 346, 270], [2021, 11, 1, 0, 14728, 12365, 137, 72, 2363, 793], [2021, 11, 2, 0, 8765, 7354, 93, 51, 1411, 697], [2021, 12, 0, 0, 3374, 2837, 47, 32, 537, 137], [2021, 12, 1, 0, 19669, 16641, 172, 103, 3027, 1016], [2021, 12, 2, 0, 10918, 9175, 124, 64, 1743, 584], [2021, 12, 4, 0, 318, 270, 9, 6, 48, 0], [2022, 1, 0, 0, 2547, 2145, 49, 30, 402, 91], [2022, 1, 1, 0, 7768, 6528, 83, 60, 1240, 274], [2022, 1, 2, 0, 5617, 4713, 99, 38, 904, 94], [2022, 1, 4, 0, 3674, 3123, 109, 77, 551, 80], [2022, 2, 0, 0, 2553, 2158, 40, 25, 396, 78], [2022, 2, 1, 0, 8691, 7296, 97, 60, 1395, 347], [2022, 2, 2, 0, 5183, 4336, 77, 42, 846, 220], [2022, 2, 4, 0, 6607, 5607, 192, 115, 1000, 397], [2022, 3, 0, 0, 3539, 2975, 50, 28, 563, 89], [2022, 3, 1, 0, 8325, 7005, 103, 74, 1320, 221], [2022, 3, 2, 0, 8895, 7474, 120, 65, 1421, 234], [2022, 3, 4, 0, 9682, 8230, 300, 190, 1452, 361], [2022, 4, 0, 0, 4174, 3502, 47, 34, 672, 144], [2022, 4, 1, 0, 23537, 19747, 163, 95, 3789, 494], [2022, 4, 2, 0, 22104, 18545, 172, 96, 3559, 541], [2022, 4, 4, 0, 19441, 16525, 423, 249, 2916, 1926], [2022, 5, 0, 0, 4752, 4012, 57, 36, 739, 240], [2022, 5, 1, 0, 26224, 22002, 203, 115, 4222, 1038], [2022, 5, 2, 0, 17534, 14711, 165, 98, 2823, 610], [2022, 5, 4, 0, 20412, 17259, 440, 279, 3046, 1323], [2022, 6, 0, 0, 4514, 3811, 48, 26, 702, 220], [2022, 6, 1, 0, 18715, 15702, 167, 95, 3013, 628], [2022, 6, 2, 0, 22665, 19024, 167, 96, 3641, 663], [2022, 6, 4, 0, 24030, 20426, 467, 302, 3604, 2064], [2022, 7, 0, 0, 6750, 5663, 60, 37, 1087, 329], [2022, 7, 1, 0, 36670, 30766, 216, 119, 5904, 709], [2022, 7, 2, 0, 29871, 25062, 199, 114, 4809, 869], [2022, 7, 4, 0, 27396, 23286, 472, 292, 4109, 724], [2022, 8, 0, 0, 8353, 7064, 63, 37, 1288, 467], [2022, 8, 1, 0, 43314, 36364, 212, 129, 6951, 1428], [2022, 8, 2, 0, 35700, 29952, 194, 111, 5748, 1394], [2022, 8, 4, 0, 36597, 31107, 483, 272, 5490, 1326], [2022, 9, 0, 0, 5658, 4764, 58, 35, 894, 304], [2022, 9, 1, 0, 25460, 21361, 173, 96, 4099, 607], [2022, 9, 2, 0, 19136, 16055, 167, 96, 3081, 498], [2022, 9, 4, 0, 24002, 20346, 476, 293, 3591, 3321], [2022, 10, 0, 0, 4946, 4150, 61, 36, 796, 278], [2022, 10, 1, 0, 21921, 18411, 178, 109, 3510, 705], [2022, 10, 2, 0, 17140, 14380, 153, 78, 2760, 395], [2022, 10, 4, 0, 21709, 18453, 481, 298, 3256, 1956], [2022, 11, 0, 0, 3225, 2730, 51, 31, 495, 419], [2022, 11, 1, 0, 11553, 9693, 114, 74, 1860, 555], [2022, 11, 2, 0, 9014, 7563, 110, 69, 1451, 622], [2022, 11, 4, 0, 13835, 11760, 363, 234, 2075, 1141], [2022, 12, 0, 0, 2198, 1844, 29, 19, 354, 344], [2022, 12, 1, 0, 13346, 11197, 118, 72, 2149, 909], [2022, 12, 2, 0, 10737, 9014, 115, 67, 1722, 767], [2022, 12, 4, 0, 14516, 12248, 350, 197, 2161, 1982], [2023, 1, 0, 0, 1872, 1570, 33, 23, 301, 103], [2023, 1, 1, 0, 10173, 8567, 107, 64, 1605, 342], [2023, 1, 2, 0, 7923, 6647, 104, 53, 1276, 298], [2023, 1, 4, 0, 9051, 7693, 278, 172, 1358, 581], [2023, 2, 0, 0, 3276, 2749, 50, 27, 528, 294], [2023, 2, 1, 0, 12776, 10719, 130, 78, 2057, 679], [2023, 2, 2, 0, 9966, 8361, 120, 58, 1604, 669], [2023, 2, 4, 0, 12584, 10696, 356, 205, 1888, 906], [2023, 3, 0, 0, 2347, 1969, 38, 26, 378, 96], [2023, 3, 1, 0, 17441, 14633, 165, 103, 2808, 889], [2023, 3, 2, 0, 9583, 8040, 116, 70, 1543, 563], [2023, 3, 3, 0, 243, 204, 3, 2, 39, 2], [2023, 3, 4, 0, 16761, 14247, 472, 277, 2514, 1875], [2023, 4, 0, 0, 5194, 4372, 63, 40, 822, 365], [2023, 4, 1, 0, 26854, 22539, 184, 105, 4315, 978], [2023, 4, 2, 0, 19574, 16491, 148, 82, 3083, 783], [2023, 4, 3, 0, 21445, 18071, 166, 100, 3374, 398], [2023, 4, 4, 0, 21406, 18124, 428, 255, 3198, 2845], [2023, 5, 0, 0, 4647, 3899, 56, 32, 748, 429], [2023, 5, 1, 0, 23366, 19627, 180, 106, 3739, 970], [2023, 5, 2, 0, 15728, 13195, 151, 89, 2532, 658], [2023, 5, 3, 0, 27235, 22859, 171, 93, 4376, 673], [2023, 5, 4, 0, 21256, 18068, 464, 274, 3188, 3218], [2023, 6, 0, 0, 4669, 3926, 54, 37, 743, 445], [2023, 6, 1, 0, 26944, 22606, 194, 123, 4338, 807], [2023, 6, 2, 0, 16579, 13930, 146, 97, 2648, 582], [2023, 6, 3, 0, 26708, 22408, 178, 97, 4300, 525], [2023, 6, 4, 0, 28956, 24613, 497, 309, 4343, 4599], [2023, 7, 0, 0, 6835, 5735, 58, 31, 1100, 1203], [2023, 7, 1, 0, 38185, 32037, 210, 131, 6148, 3758], [2023, 7, 2, 0, 34677, 29094, 193, 124, 5583, 5570], [2023, 7, 3, 0, 35614, 29880, 212, 131, 5734, 1887], [2023, 7, 4, 0, 35407, 29769, 511, 326, 5253, 4722], [2023, 8, 0, 0, 8730, 7324, 62, 38, 1406, 1025], [2023, 8, 1, 0, 47913, 40372, 206, 122, 7541, 3181], [2023, 8, 2, 0, 38252, 32094, 198, 119, 6159, 3836], [2023, 8, 3, 0, 42906, 36095, 187, 102, 6812, 1731], [2023, 8, 4, 0, 40376, 34320, 546, 320, 6056, 7377], [2023, 9, 0, 0, 5659, 4801, 55, 33, 857, 554], [2023, 9, 1, 0, 36825, 30896, 213, 109, 5929, 1399], [2023, 9, 2, 0, 27617, 23171, 190, 90, 4446, 1627], [2023, 9, 3, 0, 33948, 28482, 193, 103, 5466, 1751], [2023, 9, 4, 0, 31631, 26886, 526, 307, 4745, 2516], [2023, 10, 0, 0, 5889, 4941, 61, 36, 948, 501], [2023, 10, 1, 0, 36700, 30791, 202, 108, 5909, 935], [2023, 10, 2, 0, 26145, 21936, 187, 109, 4209, 800], [2023, 10, 3, 0, 28654, 24041, 130, 69, 4613, 499], [2023, 10, 4, 0, 26787, 22796, 484, 327, 3991, 2612], [2023, 11, 0, 0, 4125, 3461, 55, 34, 664, 256], [2023, 11, 1, 0, 22737, 19123, 196, 107, 3614, 2222], [2023, 11, 2, 0, 10348, 8682, 89, 53, 1666, 846], [2023, 11, 3, 0, 13430, 11268, 92, 50, 2162, 1356], [2023, 11, 4, 0, 17274, 14233, 421, 266, 2498, 1734], [2023, 12, 0, 0, 4732, 3987, 62, 42, 745, 480], [2023, 12, 1, 0, 29311, 24592, 212, 124, 4719, 1863], [2023, 12, 2, 0, 16442, 13795, 141, 77, 2647, 966], [2023, 12, 3, 0, 16441, 13794, 118, 65, 2647, 990], [2023, 12, 4, 0, 20860, 17671, 476, 296, 3118, 1365], [2024, 1, 0, 0, 2987, 2513, 53, 32, 474, 173], [2024, 1, 1, 0, 16417, 13782, 177, 98, 2635, 550], [2024, 1, 2, 0, 9243, 7762, 116, 58, 1481, 249], [2024, 1, 3, 0, 8904, 7470, 96, 48, 1434, 160], [2024, 1, 4, 0, 13844, 11767, 406, 228, 2077, 1064], [2024, 2, 0, 0, 3650, 3062, 59, 33, 588, 209], [2024, 2, 1, 0, 19579, 16442, 182, 107, 3137, 1371], [2024, 2, 2, 0, 12048, 10108, 143, 83, 1940, 765], [2024, 2, 3, 0, 11224, 9427, 112, 72, 1796, 454], [2024, 2, 4, 0, 14806, 12585, 398, 224, 2221, 1639], [2024, 3, 0, 0, 4812, 4037, 57, 39, 775, 673], [2024, 3, 1, 0, 27422, 23017, 179, 115, 4405, 1599], [2024, 3, 2, 0, 22349, 18807, 155, 91, 3543, 2387], [2024, 3, 3, 0, 27615, 23169, 163, 91, 4446, 863], [2024, 3, 4, 0, 24076, 20414, 466, 307, 3603, 1869], [2024, 4, 0, 0, 3932, 3299, 51, 34, 632, 690], [2024, 4, 1, 0, 26655, 22422, 214, 149, 4233, 1991], [2024, 4, 2, 0, 20642, 17331, 182, 101, 3311, 1460], [2024, 4, 3, 0, 22933, 19264, 180, 111, 3670, 803], [2024, 4, 4, 0, 21526, 18216, 470, 334, 3215, 1266], [2024, 5, 0, 0, 6062, 5097, 63, 42, 966, 990], [2024, 5, 1, 0, 44321, 37210, 225, 137, 7112, 2589], [2024, 5, 2, 0, 26393, 22144, 183, 105, 4249, 1446], [2024, 5, 3, 0, 35431, 29782, 181, 102, 5649, 1714], [2024, 5, 4, 0, 31521, 26672, 550, 367, 4707, 3911], [2024, 6, 0, 0, 4665, 3914, 47, 33, 751, 613], [2024, 6, 1, 0, 30523, 25635, 227, 142, 4888, 1203], [2024, 6, 2, 0, 25644, 21943, 207, 129, 3701, 737], [2024, 6, 3, 0, 26149, 21993, 188, 114, 4156, 837], [2024, 6, 4, 0, 15119, 12851, 247, 138, 2268, 2793], [2024, 7, 0, 0, 6414, 5397, 60, 40, 1017, 288], [2024, 7, 1, 0, 41558, 34867, 243, 135, 6691, 1187], [2024, 7, 2, 0, 31435, 26421, 199, 114, 5014, 1520], [2024, 7, 3, 0, 28348, 23812, 168, 115, 4536, 563], [2024, 7, 4, 0, 21843, 18461, 354, 230, 3258, 3613], [2024, 8, 0, 0, 9491, 7963, 65, 39, 1528, 517], [2024, 8, 1, 0, 57429, 48238, 246, 144, 9191, 2316], [2024, 8, 2, 0, 47706, 40064, 237, 111, 7643, 1938], [2024, 8, 3, 0, 40753, 34222, 172, 110, 6530, 2005], [2024, 8, 4, 0, 24604, 20913, 347, 221, 3691, 969], [2024, 9, 0, 0, 5705, 4822, 56, 34, 882, 240], [2024, 9, 1, 0, 35177, 29542, 234, 130, 5635, 1717], [2024, 9, 2, 0, 22231, 18662, 183, 92, 3569, 445], [2024, 9, 3, 0, 30626, 25742, 159, 91, 4883, 798], [2024, 9, 4, 0, 21001, 17851, 377, 207, 3150, 761], [2024, 10, 0, 0, 5869, 4918, 61, 40, 951, 441], [2024, 10, 1, 0, 35026, 29349, 178, 105, 5677, 1024], [2024, 10, 2, 0, 25082, 21026, 178, 104, 4057, 712], [2024, 10, 3, 0, 30920, 25972, 137, 87, 4948, 717], [2024, 10, 4, 0, 22325, 18976, 402, 246, 3349, 1109], [2024, 11, 0, 0, 3918, 3281, 58, 41, 637, 883], [2024, 11, 1, 0, 13474, 11285, 85, 55, 2190, 1010], [2024, 11, 2, 0, 15687, 13174, 177, 90, 2512, 751], [2024, 11, 3, 0, 14886, 12460, 116, 80, 2426, 200], [2024, 11, 4, 0, 14920, 12682, 368, 220, 2238, 401], [2024, 12, 0, 0, 4192, 3524, 61, 48, 668, 290], [2024, 12, 1, 0, 17527, 14734, 130, 76, 2793, 850], [2024, 12, 2, 0, 12410, 10416, 130, 75, 1993, 524], [2024, 12, 3, 0, 17653, 14776, 148, 94, 2877, 531], [2024, 12, 4, 0, 11631, 9886, 330, 206, 1745, 420], [2025, 1, 0, 0, 812, 680, 11, 7, 132, 191], [2025, 1, 1, 0, 1789, 1497, 15, 9, 292, 70], [2025, 1, 2, 0, 520, 435, 6, 4, 85, 13], [2025, 1, 3, 0, 1292, 1081, 14, 6, 211, 35], [2025, 1, 4, 0, 8844, 7517, 293, 189, 1327, 327], [2025, 2, 0, 0, 162, 136, 1, 1, 26, 137], [2025, 2, 1, 0, 2976, 2491, 8, 2, 485, 194], [2025, 3, 0, 0, 213, 179, 2, 1, 34, 267], [2025, 3, 1, 0, 2034, 1703, 8, 5, 331, 833], [2025, 3, 2, 0, 536, 450, 7, 2, 86, 526], [2025, 4, 1, 1, 3078, 3078, 25, 14, 0, 0], [2025, 4, 2, 1, 2670, 2670, 22, 15, 0, 0], [2025, 4, 3, 1, 4422, 4422, 18, 14, 0, 0], [2025, 4, 4, 1, 246, 246, 6, 3, 0, 0], [2025, 5, 0, 0, 3936, 3902, 32, 23, 35, 367], [2025, 5, 0, 2, 100, 100, 1, 1, 0, 0], [2025, 5, 1, 0, 26795, 26795, 105, 70, 0, 300], [2025, 5, 1, 1, 12676, 12676, 75, 48, 0, 105], [2025, 5, 1, 2, 445, 445, 14, 10, 0, 42], [2025, 5, 2, 0, 27255, 27255, 121, 71, 0, 339], [2025, 5, 2, 1, 4680, 4680, 39, 29, 0, 38], [2025, 5, 2, 2, 465, 465, 12, 6, 0, 15], [2025, 5, 3, 0, 31085, 31085, 94, 66, 0, 290], [2025, 5, 3, 1, 10160, 10160, 40, 28, 0, 56], [2025, 5, 3, 2, 410, 410, 4, 1, 0, 0], [2025, 5, 4, 0, 20408, 20408, 237, 165, 0, 800], [2025, 5, 4, 1, 888, 888, 14, 5, 0, 13], [2025, 5, 4, 2, 453, 453, 11, 9, 0, 21], [2025, 6, 0, 0, 5176, 5176, 57, 45, 0, 346], [2025, 6, 0, 2, 605, 605, 9, 4, 0, 45], [2025, 6, 1, 0, 29337, 29337, 200, 114, 0, 801], [2025, 6, 1, 1, 7172, 7172, 49, 35, 0, 213], [2025, 6, 1, 2, 4310, 4310, 40, 25, 0, 213], [2025, 6, 2, 0, 19648, 19648, 184, 96, 0, 523], [2025, 6, 2, 1, 6385, 6385, 55, 27, 0, 123], [2025, 6, 2, 2, 6046, 6046, 61, 29, 0, 259], [2025, 6, 3, 0, 22509, 22509, 171, 98, 0, 388], [2025, 6, 3, 1, 4166, 4166, 25, 15, 0, 43], [2025, 6, 3, 2, 9800, 9800, 19, 10, 0, 198], [2025, 6, 4, 0, 19995, 19995, 408, 233, 0, 1619], [2025, 6, 4, 1, 1133, 1133, 27, 13, 0, 44], [2025, 6, 4, 2, 4675, 4675, 76, 36, 0, 456], [2025, 7, 0, 0, 6758, 6758, 65, 40, 0, 283], [2025, 7, 0, 2, 50, 50, 8, 3, 0, 6], [2025, 7, 1, 0, 31846, 31846, 197, 125, 0, 590], [2025, 7, 1, 1, 11677, 11677, 61, 41, 0, 160], [2025, 7, 1, 2, 1991, 1991, 36, 21, 0, 59], [2025, 7, 2, 0, 23280, 23280, 164, 89, 0, 471], [2025, 7, 2, 1, 11033, 11033, 78, 39, 0, 149], [2025, 7, 2, 2, 4352, 4352, 41, 15, 0, 85], [2025, 7, 3, 0, 28501, 28501, 159, 81, 0, 310], [2025, 7, 3, 1, 5504, 5504, 32, 19, 0, 43], [2025, 7, 3, 2, 12711, 12711, 59, 15, 0, 35], [2025, 7, 4, 0, 20107, 20107, 394, 271, 0, 2048], [2025, 7, 4, 1, 744, 744, 16, 14, 0, 34], [2025, 7, 4, 2, 1206, 1206, 36, 24, 0, 59], [2025, 8, 0, 0, 9075, 9075, 63, 40, 0, 525], [2025, 8, 0, 2, 150, 150, 14, 5, 0, 36], [2025, 8, 1, 0, 48129, 48129, 213, 116, 0, 597], [2025, 8, 1, 1, 4966, 4966, 19, 11, 0, 298], [2025, 8, 1, 2, 9270, 9270, 73, 30, 0, 290], [2025, 8, 2, 0, 39857, 39857, 197, 95, 0, 443], [2025, 8, 2, 1, 6072, 6072, 33, 15, 0, 87], [2025, 8, 2, 2, 3340, 3340, 53, 18, 0, 64], [2025, 8, 3, 0, 41307, 41307, 167, 85, 0, 347], [2025, 8, 3, 1, 1653, 1653, 7, 6, 0, 4], [2025, 8, 3, 2, 42602, 42602, 119, 4, 0, 11], [2025, 8, 4, 0, 31228, 31228, 470, 285, 0, 2750], [2025, 8, 4, 1, 3363, 3363, 53, 31, 0, 250], [2025, 8, 4, 2, 714, 714, 13, 11, 0, 14], [2025, 9, 0, 0, 5267, 5267, 45, 25, 0, 284], [2025, 9, 0, 2, 450, 450, 30, 4, 0, 9], [2025, 9, 1, 0, 41249, 41249, 249, 126, 0, 726], [2025, 9, 1, 1, 77, 77, 1, 1, 0, 0], [2025, 9, 1, 2, 2423, 2423, 41, 26, 0, 54], [2025, 9, 2, 0, 24905, 24905, 194, 99, 0, 740], [2025, 9, 2, 1, 1550, 1550, 13, 10, 0, 56], [2025, 9, 2, 2, 5853, 5853, 58, 20, 0, 77], [2025, 9, 3, 0, 28497, 28497, 166, 88, 0, 686], [2025, 9, 3, 1, 1141, 1141, 5, 5, 0, 19], [2025, 9, 3, 2, 1208, 1208, 11, 8, 0, 12], [2025, 9, 4, 0, 22527, 22527, 415, 268, 0, 1646], [2025, 9, 4, 1, 3850, 3850, 70, 46, 0, 307], [2025, 9, 4, 2, 4162, 4162, 71, 28, 0, 70], [2025, 10, 0, 0, 14079, 14079, 104, 36, 0, 267], [2025, 10, 0, 2, 2905, 2905, 34, 6, 0, 67], [2025, 10, 1, 0, 40450, 40450, 211, 103, 0, 1211], [2025, 10, 1, 1, 982, 982, 5, 5, 0, 34], [2025, 10, 1, 2, 15245, 15245, 122, 26, 0, 221], [2025, 10, 2, 0, 20712, 20712, 177, 111, 0, 345], [2025, 10, 2, 1, 1760, 1760, 16, 14, 0, 56], [2025, 10, 2, 2, 11300, 11300, 106, 36, 0, 367], [2025, 10, 3, 0, 41154, 41154, 200, 104, 0, 1073], [2025, 10, 3, 1, 295, 295, 2, 2, 0, 4], [2025, 10, 3, 2, 4397, 4397, 27, 11, 0, 27], [2025, 10, 4, 0, 20099, 20099, 373, 226, 0, 1336], [2025, 10, 4, 1, 1755, 1755, 32, 20, 0, 147], [2025, 10, 4, 2, 4836, 4836, 101, 30, 0, 60], [2025, 11, 0, 0, 4929, 4929, 66, 38, 0, 831], [2025, 11, 0, 2, 170, 170, 6, 4, 0, 8], [2025, 11, 1, 0, 24741, 24741, 207, 125, 0, 1280], [2025, 11, 1, 1, 326, 326, 2, 2, 0, 5], [2025, 11, 1, 2, 3030, 3030, 44, 24, 0, 224], [2025, 11, 2, 0, 15679, 15679, 173, 88, 0, 816], [2025, 11, 2, 1, 868, 868, 10, 4, 0, 187], [2025, 11, 2, 2, 3571, 3571, 44, 18, 0, 106], [2025, 11, 3, 0, 20968, 20968, 134, 73, 0, 901], [2025, 11, 3, 1, 189, 189, 2, 2, 0, 7], [2025, 11, 3, 2, 38594, 38594, 258, 23, 0, 457], [2025, 11, 4, 0, 13285, 13285, 344, 191, 0, 1085], [2025, 11, 4, 1, 1156, 1156, 33, 22, 0, 306], [2025, 11, 4, 2, 4539, 4539, 102, 20, 0, 63], [2025, 12, 0, 0, 5453, 5453, 67, 37, 0, 546], [2025, 12, 0, 2, 220, 220, 5, 3, 0, 75], [2025, 12, 1, 0, 31241, 31241, 266, 158, 0, 2585], [2025, 12, 1, 1, 154, 154, 2, 2, 0, 1], [2025, 12, 1, 2, 2375, 2375, 40, 22, 0, 135], [2025, 12, 2, 0, 13855, 13855, 144, 93, 0, 611], [2025, 12, 2, 1, 498, 498, 6, 6, 0, 19], [2025, 12, 2, 2, 7793, 7793, 90, 28, 0, 204], [2025, 12, 3, 0, 28535, 28535, 140, 72, 0, 1146], [2025, 12, 3, 1, 1075, 1075, 8, 6, 0, 29], [2025, 12, 3, 2, 1777, 1777, 23, 13, 0, 34], [2025, 12, 4, 0, 10460, 10460, 288, 176, 0, 900], [2025, 12, 4, 1, 2037, 2037, 54, 34, 0, 560], [2025, 12, 4, 2, 3269, 3269, 79, 20, 0, 106], [2026, 1, 0, 0, 3324, 3324, 58, 31, 0, 252], [2026, 1, 0, 2, 40, 40, 1, 1, 0, 0], [2026, 1, 1, 0, 16772, 16772, 178, 112, 0, 897], [2026, 1, 1, 1, 66, 66, 1, 1, 0, 0], [2026, 1, 1, 2, 1729, 1729, 39, 26, 0, 163], [2026, 1, 2, 0, 7838, 7838, 113, 75, 0, 410], [2026, 1, 2, 1, 828, 828, 11, 10, 0, 15], [2026, 1, 2, 2, 2822, 2822, 41, 18, 0, 86], [2026, 1, 3, 0, 10664, 10664, 115, 63, 0, 252], [2026, 1, 3, 1, 1160, 1160, 9, 7, 0, 13], [2026, 1, 3, 2, 1572, 1572, 133, 5, 0, 1], [2026, 1, 4, 0, 15731, 15731, 500, 242, 0, 3046], [2026, 1, 4, 1, 743, 743, 25, 21, 0, 98], [2026, 1, 4, 2, 1645, 1645, 51, 22, 0, 27], [2026, 2, 0, 0, 3636, 3636, 63, 41, 0, 349], [2026, 2, 0, 2, 215, 215, 3, 2, 0, 12], [2026, 2, 1, 0, 15753, 15753, 172, 108, 0, 646], [2026, 2, 1, 1, 1309, 1309, 13, 10, 0, 24], [2026, 2, 1, 2, 11627, 11627, 144, 22, 0, 56], [2026, 2, 2, 0, 8677, 8677, 125, 77, 0, 329], [2026, 2, 2, 1, 1693, 1693, 25, 17, 0, 18], [2026, 2, 2, 2, 3174, 3174, 60, 31, 0, 132], [2026, 2, 3, 0, 14980, 14980, 120, 56, 0, 564], [2026, 2, 3, 1, 845, 845, 7, 7, 0, 9], [2026, 2, 3, 2, 3007, 3007, 31, 19, 0, 72], [2026, 2, 4, 0, 11579, 11579, 352, 200, 0, 3082], [2026, 2, 4, 1, 1330, 1330, 46, 28, 0, 76], [2026, 2, 4, 2, 1441, 1441, 45, 26, 0, 26], [2026, 3, 0, 0, 2964, 2964, 47, 28, 0, 180], [2026, 3, 1, 0, 19893, 19893, 150, 90, 0, 1679], [2026, 3, 1, 1, 2746, 2746, 23, 18, 0, 113], [2026, 3, 1, 2, 2809, 2809, 39, 20, 0, 242], [2026, 3, 2, 0, 14074, 14074, 148, 85, 0, 1245], [2026, 3, 2, 1, 3594, 3594, 43, 28, 0, 189], [2026, 3, 2, 2, 3258, 3258, 45, 26, 0, 195], [2026, 3, 3, 0, 16282, 16282, 88, 51, 0, 949], [2026, 3, 3, 1, 1536, 1536, 14, 10, 0, 35], [2026, 3, 3, 2, 4971, 4971, 29, 9, 0, 246], [2026, 3, 4, 0, 13506, 13506, 371, 200, 0, 4137], [2026, 3, 4, 1, 659, 659, 18, 14, 0, 99], [2026, 3, 4, 2, 865, 865, 21, 12, 0, 66], [2026, 4, 0, 0, 609, 510, 8, 3, 99, 52], [2026, 4, 1, 0, 1492, 1249, 14, 7, 243, 85], [2026, 4, 2, 0, 1394, 1166, 17, 11, 227, 36], [2026, 4, 3, 0, 110, 92, 1, 1, 18, 3]], "lead": [[2019, 0, 0, 0, 185], [2019, 0, 0, 1, 3], [2019, 0, 0, 2, 14], [2019, 0, 0, 3, 5], [2019, 1, 0, 0, 312], [2019, 1, 0, 1, 17], [2019, 1, 0, 2, 47], [2019, 1, 0, 3, 5], [2019, 1, 0, 4, 1], [2020, 0, 0, 0, 65], [2020, 0, 0, 1, 44], [2020, 0, 0, 2, 26], [2020, 0, 0, 3, 16], [2020, 1, 0, 0, 203], [2020, 1, 0, 1, 192], [2020, 1, 0, 2, 99], [2020, 1, 0, 3, 29], [2020, 1, 0, 4, 5], [2020, 2, 0, 0, 68], [2020, 2, 0, 1, 25], [2020, 2, 0, 2, 6], [2021, 0, 0, 0, 111], [2021, 0, 0, 1, 94], [2021, 0, 0, 2, 57], [2021, 0, 0, 3, 6], [2021, 1, 0, 0, 294], [2021, 1, 0, 1, 291], [2021, 1, 0, 2, 230], [2021, 1, 0, 3, 68], [2021, 2, 0, 0, 219], [2021, 2, 0, 1, 156], [2021, 2, 0, 2, 165], [2021, 2, 0, 3, 37], [2021, 4, 0, 0, 237], [2021, 4, 0, 1, 127], [2021, 4, 0, 2, 82], [2021, 4, 0, 3, 2], [2022, 0, 0, 0, 119], [2022, 0, 0, 1, 130], [2022, 0, 0, 2, 106], [2022, 0, 0, 3, 19], [2022, 1, 0, 0, 435], [2022, 1, 0, 1, 407], [2022, 1, 0, 2, 200], [2022, 1, 0, 3, 55], [2022, 1, 0, 4, 1], [2022, 2, 0, 0, 356], [2022, 2, 0, 1, 385], [2022, 2, 0, 2, 172], [2022, 2, 0, 3, 56], [2022, 2, 0, 4, 1], [2022, 4, 0, 0, 1423], [2022, 4, 0, 1, 743], [2022, 4, 0, 2, 517], [2022, 4, 0, 3, 115], [2023, 0, 0, 0, 79], [2023, 0, 0, 1, 114], [2023, 0, 0, 2, 150], [2023, 0, 0, 3, 51], [2023, 0, 0, 4, 5], [2023, 1, 0, 0, 410], [2023, 1, 0, 1, 396], [2023, 1, 0, 2, 305], [2023, 1, 0, 3, 136], [2023, 1, 0, 4, 33], [2023, 2, 0, 0, 345], [2023, 2, 0, 1, 253], [2023, 2, 0, 2, 263], [2023, 2, 0, 3, 111], [2023, 2, 0, 4, 49], [2023, 3, 0, 0, 282], [2023, 3, 0, 1, 214], [2023, 3, 0, 2, 216], [2023, 3, 0, 3, 95], [2023, 3, 0, 4, 5], [2023, 4, 0, 0, 1393], [2023, 4, 0, 1, 766], [2023, 4, 0, 2, 814], [2023, 4, 0, 3, 341], [2023, 4, 0, 4, 20], [2024, 0, 0, 0, 91], [2024, 0, 0, 1, 162], [2024, 0, 0, 2, 153], [2024, 0, 0, 3, 42], [2024, 0, 0, 4, 7], [2024, 1, 0, 0, 448], [2024, 1, 0, 1, 471], [2024, 1, 0, 2, 308], [2024, 1, 0, 3, 137], [2024, 1, 0, 4, 29], [2024, 2, 0, 0, 393], [2024, 2, 0, 1, 391], [2024, 2, 0, 2, 255], [2024, 2, 0, 3, 89], [2024, 2, 0, 4, 25], [2024, 3, 0, 0, 484], [2024, 3, 0, 1, 332], [2024, 3, 0, 2, 222], [2024, 3, 0, 3, 59], [2024, 3, 0, 4, 18], [2024, 4, 0, 0, 1591], [2024, 4, 0, 1, 631], [2024, 4, 0, 2, 540], [2024, 4, 0, 3, 155], [2024, 4, 0, 4, 11], [2025, 0, 0, 0, 53], [2025, 0, 0, 1, 111], [2025, 0, 0, 2, 105], [2025, 0, 0, 3, 18], [2025, 0, 0, 4, 6], [2025, 0, 2, 0, 11], [2025, 0, 2, 1, 8], [2025, 0, 2, 2, 10], [2025, 0, 2, 3, 1], [2025, 1, 0, 0, 370], [2025, 1, 0, 1, 341], [2025, 1, 0, 2, 157], [2025, 1, 0, 3, 73], [2025, 1, 0, 4, 12], [2025, 1, 1, 0, 78], [2025, 1, 1, 1, 42], [2025, 1, 1, 2, 37], [2025, 1, 1, 3, 1], [2025, 1, 1, 4, 1], [2025, 1, 2, 0, 90], [2025, 1, 2, 1, 51], [2025, 1, 2, 2, 35], [2025, 1, 2, 3, 8], [2025, 2, 0, 0, 329], [2025, 2, 0, 1, 260], [2025, 2, 0, 2, 131], [2025, 2, 0, 3, 26], [2025, 2, 0, 4, 2], [2025, 2, 1, 0, 89], [2025, 2, 1, 1, 42], [2025, 2, 1, 2, 24], [2025, 2, 1, 3, 4], [2025, 2, 2, 0, 87], [2025, 2, 2, 1, 33], [2025, 2, 2, 2, 42], [2025, 2, 2, 3, 8], [2025, 3, 0, 0, 273], [2025, 3, 0, 1, 223], [2025, 3, 0, 2, 126], [2025, 3, 0, 3, 51], [2025, 3, 1, 0, 62], [2025, 3, 1, 1, 29], [2025, 3, 1, 2, 6], [2025, 3, 2, 0, 35], [2025, 3, 2, 1, 23], [2025, 3, 2, 2, 18], [2025, 3, 2, 3, 9], [2025, 4, 0, 0, 876], [2025, 4, 0, 1, 719], [2025, 4, 0, 2, 319], [2025, 4, 0, 3, 78], [2025, 4, 0, 4, 12], [2025, 4, 1, 0, 58], [2025, 4, 1, 1, 79], [2025, 4, 1, 2, 39], [2025, 4, 1, 3, 9], [2025, 4, 1, 4, 3], [2025, 4, 2, 0, 95], [2025, 4, 2, 1, 51], [2025, 4, 2, 2, 30], [2025, 4, 2, 3, 2], [2026, 0, 0, 0, 38], [2026, 0, 0, 1, 37], [2026, 0, 0, 2, 22], [2026, 0, 0, 3, 4], [2026, 0, 0, 4, 2], [2026, 0, 2, 0, 1], [2026, 0, 2, 1, 1], [2026, 0, 2, 2, 1], [2026, 1, 0, 0, 122], [2026, 1, 0, 1, 106], [2026, 1, 0, 2, 60], [2026, 1, 0, 3, 23], [2026, 1, 0, 4, 6], [2026, 1, 1, 0, 13], [2026, 1, 1, 1, 10], [2026, 1, 1, 2, 6], [2026, 1, 2, 0, 37], [2026, 1, 2, 1, 21], [2026, 1, 2, 2, 6], [2026, 1, 2, 3, 2], [2026, 1, 2, 4, 2], [2026, 2, 0, 0, 119], [2026, 2, 0, 1, 80], [2026, 2, 0, 2, 32], [2026, 2, 0, 3, 11], [2026, 2, 0, 4, 6], [2026, 2, 1, 0, 31], [2026, 2, 1, 1, 11], [2026, 2, 1, 2, 13], [2026, 2, 2, 0, 39], [2026, 2, 2, 1, 18], [2026, 2, 2, 2, 17], [2026, 2, 2, 3, 1], [2026, 3, 0, 0, 76], [2026, 3, 0, 1, 50], [2026, 3, 0, 2, 25], [2026, 3, 0, 3, 18], [2026, 3, 0, 4, 2], [2026, 3, 1, 0, 13], [2026, 3, 1, 1, 8], [2026, 3, 1, 2, 3], [2026, 3, 2, 0, 18], [2026, 3, 2, 1, 7], [2026, 3, 2, 2, 7], [2026, 3, 2, 4, 1], [2026, 4, 0, 0, 293], [2026, 4, 0, 1, 106], [2026, 4, 0, 2, 97], [2026, 4, 0, 3, 146], [2026, 4, 1, 0, 31], [2026, 4, 1, 1, 22], [2026, 4, 1, 2, 10], [2026, 4, 2, 0, 46], [2026, 4, 2, 1, 12], [2026, 4, 2, 2, 1], [2026, 4, 2, 3, 1]], "months": ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"], "buildings": ["Edif. A — Urban District", "Edif. B — City Center", "Edif. C — Riverside", "Edif. D — Old Quarter", "Edif. E — Budget Inn"], "capacity": [2, 9, 9, 7, 14], "channels": ["OTA Principal", "OTA Secundaria", "Directo"], "scoreYB": {"2023": {"0": 6.59, "1": 8.03, "2": 7.92, "3": 8.95, "4": 6.38}, "2024": {"0": 6.3, "1": 7.99, "2": 8.01, "3": 8.94, "4": 6.55}, "2025": {"0": 6.27, "1": 8.04, "2": 7.8, "3": 9.02, "4": 7.13}, "2026": {"0": 5.86, "1": 8.34, "2": 7.63, "3": 9.09, "4": 7.19}}, "market": {"adr": 137, "occ": 47.6, "revpar": 65, "adr_p25": 88, "adr_p75": 200, "occ_note": "Inside Airbnb (datos abiertos)"}, "bMarket": [[98, 72, 6.32, 137, -39, 102492], [138, 84, 8.04, 137, 1, 0], [121, 79, 7.89, 137, -16, 46136], [164, 82, 8.98, 137, 27, 0], [71, 76, 6.72, 88, -17, 47158]], "reviewsTotal": 6298, "reviewSubs": {"Confort": 7.89, "Limpieza": 7.99, "Instalaciones y servicios": 7.72, "Ubicación": 8.2, "Relación calidad-precio": 7.64, "Personal": 7.26}, "topics": [["General", 4284], ["Comodidad", 231], ["Limpieza", 223], ["Ubicación", 166], ["Rutas", 96], ["Check-in", 93], ["Precio/Valor", 85], ["Limpieza|Comodidad", 76]], "reviewReplyRate": 0.0, "reviewScoreByB": [6.32, 8.04, 7.89, 8.98, 6.72], "reviewCountByB": [454, 1414, 1133, 1133, 2164]};
+const CAP = DATA.capacity;                 // apartamentos por edificio [A..E]
+const MONTHS = DATA.months;
+const BLABEL = DATA.buildings;
+const BCOLORS = ['#f59e0b','#1e5fa8','#3b82f6','#10b981','#94a3b8']; // A,B,C,D,E
+const fmtMoney = v => '€' + (Math.abs(v) >= 1e6 ? (v/1e6).toFixed(2)+'M' : Math.round(v/1000)+'K');
 
-const revenueData2024 = [58000,74000,89000,103000,128000,158000,218000,235000,182000,155000,96000,104000];
-const revenueData2023 = [48000,61000,76000,88000,112000,138000,192000,208000,161000,138000,83000,91000];
-const revenueYearly = { labels:['2019','2020','2021','2022','2023','2024','2025*'], data:[180,52,290,980,1950,2250,1100] };
+const state = { year: 2024, building: 'all', channel: 'all' };
 
-// ── CHART 1: Revenue mensual ──────────────────────────────────────────────────
-let revenueChart = new Chart(document.getElementById('revenueChart'), {
-  type: 'line',
-  data: {
-    labels: MONTHS,
-    datasets: [
-      {
-        label: '2024', data: revenueData2024,
-        borderColor: '#1e5fa8', backgroundColor: 'rgba(30,95,168,0.08)',
-        fill: true, tension: 0.4, borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#1e5fa8'
-      },
-      {
-        label: '2023', data: revenueData2023,
-        borderColor: '#94a3b8', backgroundColor: 'transparent',
-        fill: false, tension: 0.4, borderWidth: 1.5, borderDash: [5,4], pointRadius: 3, pointBackgroundColor: '#94a3b8'
-      }
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: true,
-    plugins: { legend: { position:'top', labels:{font:{size:11}} } },
-    scales: {
-      y: { ticks: { callback: v => '€'+Math.round(v/1000)+'K', font:{size:10} }, grid:{color:'#f1f5f9'} },
-      x: { ticks: { font:{size:10} }, grid:{display:false} }
-    }
-  }
-});
+function leap(y){ return (y%4===0 && (y%100!==0 || y%400===0)); }
+function daysInYear(y){ return leap(y) ? 366 : 365; }
+function monthDays(y,m){ return new Date(y, m, 0).getDate(); } // m 1..12
 
-function switchRevenueChart(type, el) {
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  if(type==='yearly') {
-    revenueChart.data.labels = revenueYearly.labels;
-    revenueChart.data.datasets = [{
-      label: 'Revenue (€K)', data: revenueYearly.data,
-      backgroundColor: ['#fee2e2','#fef3c7','#dbeafe','#d1fae5','#d1fae5','#1e5fa8','#e0f2fe'],
-      borderRadius: 6
-    }];
-    revenueChart.config.type = 'bar';
+// Años presentes en el cubo
+const YEARS = [...new Set(DATA.cube.map(r => r[0]))].sort();
+
+// --- filtro base (edificio + canal, NO año) ---
+function rowsBC(){
+  return DATA.cube.filter(r =>
+    (state.building === 'all' || r[2] === state.building) &&
+    (state.channel  === 'all' || r[3] === state.channel));
+}
+function rowsY(year){ return rowsBC().filter(r => year === 'all' || r[0] === year); }
+
+function buildingsInScope(){ return state.building === 'all' ? [0,1,2,3,4] : [state.building]; }
+function capScope(){ return buildingsInScope().reduce((s,b)=>s+CAP[b],0); }
+
+// nights disponibles (capacidad) para un año o para todo el periodo
+function availableNights(year){
+  const cs = capScope();
+  if (year === 'all') return YEARS.reduce((s,y)=> s + cs*daysInYear(y), 0);
+  return cs * daysInYear(year);
+}
+
+// --- KPIs para el estado actual ---
+function computeKPIs(year){
+  const rows = rowsY(year);
+  const rev = rows.reduce((s,r)=>s+r[4],0);
+  const nights = rows.reduce((s,r)=>s+r[6],0);
+  const avail = availableNights(year);
+  const adr = nights ? rev/nights : 0;
+  const occ = avail ? nights/avail*100 : 0;
+  const revpar = avail ? rev/avail : 0;
+
+  // score booking: media ponderada por reservas de los edificios en scope
+  let sw=0, sn=0;
+  buildingsInScope().forEach(b=>{
+    const resvB = rows.filter(r=>r[2]===b).reduce((s,r)=>s+r[7],0);
+    let sc=null;
+    if (year==='all'){
+      let a=0,c=0; YEARS.forEach(y=>{ const v=DATA.scoreYB[y] && DATA.scoreYB[y][b]; if(v!=null){a+=v;c++;} });
+      sc = c? a/c : null;
+    } else { sc = DATA.scoreYB[year] && DATA.scoreYB[year][b]; }
+    if (sc!=null && resvB){ sw += sc*resvB; sn += resvB; }
+  });
+  const score = sn ? sw/sn : null;
+
+  // lead time medio: dias de antelacion, ponderado por numero de reservas
+  const leadSum = rows.reduce((s,r)=>s+r[9],0);
+  const resvTot = rows.reduce((s,r)=>s+r[7],0);
+  const leadAvg = resvTot ? leadSum/resvTot : null;
+
+  return { rev, nights, adr, occ, revpar, score, leadAvg };
+}
+
+// --- render KPIs ---
+function renderKPIs(){
+  const cur = computeKPIs(state.year);
+  const prevYear = (state.year==='all') ? 'all' : state.year-1;
+  const prev = computeKPIs(prevYear);
+  const yLabel = state.year==='all' ? 'histórico' : state.year;
+  const pLabel = state.year==='all' ? '' : (state.year-1);
+
+  const set = (id,v)=>{ const e=document.getElementById(id); if(e) e.textContent=v; };
+  const setDelta = (id, cur, prev, pp) => {
+    const e=document.getElementById(id); if(!e) return;
+    if(prev==null || prev===0 || state.year==='all'){ e.className='kpi-delta neutral'; e.textContent='→ '+yLabel; return; }
+    const d = pp ? (cur-prev) : (cur-prev)/prev*100;
+    const up = d>=0;
+    e.className = 'kpi-delta '+(up?'up':'down');
+    e.textContent = (up?'▲ ':'▼ ') + (up?'+':'−') + Math.abs(d).toFixed(1) + (pp?'pp':'%') + ' vs '+pLabel;
+  };
+
+  set('kpi-revenue', fmtMoney(cur.rev));
+  setDelta('kpi-revenue-delta', cur.rev, prev.rev, false);
+  set('kpi-revenue-sub', pLabel? (fmtMoney(prev.rev)+' en '+pLabel) : 'Total '+yLabel);
+
+  set('kpi-adr', '€'+Math.round(cur.adr));
+  setDelta('kpi-adr-delta', cur.adr, prev.adr, false);
+  set('kpi-adr-sub', 'Mercado comparable: €'+DATA.market.adr);
+
+  set('kpi-revpar', '€'+Math.round(cur.revpar));
+  setDelta('kpi-revpar-delta', cur.revpar, prev.revpar, false);
+  set('kpi-revpar-sub', 'Mercado: €'+DATA.market.revpar);
+
+  set('kpi-occ', Math.min(100,cur.occ).toFixed(1)+'%');
+  setDelta('kpi-occ-delta', cur.occ, prev.occ, true);
+  set('kpi-occ-sub', 'Mercado comparable: '+DATA.market.occ+'%');
+
+  set('kpi-score', cur.score!=null? cur.score.toFixed(2) : 's/d');
+  const se=document.getElementById('kpi-score-delta'); if(se){ se.className='kpi-delta neutral'; se.textContent='→ media '+(state.building==='all'?'portfolio':BLABEL[state.building].split('—')[0].trim()); }
+  set('kpi-score-sub', 'Umbral premium: 8.5');
+
+  set('kpi-margin', cur.leadAvg!=null? cur.leadAvg.toFixed(1)+' d' : 's/d');
+  const me=document.getElementById('kpi-margin-delta'); if(me){ me.className='kpi-delta '+(cur.margin!=null&&cur.margin>=35?'up':'neutral'); me.textContent= cur.margin!=null? '▲ Sector: ~35-38%' : '— sin datos de coste'; }
+  set('kpi-margin-sub', 'Antelación media de reserva');
+}
+
+// ============================ CHARTS ============================
+let revenueChart, buildingChart, bookingWindowChart, topicsChart, channelChart;
+
+function monthlySeries(year){
+  const rows = rowsBC().filter(r=>r[0]===year);
+  const arr = Array(12).fill(0);
+  rows.forEach(r=> arr[r[1]-1]+=r[4]);
+  return arr;
+}
+function yearlySeries(){
+  const rows = rowsBC();
+  return YEARS.map(y=> Math.round(rows.filter(r=>r[0]===y).reduce((s,r)=>s+r[4],0)/1000));
+}
+
+function buildRevenueChart(){
+  const ctx = document.getElementById('revenueChart');
+  revenueChart = new Chart(ctx, {
+    type:'line',
+    data:{ labels:MONTHS, datasets:[] },
+    options:{ responsive:true, maintainAspectRatio:true,
+      plugins:{ legend:{position:'top', labels:{font:{size:11}}} },
+      scales:{ y:{ ticks:{callback:v=>'€'+Math.round(v/1000)+'K', font:{size:10}}, grid:{color:'#f1f5f9'} },
+               x:{ ticks:{font:{size:10}}, grid:{display:false} } } }
+  });
+}
+let revenueMode='monthly';
+function updateRevenueChart(){
+  if(revenueMode==='yearly'){
+    revenueChart.config.type='bar';
+    revenueChart.data.labels = YEARS.map(String);
+    revenueChart.data.datasets=[{ label:'Revenue (€K)', data:yearlySeries(),
+      backgroundColor: YEARS.map(y=> y===state.year?'#1e5fa8':'#cbd5e1'), borderRadius:6 }];
   } else {
+    revenueChart.config.type='line';
     revenueChart.data.labels = MONTHS;
-    revenueChart.data.datasets = [
-      { label:'2024', data:revenueData2024, borderColor:'#1e5fa8', backgroundColor:'rgba(30,95,168,0.08)', fill:true, tension:0.4, borderWidth:2.5, type:'line', pointRadius:4, pointBackgroundColor:'#1e5fa8' },
-      { label:'2023', data:revenueData2023, borderColor:'#94a3b8', backgroundColor:'transparent', fill:false, tension:0.4, borderWidth:1.5, borderDash:[5,4], type:'line', pointRadius:3, pointBackgroundColor:'#94a3b8' }
-    ];
-    revenueChart.config.type = 'line';
+    if(state.year==='all'){
+      // suma por mes de todos los años
+      const rows=rowsBC(); const arr=Array(12).fill(0); rows.forEach(r=>arr[r[1]-1]+=r[4]);
+      revenueChart.data.datasets=[{ label:'Histórico', data:arr, borderColor:'#1e5fa8', backgroundColor:'rgba(30,95,168,0.08)', fill:true, tension:0.4, borderWidth:2.5, type:'line', pointRadius:4, pointBackgroundColor:'#1e5fa8' }];
+    } else {
+      const cur=monthlySeries(state.year), prev=monthlySeries(state.year-1);
+      const ds=[{ label:String(state.year), data:cur, borderColor:'#1e5fa8', backgroundColor:'rgba(30,95,168,0.08)', fill:true, tension:0.4, borderWidth:2.5, type:'line', pointRadius:4, pointBackgroundColor:'#1e5fa8' }];
+      if(prev.some(v=>v>0)) ds.push({ label:String(state.year-1), data:prev, borderColor:'#94a3b8', backgroundColor:'transparent', fill:false, tension:0.4, borderWidth:1.5, borderDash:[5,4], type:'line', pointRadius:3, pointBackgroundColor:'#94a3b8' });
+      revenueChart.data.datasets=ds;
+    }
   }
   revenueChart.update();
 }
-
-// ── CHART 2: Building donut ───────────────────────────────────────────────────
-new Chart(document.getElementById('buildingChart'), {
-  type: 'doughnut',
-  data: {
-    labels: ['Edif. B — City Center','Edif. D — Old Quarter','Edif. C — Riverside','Edif. A — Urban','Edif. E — Budget'],
-    datasets: [{
-      data: [620,580,530,340,180],
-      backgroundColor: ['#1e5fa8','#10b981','#3b82f6','#f59e0b','#94a3b8'],
-      borderWidth: 2, borderColor: '#fff', hoverOffset: 6
-    }]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: true, cutout: '62%',
-    plugins: {
-      legend: { position:'bottom', labels:{font:{size:10}, padding:8} },
-      tooltip: { callbacks: { label: ctx => ` €${ctx.parsed}K (${Math.round(ctx.parsed/2250*100)}%)` } }
-    }
-  }
-});
-
-// ── CHART 3: Booking window ───────────────────────────────────────────────────
-new Chart(document.getElementById('bookingWindowChart'), {
-  type: 'bar',
-  data: {
-    labels: ['0-1 días\n(last-minute)','2-7 días','8-30 días','31-90 días','91+ días\n(anticipada)'],
-    datasets: [
-      { label: 'Portfolio', data: [28,31,25,10,6], backgroundColor:'#1e5fa8', borderRadius:5 },
-      { label: 'Mercado Bilbao', data: [20,30,25,15,10], backgroundColor:'#94a3b8', borderRadius:5 }
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: true,
-    plugins: { legend: { position:'top', labels:{font:{size:10}} } },
-    scales: {
-      y: { ticks: { callback: v => v+'%', font:{size:10} }, grid:{color:'#f1f5f9'} },
-      x: { ticks: { font:{size:9} }, grid:{display:false} }
-    }
-  }
-});
-
-// ── CHART 4: Topics NLP ───────────────────────────────────────────────────────
-new Chart(document.getElementById('topicsChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Limpieza','Ubicación','Comodidad','Check-in','Precio','Ruido','Servicio','Wi-Fi'],
-    datasets: [{
-      data: [744,738,754,328,277,271,213,37],
-      backgroundColor: ['#fee2e2','#d1fae5','#dbeafe','#fef3c7','#ede9fe','#fce7f3','#f3f4f6','#e0f2fe'],
-      borderColor:     ['#ef4444','#10b981','#3b82f6','#f59e0b','#8b5cf6','#ec4899','#6b7280','#06b6d4'],
-      borderWidth: 1.5, borderRadius: 4
-    }]
-  },
-  options: {
-    indexAxis: 'y', responsive:true, maintainAspectRatio:false,
-    plugins: { legend:{display:false} },
-    scales: { x:{ticks:{font:{size:9}},grid:{color:'#f1f5f9'}}, y:{ticks:{font:{size:9}},grid:{display:false}} }
-  }
-});
-
-// ── CHART 5: Score evolution ──────────────────────────────────────────────────
-new Chart(document.getElementById('scoreEvolutionChart'), {
-  type: 'line',
-  data: {
-    labels: ['2023','2024','2025','2026'],
-    datasets: [
-      { label:'Edif. D — Old Quarter', data:[8.95,8.94,9.02,9.09], borderColor:'#10b981', backgroundColor:'rgba(16,185,129,0.05)', fill:true, tension:0.3, borderWidth:2.5, pointRadius:5, pointBackgroundColor:'#10b981' },
-      { label:'Edif. B — City Center', data:[8.03,7.99,8.04,8.34], borderColor:'#1e5fa8', backgroundColor:'transparent', tension:0.3, borderWidth:2, pointRadius:4, pointBackgroundColor:'#1e5fa8' },
-      { label:'Edif. C — Riverside',   data:[7.92,8.01,7.80,7.63], borderColor:'#f59e0b', backgroundColor:'transparent', tension:0.3, borderWidth:2, pointRadius:4, pointBackgroundColor:'#f59e0b', borderDash:[4,3] },
-      { label:'Edif. E — Budget',      data:[6.38,6.55,7.13,7.19], borderColor:'#8b5cf6', backgroundColor:'transparent', tension:0.3, borderWidth:2, pointRadius:4, pointBackgroundColor:'#8b5cf6' },
-      { label:'Edif. A — Urban ⚠',    data:[6.59,6.30,6.27,5.86], borderColor:'#ef4444', backgroundColor:'transparent', tension:0.3, borderWidth:2, pointRadius:4, pointBackgroundColor:'#ef4444', borderDash:[4,3] },
-    ]
-  },
-  options: {
-    responsive:true, maintainAspectRatio:true,
-    plugins: {
-      legend:{ position:'bottom', labels:{font:{size:10}, padding:6} },
-      annotation: { annotations: { threshold: { type:'line', yMin:8.5, yMax:8.5, borderColor:'#10b981', borderWidth:1.5, borderDash:[6,3], label:{display:true, content:'Umbral premium 8.5', position:'end', font:{size:9}, color:'#059669', backgroundColor:'#d1fae5', padding:3} } } }
-    },
-    scales: {
-      y:{ min:5.5, max:9.5, ticks:{font:{size:10}}, grid:{color:'#f1f5f9'} },
-      x:{ ticks:{font:{size:10}}, grid:{display:false} }
-    }
-  }
-});
-
-// ── CHART 6: Benchmark ADR mensual ────────────────────────────────────────────
-new Chart(document.getElementById('benchmarkChart'), {
-  type: 'line',
-  data: {
-    labels: MONTHS,
-    datasets: [
-      { label:'Portfolio ADR', data:[57,70,85,98,118,142,188,198,165,148,102,98], borderColor:'#1e5fa8', backgroundColor:'rgba(30,95,168,0.08)', fill:true, tension:0.4, borderWidth:2.5, pointRadius:4, pointBackgroundColor:'#1e5fa8' },
-      { label:'Mercado Bilbao', data:[120,132,148,158,172,188,215,225,195,178,145,138], borderColor:'#10b981', backgroundColor:'transparent', tension:0.4, borderWidth:2, borderDash:[5,3], pointRadius:3, pointBackgroundColor:'#10b981' }
-    ]
-  },
-  options: {
-    responsive:true, maintainAspectRatio:true,
-    plugins:{ legend:{position:'top',labels:{font:{size:10}}} },
-    scales:{
-      y:{ticks:{callback:v=>'€'+v,font:{size:10}},grid:{color:'#f1f5f9'}},
-      x:{ticks:{font:{size:9}},grid:{display:false}}
-    }
-  }
-});
-
-// ── CHART 7: Channel mix ──────────────────────────────────────────────────────
-new Chart(document.getElementById('channelChart'), {
-  type: 'bar',
-  data: {
-    labels: ['OTA Principal\n(Booking.com)','OTA Secundaria\n(Airbnb)','Canal Directo','PMS/Otros'],
-    datasets: [
-      { label:'Revenue bruto', data:[1462,450,180,158], backgroundColor:'#1e5fa8', borderRadius:[6,0,0,6], borderSkipped:false },
-      { label:'Comisiones pagadas', data:[219,13.5,0,11], backgroundColor:'#ef4444', borderRadius:[0,6,6,0], borderSkipped:false }
-    ]
-  },
-  options: {
-    responsive:true, maintainAspectRatio:true, indexAxis:'y',
-    plugins:{legend:{position:'top',labels:{font:{size:10}}}},
-    scales:{
-      x:{stacked:false, ticks:{callback:v=>'€'+v+'K',font:{size:9}},grid:{color:'#f1f5f9'}},
-      y:{ticks:{font:{size:9}},grid:{display:false}}
-    }
-  }
-});
-
-// ── HEATMAP: Ocupación por mes y edificio ─────────────────────────────────────
-const heatmapData = {
-  buildings: ['Edif. A','Edif. B','Edif. C','Edif. D','Edif. E'],
-  months: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
-  values: [
-    [52,58,65,70,78,82,90,92,80,74,58,54],
-    [72,78,82,86,90,92,96,98,94,88,78,74],
-    [62,68,74,80,84,88,94,96,88,80,70,66],
-    [70,76,80,84,88,92,96,98,92,86,74,70],
-    [68,72,78,80,84,86,90,92,84,78,70,66],
-  ]
-};
-
-function getColor(v) {
-  if(v>=90) return '#059669';
-  if(v>=80) return '#34d399';
-  if(v>=70) return '#fbbf24';
-  if(v>=60) return '#fb923c';
-  return '#ef4444';
+function switchRevenueChart(type, el){
+  revenueMode = (type==='yearly')?'yearly':'monthly';
+  document.querySelectorAll('.tabs .tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  updateRevenueChart();
 }
 
-const heatmapEl = document.getElementById('heatmap-container');
-let html = '<table style="width:100%;border-collapse:collapse;font-size:0.72rem;">';
-html += '<tr><td style="padding:3px 6px;color:#94a3b8;"></td>';
-heatmapData.months.forEach(m => html += `<td style="text-align:center;padding:3px 2px;color:#94a3b8;font-weight:600;">${m}</td>`);
-html += '</tr>';
-heatmapData.buildings.forEach((b,bi) => {
-  html += `<tr><td style="padding:4px 6px;font-weight:600;font-size:0.72rem;color:#475569;white-space:nowrap;">${b}</td>`;
-  heatmapData.values[bi].forEach(v => {
-    html += `<td style="padding:2px;"><div style="background:${getColor(v)};color:white;border-radius:4px;padding:5px 2px;text-align:center;font-weight:700;cursor:pointer;" title="${v}% ocupación">${v}%</div></td>`;
+function buildDonut(){
+  buildingChart = new Chart(document.getElementById('buildingChart'), {
+    type:'doughnut',
+    data:{ labels: BLABEL, datasets:[{ data:[0,0,0,0,0], backgroundColor:BCOLORS, borderWidth:2, borderColor:'#fff', hoverOffset:6 }] },
+    options:{ responsive:true, maintainAspectRatio:true, cutout:'62%',
+      plugins:{ legend:{position:'bottom', labels:{font:{size:10}, padding:8}},
+        tooltip:{ callbacks:{ label:ctx=>{ const tot=ctx.dataset.data.reduce((a,b)=>a+b,0); return ' '+fmtMoney(ctx.parsed*1000)+' ('+(tot?Math.round(ctx.parsed/tot*100):0)+'%)'; } } } } }
   });
-  html += '</tr>';
-});
-html += '</table>';
-heatmapEl.innerHTML = html;
+}
+function updateDonut(){
+  // desglose por edificio (respeta año + canal, ignora filtro de edificio para mantener el desglose)
+  const rows = DATA.cube.filter(r=> (state.channel==='all'||r[3]===state.channel) && (state.year==='all'||r[0]===state.year));
+  const vals = [0,1,2,3,4].map(b=> Math.round(rows.filter(r=>r[2]===b).reduce((s,r)=>s+r[4],0)/1000));
+  buildingChart.data.datasets[0].data = vals;
+  buildingChart.update();
+  const badge=document.getElementById('donut-badge'); if(badge) badge.textContent = state.year==='all'?'histórico':state.year;
+}
+
+function buildBookingWindow(){
+  bookingWindowChart = new Chart(document.getElementById('bookingWindowChart'), {
+    type:'bar',
+    data:{ labels:['0-1 días\n(last-minute)','2-7 días','8-30 días','31-90 días','91+ días\n(anticipada)'],
+      datasets:[ {label:'Portfolio', data:[0,0,0,0,0], backgroundColor:'#1e5fa8', borderRadius:5},
+                 {label:'Mercado (est.)', data:[20,30,25,15,10], backgroundColor:'#94a3b8', borderRadius:5} ] },
+    options:{ responsive:true, maintainAspectRatio:true,
+      plugins:{ legend:{position:'top', labels:{font:{size:10}}} },
+      scales:{ y:{ ticks:{callback:v=>v+'%', font:{size:10}}, grid:{color:'#f1f5f9'} },
+               x:{ ticks:{font:{size:9}}, grid:{display:false} } } }
+  });
+}
+function updateBookingWindow(){
+  const rows = DATA.lead.filter(r=>
+    (state.year==='all'||r[0]===state.year) &&
+    (state.building==='all'||r[1]===state.building) &&
+    (state.channel==='all'||r[2]===state.channel));
+  const buckets=[0,0,0,0,0]; rows.forEach(r=> buckets[r[3]]+=r[4]);
+  const tot = buckets.reduce((a,b)=>a+b,0) || 1;
+  bookingWindowChart.data.datasets[0].data = buckets.map(v=> +(v/tot*100).toFixed(1));
+  bookingWindowChart.update();
+  const ins=document.getElementById('bw-insight');
+  if(ins){ const lm=(buckets[0]/tot*100); const adv=(buckets[4]/tot*100);
+    ins.innerHTML='<b>⚠ Insight:</b> '+lm.toFixed(0)+'% de reservas son last-minute (0-1 días) vs ~20% del mercado. Solo el '+adv.toFixed(0)+'% reserva con +91 días — segmento fiel infrautilizado para pricing premium.'; }
+}
+
+function buildChannelChart(){
+  channelChart = new Chart(document.getElementById('channelChart'), {
+    type:'bar',
+    data:{ labels: DATA.channels, datasets:[
+      {label:'Revenue bruto', data:[0,0,0], backgroundColor:'#1e5fa8', borderRadius:[6,0,0,6], borderSkipped:false},
+      {label:'Comisiones pagadas', data:[0,0,0], backgroundColor:'#ef4444', borderRadius:[0,6,6,0], borderSkipped:false} ] },
+    options:{ responsive:true, maintainAspectRatio:true, indexAxis:'y',
+      plugins:{ legend:{position:'top', labels:{font:{size:10}}} },
+      scales:{ x:{ ticks:{callback:v=>'€'+v+'K', font:{size:9}}, grid:{color:'#f1f5f9'} },
+               y:{ ticks:{font:{size:9}}, grid:{display:false} } } }
+  });
+}
+function updateChannelChart(){
+  // ignora filtro de canal (muestra el mix), respeta año + edificio
+  const rows = DATA.cube.filter(r=> (state.year==='all'||r[0]===state.year) && (state.building==='all'||r[2]===state.building));
+  const rev=[0,0,0], comm=[0,0,0];
+  rows.forEach(r=>{ rev[r[3]]+=r[4]; comm[r[3]]+=r[8]; });
+  channelChart.data.datasets[0].data = rev.map(v=>Math.round(v/1000));
+  channelChart.data.datasets[1].data = comm.map(v=>Math.round(v/1000));
+  channelChart.update();
+}
+
+// --- tabla de rendimiento por edificio ---
+function renderBuildingTable(){
+  const tb=document.getElementById('btBody'); if(!tb) return;
+  const year = state.year;
+  const rows = (state.channel==='all') ? DATA.cube : DATA.cube.filter(r=>r[3]===state.channel);
+  const yr = rows.filter(r=> year==='all'||r[0]===year);
+  const scope = state.building==='all'? [0,1,2,3,4] : [state.building];
+  const days = year==='all'? YEARS.reduce((s,y)=>s+daysInYear(y),0) : daysInYear(year);
+  const segs=['Economy','Mid-scale','Upscale','Premium','Budget'];
+  let html='';
+  const data = scope.map(b=>{
+    const rb=yr.filter(r=>r[2]===b);
+    const rev=rb.reduce((s,r)=>s+r[4],0), nights=rb.reduce((s,r)=>s+r[6],0);
+    const adr=nights?rev/nights:0, occ=(CAP[b]*days)?nights/(CAP[b]*days)*100:0, revpar=(CAP[b]*days)?rev/(CAP[b]*days):0;
+    let sc=null; if(year==='all'){ let a=0,c=0; YEARS.forEach(y=>{const v=DATA.scoreYB[y]&&DATA.scoreYB[y][b]; if(v!=null){a+=v;c++;}}); sc=c?a/c:null;} else sc=DATA.scoreYB[year]&&DATA.scoreYB[year][b];
+    // lead time por edificio
+    const lsum=rb.reduce((s,r)=>s+r[9],0), lres=rb.reduce((s,r)=>s+r[7],0);
+    const mar = lres ? lsum/lres : null;
+    return {b,adr,occ,revpar,sc,mar,rev};
+  }).sort((a,b)=>b.rev-a.rev);
+  data.forEach(d=>{
+    const scCls = d.sc==null?'':(d.sc>=8.5?'excellent':d.sc>=7.5?'good':d.sc>=7?'warning':'danger');
+    const occCol = d.occ>=80?'var(--green)':d.occ>=70?'var(--amber)':'var(--red)';
+    html+=`<tr>
+      <td><b>${BLABEL[d.b]}</b><br><span style="font-size:0.7rem;color:var(--muted)">${segs[d.b]} · ${CAP[d.b]} unidades</span></td>
+      <td><b>€${Math.round(d.adr)}</b></td>
+      <td><div style="display:flex;align-items:center;gap:6px;">${Math.min(100,d.occ).toFixed(0)}%<div class="progress-bar-wrap"><div class="progress-bar" style="width:${Math.min(100,d.occ).toFixed(0)}%;background:${occCol}"></div></div></div></td>
+      <td>€${Math.round(d.revpar)}</td>
+      <td>${d.sc==null?'—':`<span class="score-pill ${scCls}">${d.sc.toFixed(2)}${d.sc<7?' ⚠':d.sc>=8.5?' ⭐':''}</span>`}</td>
+      <td>${d.mar==null?'<span style="color:var(--muted)">s/d</span>':d.mar.toFixed(1)+' d'}</td>
+    </tr>`;
+  });
+  tb.innerHTML=html;
+}
+
+// --- reputación (subcategorías reales, portfolio) + score por edificio ---
+function renderReviews(){
+  const cont=document.getElementById('reviewScores'); if(cont){
+    const order=['Confort','Limpieza','Instalaciones y servicios','Ubicación','Relación calidad-precio','Personal'];
+    const short={'Instalaciones y servicios':'Instalaciones','Relación calidad-precio':'Calidad-Precio'};
+    let html='';
+    order.forEach(k=>{ const v=DATA.reviewSubs[k]; if(v==null) return;
+      const col=v>=8?'var(--green)':v>=7.8?'var(--blue-light)':v>=7.5?'var(--amber)':'var(--red)';
+      html+=`<div class="score-row"><div class="score-name">${short[k]||k}</div><div class="score-bar-wrap"><div class="score-bar" style="width:${(v/10*100).toFixed(0)}%;background:${col}"></div></div><div class="score-val" style="color:${col}">${v.toFixed(2)}</div></div>`;
+    });
+    cont.innerHTML=html;
+  }
+  const badge=document.getElementById('reviews-badge');
+  if(badge) badge.textContent = DATA.reviewReplyRate.toFixed(1)+'% tasa respuesta';
+  const hdr=document.getElementById('reviews-title');
+  if(hdr){ const n = state.building==='all'? DATA.reviewsTotal : DATA.reviewCountByB[state.building];
+    const nf = x => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+    hdr.textContent = 'Reputación Online — '+nf(n)+' Reviews Analizadas'; }
+}
+
+function buildTopics(){
+  const t=DATA.topics; // [[name,count],...]
+  topicsChart = new Chart(document.getElementById('topicsChart'), {
+    type:'bar',
+    data:{ labels:t.map(x=>x[0]), datasets:[{ data:t.map(x=>x[1]),
+      backgroundColor:['#dbeafe','#fee2e2','#d1fae5','#fef3c7','#ede9fe','#fce7f3','#e0f2fe','#f3f4f6'],
+      borderColor:['#3b82f6','#ef4444','#10b981','#f59e0b','#8b5cf6','#ec4899','#06b6d4','#6b7280'], borderWidth:1.5, borderRadius:4 }] },
+    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+      scales:{ x:{ticks:{font:{size:9}},grid:{color:'#f1f5f9'}}, y:{ticks:{font:{size:9}},grid:{display:false}} } }
+  });
+}
+
+// --- evolución de score por edificio (real, desde scoreYB) ---
+let scoreEvoChart;
+function buildScoreEvolution(){
+  const yrs=[2023,2024,2025,2026];
+  const cols=['#f59e0b','#1e5fa8','#3b82f6','#10b981','#94a3b8'];
+  const dash=[[4,3],[],[],[],[4,3]];
+  const ds=[0,1,2,3,4].map(b=>({
+    label: BLABEL[b].split('—')[0].trim()+' '+BLABEL[b].split('—')[1].trim(),
+    data: yrs.map(y=> (DATA.scoreYB[y]&&DATA.scoreYB[y][b]!=null)? DATA.scoreYB[y][b] : null),
+    borderColor: cols[b], backgroundColor:'transparent', tension:0.3, borderWidth:2, pointRadius:4,
+    pointBackgroundColor: cols[b], borderDash: dash[b], spanGaps:true
+  }));
+  scoreEvoChart = new Chart(document.getElementById('scoreEvolutionChart'), {
+    type:'line', data:{ labels:yrs.map(String), datasets:ds },
+    options:{ responsive:true, maintainAspectRatio:true,
+      plugins:{ legend:{position:'bottom', labels:{font:{size:10}, padding:6}},
+        annotation:{ annotations:{ threshold:{ type:'line', yMin:8.5, yMax:8.5, borderColor:'#10b981', borderWidth:1.5, borderDash:[6,3], label:{display:true, content:'Umbral premium 8.5', position:'end', font:{size:9}, color:'#059669', backgroundColor:'#d1fae5', padding:3} } } } },
+      scales:{ y:{ min:5.5, max:9.5, ticks:{font:{size:10}}, grid:{color:'#f1f5f9'} }, x:{ ticks:{font:{size:10}}, grid:{display:false} } } }
+  });
+}
+
+// --- ADR mensual portfolio (real) vs mediana de mercado ---
+let benchmarkChart;
+function buildBenchmarkChart(){
+  benchmarkChart = new Chart(document.getElementById('benchmarkChart'), {
+    type:'line', data:{ labels:MONTHS, datasets:[
+      { label:'Portfolio ADR', data:Array(12).fill(0), borderColor:'#1e5fa8', backgroundColor:'rgba(30,95,168,0.08)', fill:true, tension:0.4, borderWidth:2.5, pointRadius:4, pointBackgroundColor:'#1e5fa8' },
+      { label:'Mercado comparable (mediana)', data:Array(12).fill(DATA.market.adr), borderColor:'#10b981', backgroundColor:'transparent', tension:0, borderWidth:2, borderDash:[5,3], pointRadius:0 } ] },
+    options:{ responsive:true, maintainAspectRatio:true,
+      plugins:{ legend:{position:'top', labels:{font:{size:10}}} },
+      scales:{ y:{ ticks:{callback:v=>'€'+v, font:{size:10}}, grid:{color:'#f1f5f9'} }, x:{ ticks:{font:{size:9}}, grid:{display:false} } } }
+  });
+}
+function updateBenchmarkChart(){
+  const year = state.year==='all'?2024:state.year;
+  const rows = DATA.cube.filter(r=> r[0]===year && (state.building==='all'||r[2]===state.building) && (state.channel==='all'||r[3]===state.channel));
+  const rev=Array(12).fill(0), ni=Array(12).fill(0);
+  rows.forEach(r=>{ rev[r[1]-1]+=r[4]; ni[r[1]-1]+=r[6]; });
+  benchmarkChart.data.datasets[0].data = rev.map((v,i)=> ni[i]? Math.round(v/ni[i]) : null);
+  benchmarkChart.update();
+}
+
+// --- benchmarking (portfolio en vivo vs mercado real) ---
+function renderBenchmark(){
+  const cur = computeKPIs(state.year);
+  const set=(id,v)=>{ const e=document.getElementById(id); if(e) e.textContent=v; };
+  const setw=(id,w)=>{ const e=document.getElementById(id); if(e) e.style.width=Math.min(100,w)+'%'; };
+  const mAdr=DATA.market.adr, mOcc=DATA.market.occ, mRev=DATA.market.revpar;
+  set('bm-adr-p','€'+Math.round(cur.adr));  set('bm-adr-m','€'+mAdr);
+  setw('bm-adr-pw', cur.adr/Math.max(cur.adr,mAdr)*100); setw('bm-adr-mw', mAdr/Math.max(cur.adr,mAdr)*100);
+  set('bm-occ-p',Math.min(100,cur.occ).toFixed(0)+'%'); set('bm-occ-m',mOcc+'%');
+  setw('bm-occ-pw',Math.min(100,cur.occ)); setw('bm-occ-mw',mOcc);
+  set('bm-rev-p','€'+Math.round(cur.revpar)); set('bm-rev-m','€'+mRev);
+  setw('bm-rev-pw',cur.revpar/Math.max(cur.revpar,mRev)*100); setw('bm-rev-mw',mRev/Math.max(cur.revpar,mRev)*100);
+}
+
+// --- oportunidad (upside real desde buildings_vs_market) ---
+function renderOpportunity(){
+  const scope=buildingsInScope();
+  const upside=scope.reduce((s,b)=>s+DATA.bMarket[b][5],0);
+  const cur=computeKPIs(state.year);
+  const set=(id,v)=>{ const e=document.getElementById(id); if(e) e.textContent=v; };
+  set('opp-value', upside>0? '+'+fmtMoney(upside) : '€0');
+  set('opp-sub', upside>0? 'revenue adicional/año cerrando el gap de ADR vs mercado mediano (€'+DATA.market.adr+')' : 'ya en o por encima de la mediana de mercado');
+  set('opp-gap-val', '€'+Math.round(cur.adr)+' / €'+DATA.market.adr);
+  const bar=document.getElementById('opp-gap-bar'); if(bar) bar.style.width=Math.min(100,cur.adr/DATA.market.adr*100)+'%';
+}
+
+// --- heatmap ocupación (real, por año) ---
+function getColor(v){ if(v>=90)return '#059669'; if(v>=80)return '#34d399'; if(v>=70)return '#fbbf24'; if(v>=60)return '#fb923c'; return '#ef4444'; }
+function renderHeatmap(){
+  const el=document.getElementById('heatmap-container'); if(!el) return;
+  const year = state.year==='all' ? 2024 : state.year;
+  const rows = DATA.cube.filter(r=> r[0]===year && (state.channel==='all'||r[3]===state.channel));
+  let html='<table style="width:100%;border-collapse:collapse;font-size:0.72rem;"><tr><td style="padding:3px 6px;"></td>';
+  MONTHS.forEach(m=> html+=`<td style="text-align:center;padding:3px 2px;color:#94a3b8;font-weight:600;">${m}</td>`);
+  html+='</tr>';
+  [0,1,2,3,4].forEach(b=>{
+    html+=`<tr><td style="padding:4px 6px;font-weight:600;font-size:0.72rem;color:#475569;white-space:nowrap;">${BLABEL[b].split('—')[0].trim()}</td>`;
+    for(let m=1;m<=12;m++){
+      const nights=rows.filter(r=>r[2]===b && r[1]===m).reduce((s,r)=>s+r[6],0);
+      const occ = Math.min(100, Math.round(nights/(CAP[b]*monthDays(year,m))*100));
+      html+=`<td style="padding:2px;"><div style="background:${getColor(occ)};color:white;border-radius:4px;padding:5px 2px;text-align:center;font-weight:700;" title="${BLABEL[b]} · ${MONTHS[m-1]}: ${occ}% ocupación">${occ}%</div></td>`;
+    }
+    html+='</tr>';
+  });
+  html+='</table>';
+  el.innerHTML=html;
+}
+
+// ============================ FILTROS + NAV ============================
+function readFilters(){
+  const yv=document.getElementById('f-year').value;
+  state.year = yv.includes('Todo') ? 'all' : parseInt(yv,10);
+  const bv=document.getElementById('f-building').value;
+  state.building = bv.startsWith('Todos') ? 'all' : ({'A':0,'B':1,'C':2,'D':3,'E':4})[bv.trim().charAt(9)];
+  const cv=document.getElementById('f-channel').value;
+  state.channel = cv.startsWith('Todos') ? 'all' : ({'OTA Principal':0,'OTA Secundaria':1,'Directo':2})[cv];
+}
+function applyFilters(){
+  readFilters();
+  renderKPIs();
+  updateRevenueChart();
+  updateDonut();
+  updateBookingWindow();
+  updateChannelChart();
+  renderBuildingTable();
+  renderReviews();
+  renderBenchmark();
+  updateBenchmarkChart();
+  renderOpportunity();
+  renderHeatmap();
+  // etiquetas de año en títulos
+  const y = state.year==='all'?'histórico':state.year;
+  document.querySelectorAll('.year-label').forEach(e=> e.textContent=y);
+}
+
+function navTo(section, el){
+  document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  const target=document.getElementById(section);
+  if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ============================ INIT ============================
+buildRevenueChart();
+buildDonut();
+buildBookingWindow();
+buildChannelChart();
+buildTopics();
+buildScoreEvolution();
+buildBenchmarkChart();
+applyFilters();
+
 </script>
 
 </body>
