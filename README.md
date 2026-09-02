@@ -52,14 +52,20 @@ A portfolio of 50 tourist apartments across 5 buildings was operating with:
 
 ## 📈 Key Results
 
-| Metric | Value |
-|--------|-------|
-| Bookings analysed | 34,167 (2019–2026) |
-| Reviews processed (NLP) | 6,298 in 5 languages |
-| Market listings benchmarked | 1,561 (Inside Airbnb) |
-| Revenue upside identified | ~€195K/year |
-| Occupancy vs. market benchmark | 77.8% vs 47.6% |
-| ML features engineered | 47 |
+| Metric | Value | Source |
+|--------|-------|--------|
+| Bookings analysed | 34,167 (2019–2026) | `fact_reservations` |
+| Gross revenue analysed | €5.0M (2019–2025) | `01_kpis_summary.md` |
+| Reviews processed (NLP) | 6,298 in 5 languages | `fact_reviews` |
+| Market listings benchmarked | 1,561 | Inside Airbnb open data |
+| Pricing upside identified | €195,786/year | `buildings_vs_market.csv` |
+| Occupancy 2024 vs. market | 77.5% vs 47.6% | `01_kpis_summary.md` |
+| ADR 2025 | €116.27 | `01_kpis_summary.md` |
+| RevPAR 2025 | €85.25 | `01_kpis_summary.md` |
+
+Every figure above is reproducible from the published data. Cost structure and
+operating margin are deliberately excluded, so no profitability claims are made
+here.
 
 ---
 
@@ -212,8 +218,8 @@ published only after a scripted anonymization pass:
 - Building and unit names replaced with neutral labels (`A`–`E`, `A-01`)
 - Commercial and brand names stripped from every file, including free-text reviews
 - Guest names, contact details and staff names removed; guest identifiers hashed
-- Coordinates rounded to 2 decimals (~1.1 km) — enough for market-level mapping,
-  not enough to locate a specific building
+- Coordinates rounded to 3 decimals (~110 m) — the same level of displacement
+  Inside Airbnb applies to its own listings
 - Internal P&L, cost structure and financing data excluded entirely
 
 Anonymization is enforced by script rather than by hand, and the build runs an

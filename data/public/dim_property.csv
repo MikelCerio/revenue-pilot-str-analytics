@@ -1,6 +1,6 @@
 property_key,building_code,neighbourhood,city,country,inventory_units,inventory_nights_week,building_name_public,latitude,longitude,segment,booking_score,units,opening_year,region
-1,A,Abando,Bilbao,Espana,2,14,Edificio A - Urban District,43.26,-2.94,Urban / Economy,6.32,10,2019,Pais Vasco
-2,B,Abando,Bilbao,Espana,9,63,Edificio B - City Center,43.26,-2.93,Urban / Mid-scale,8.04,12,2019,Pais Vasco
-3,C,EDIFICIO_C,Bilbao,Espana,9,63,Edificio C - Riverside,43.26,-2.94,Riverside / Upscale,7.89,10,2020,Pais Vasco
-4,D,Casco Viejo,Bilbao,Espana,7,49,Edificio D - Old Quarter,43.26,-2.92,Old Town / Premium,8.98,8,2023,Pais Vasco
-5,E,Casco Viejo,Bilbao,Espana,14,98,Edificio E - Budget Inn,43.26,-2.93,Budget / Hostal,6.72,4,2021,Pais Vasco
+1,A,Abando,Bilbao,Espana,2,14,Edificio A - Urban District,43.26,-2.935,Urban / Economy,6.32,10,2019,Pais Vasco
+2,B,Abando,Bilbao,Espana,9,63,Edificio B - City Center,43.263,-2.925,Urban / Mid-scale,8.04,12,2019,Pais Vasco
+3,C,EDIFICIO_C,Bilbao,Espana,9,63,Edificio C - Riverside,43.265,-2.942,Riverside / Upscale,7.89,10,2020,Pais Vasco
+4,D,Casco Viejo,Bilbao,Espana,7,49,Edificio D - Old Quarter,43.257,-2.923,Old Town / Premium,8.98,8,2023,Pais Vasco
+5,E,Casco Viejo,Bilbao,Espana,14,98,Edificio E - Budget Inn,43.258,-2.928,Budget / Hostal,6.72,4,2021,Pais Vasco
